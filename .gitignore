@@ -27,6 +27,14 @@ docs/
 # Vercel & Supabase local
 .vercel/
 .supabase/
+# Python Virtual Environments & Cache
+venv/
+.venv/
+env/
+ENV/
+__pycache__/
+*.py[cod]
 
+# Local agent & internal
 .agent/
 .docs/

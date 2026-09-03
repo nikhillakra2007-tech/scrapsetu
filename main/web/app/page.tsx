@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Header from '@/components/shell/Header';
+import MobileNav from '@/components/shell/MobileNav';
 import SmoothScroll from '@/components/SmoothScroll';
 import SetuAssistant from '@/components/SetuAssistant';
 import CollectorPortal from '@/features/collector/CollectorPortal';
@@ -159,6 +160,15 @@ export default function Home() {
             onSuccess={handleHandoverSuccess}
           />
         )}
+
+        {/* Mobile Fixed App Navigation Bar */}
+        <MobileNav
+          currentTab={activeTab}
+          onSelectTab={setActiveTab}
+          activeRole={activeRole}
+          matchedCount={matchedLots.length}
+          pickupCount={MOCK_PICKUP_REQUESTS.length}
+        />
 
         {/* Floating Setu Assistant */}
         <SetuAssistant />

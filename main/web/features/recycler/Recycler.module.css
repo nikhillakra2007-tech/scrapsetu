@@ -636,12 +636,28 @@
 }
 
 @media (max-width: 640px) {
+  .pageTitle {
+    font-size: 1.35rem;
+  }
   .kpiGrid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.65rem;
+  }
+  .kpiCard {
+    padding: 0.95rem 1rem;
+    border-radius: var(--radius-md);
+  }
+  .kpiValue {
+    font-size: 1.35rem;
   }
   .bannerCard {
+    padding: 1.25rem 1.15rem;
     flex-direction: column;
     align-items: flex-start;
+    border-radius: var(--radius-lg);
+  }
+  .bannerTitle {
+    font-size: 1.15rem;
   }
   .bannerActions {
     width: 100%;
@@ -649,5 +665,17 @@
   .primaryActionBtn, .secondaryActionBtn {
     flex: 1;
     text-align: center;
+    padding: 0.65rem 1rem;
+    font-size: 0.8125rem;
+  }
+  .lotsGrid {
+    grid-template-columns: 1fr;
+  }
+  .lotCard {
+    padding: 1.25rem;
+    border-radius: var(--radius-lg);
+  }
+  .customTable {
+    min-width: 620px;
   }
 }

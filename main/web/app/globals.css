@@ -172,7 +172,7 @@ button, input, select, textarea {
 
 @media (max-width: 768px) {
   .page-container {
-    padding: 1.25rem 1rem 4rem;
+    padding: 1rem 0.85rem 6.5rem;
   }
 }
 

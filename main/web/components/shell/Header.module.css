@@ -238,17 +238,27 @@
 
 @media (max-width: 768px) {
   .header {
-    height: auto;
-    padding: 0.75rem 0;
+    height: 3.85rem;
+    padding: 0;
   }
   .headerInner {
     padding: 0 1rem;
-    flex-wrap: wrap;
     gap: 0.75rem;
   }
   .navLinks {
-    order: 3;
-    width: 100%;
-    gap: 1rem;
+    display: none; /* Shifted to Mobile Bottom Navigation Bar */
+  }
+  .logoText {
+    font-size: 1.35rem;
+  }
+  .roleSubtext {
+    display: none;
+  }
+  .loginSwitchBox {
+    padding: 0.25rem 0.5rem;
+    gap: 0.5rem;
+  }
+  .loginLabel {
+    font-size: 0.625rem;
   }
 }

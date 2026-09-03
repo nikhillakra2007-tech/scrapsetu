@@ -1,0 +1,94 @@
+/* Mobile Bottom App Navigation Bar */
+
+.mobileNav {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 4.25rem;
+  background-color: rgba(250, 248, 238, 0.96);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-top: 1px solid var(--border-subtle);
+  z-index: 45;
+  box-shadow: 0 -4px 16px rgba(2, 15, 18, 0.06);
+  padding: 0 0.5rem;
+  padding-bottom: env(safe-area-inset-bottom, 0);
+  align-items: center;
+  justify-content: space-around;
+}
+
+.mobileNavItem {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  height: 100%;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  position: relative;
+  transition: all var(--transition-fast);
+  padding: 0.35rem 0.2rem;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mobileNavItem:active {
+  transform: scale(0.94);
+}
+
+.iconWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: var(--radius-full);
+  transition: all var(--transition-fast);
+}
+
+.mobileNavItemActive .iconWrapper {
+  background-color: var(--brand-tint);
+  color: var(--brand-primary);
+}
+
+.mobileNavLabel {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.mobileNavItemActive .mobileNavLabel {
+  color: var(--brand-primary);
+  font-weight: 800;
+}
+
+.mobileBadge {
+  position: absolute;
+  top: -2px;
+  right: -4px;
+  background-color: var(--brand-secondary);
+  color: #020F12;
+  font-size: 0.5625rem;
+  font-weight: 900;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid #FAF8EE;
+}
+
+/* Only display on Mobile & Small Tablet breakpoints */
+@media (max-width: 768px) {
+  .mobileNav {
+    display: flex;
+  }
+}

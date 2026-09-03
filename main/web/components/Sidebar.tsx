@@ -10,6 +10,7 @@ import {
   TrendingUp,
   AlertTriangle,
   Layers,
+  Sparkles,
 } from 'lucide-react';
 import { isSupabaseConfigured } from '@/lib/supabase';
 
@@ -41,6 +42,18 @@ export default function Sidebar({
 
       {/* Navigation Menu */}
       <nav className="nav-menu">
+        <div className="nav-heading">Collector (Kabadiwala)</div>
+
+        <button
+          className={`nav-item ${activeTab === 'collector-scan' ? 'active' : ''}`}
+          onClick={() => setActiveTab('collector-scan')}
+          style={activeTab === 'collector-scan' ? { background: 'rgba(16, 185, 129, 0.15)', borderColor: 'var(--emerald-accent)' } : {}}
+        >
+          <Sparkles size={18} color="#34d399" />
+          <span style={{ fontWeight: 600 }}>AI Scrap Scanner</span>
+          <span className="nav-badge" style={{ background: '#10b981', color: '#000', fontWeight: 700 }}>AI</span>
+        </button>
+
         <div className="nav-heading">Recycler Portal</div>
         
         <button

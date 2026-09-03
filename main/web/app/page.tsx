@@ -11,14 +11,19 @@ import CustomerPickupPortal from '@/components/CustomerPickupPortal';
 import LivePriceBoard from '@/components/LivePriceBoard';
 import SafetyGuidanceView from '@/components/SafetyGuidanceView';
 import HandoverTraceabilityView from '@/components/HandoverTraceabilityView';
+import CollectorPortal from '@/components/CollectorPortal';
 import { MOCK_MATCHED_LOTS, MOCK_PICKUP_REQUESTS } from '@/lib/mock-data';
 import { LotMatch } from '@/types/database';
 
 export default function Home() {
-  const [activeTab, setActiveTab] = useState<string>('recycler-overview');
+  const [activeTab, setActiveTab] = useState<string>('collector-scan');
   const [matchedLots, setMatchedLots] = useState<LotMatch[]>(MOCK_MATCHED_LOTS);
   const [selectedHandoverMatch, setSelectedHandoverMatch] = useState<LotMatch | null>(null);
   const [isHandoverModalOpen, setIsHandoverModalOpen] = useState<boolean>(false);
+
+  const handleLotCreated = (newMatch: LotMatch) => {
+    setMatchedLots((prev) => [newMatch, ...prev]);
+  };
 
   const handleAcceptLot = (match: LotMatch) => {
     setMatchedLots((prev) =>
@@ -52,6 +57,13 @@ export default function Home() {
         <Header currentTab={activeTab} />
 
         <main className="page-container">
+          {activeTab === 'collector-scan' && (
+            <CollectorPortal
+              onLotCreated={handleLotCreated}
+              onNavigateToRecyclerQueue={() => setActiveTab('matched-lots')}
+            />
+          )}
+
           {activeTab === 'recycler-overview' && (
             <RecyclerOverview
               matchedLots={matchedLots}

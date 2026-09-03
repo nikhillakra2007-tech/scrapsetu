@@ -5,3 +5,5 @@ supabase>=2.11.0
 google-genai>=1.0.0
 httpx>=0.28.0
 python-dotenv>=1.0.1
+python-multipart>=0.0.20
+pillow>=10.0.0

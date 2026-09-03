@@ -11,6 +11,7 @@ interface HeaderProps {
 export default function Header({ currentTab }: HeaderProps) {
   const getTabTitle = () => {
     switch (currentTab) {
+      case 'collector-scan': return 'Collector Portal · Multimodal AI Scrap Scanner';
       case 'recycler-overview': return 'Recycler Command Center';
       case 'matched-lots': return 'Matched Incoming Scrap Lots';
       case 'handover': return 'Digital Handover & QR Traceability';

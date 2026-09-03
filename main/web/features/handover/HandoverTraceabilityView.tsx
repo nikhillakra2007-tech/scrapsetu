@@ -2,14 +2,11 @@
 
 import React, { useState } from 'react';
 import {
-  ShieldCheck,
   QrCode,
   CheckCircle2,
   Search,
-  Filter,
-  ArrowUpRight,
-  Receipt,
 } from 'lucide-react';
+import styles from './Handover.module.css';
 
 export default function HandoverTraceabilityView() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -58,32 +55,33 @@ export default function HandoverTraceabilityView() {
   );
 
   return (
-    <div>
-      <div className="page-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
+    <div className={styles.container}>
+      {/* Page Header */}
+      <div className={styles.pageHeader}>
         <div>
-          <h2>Traceability Ledger & Handover Audit</h2>
-          <p>
+          <h2 className={styles.pageTitle}>Traceability Ledger & Handover Audit</h2>
+          <p className={styles.pageSubtitle}>
             Immutable digital handover records linking informal waste-pickers with CPCB/DPCC authorized recyclers.
           </p>
         </div>
 
-        {/* Search input */}
-        <div style={{ position: 'relative', width: '280px' }}>
-          <Search size={16} color="var(--text-muted)" style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)' }} />
+        {/* Search Input */}
+        <div className={styles.searchWrapper}>
+          <Search size={16} className={styles.searchIcon} />
           <input
             type="text"
-            className="form-input"
-            style={{ paddingLeft: '36px' }}
-            placeholder="Search by KC-DL code or collector..."
+            className={styles.searchInput}
+            placeholder="Search by KC-DL code, material, collector..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
         </div>
       </div>
 
-      <div className="content-card">
-        <div className="table-responsive">
-          <table className="custom-table">
+      {/* Audit Table Card */}
+      <div className={styles.tableCard}>
+        <div className={styles.tableResponsive}>
+          <table className={styles.customTable}>
             <thead>
               <tr>
                 <th>Reference ID</th>
@@ -99,42 +97,46 @@ export default function HandoverTraceabilityView() {
               {filtered.map((rec) => (
                 <tr key={rec.refCode}>
                   <td>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                      <QrCode size={16} color="var(--emerald-accent)" />
-                      <span style={{ fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '0.04em' }}>
+                    <div className={styles.refCodeGroup}>
+                      <QrCode size={16} className={styles.qrCodeIcon} />
+                      <span className={styles.refCodeText}>
                         {rec.refCode}
                       </span>
                     </div>
-                    <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>
+                    <div className={styles.timestampText}>
                       {rec.timestamp}
                     </div>
                   </td>
                   <td>
-                    <div style={{ fontWeight: 600, color: 'var(--text-primary)' }}>
+                    <div className={styles.materialNameText}>
                       {rec.material}
                     </div>
                   </td>
-                  <td>{rec.collector}</td>
                   <td>
-                    <div style={{ fontSize: '13px', fontWeight: 600, color: 'var(--text-primary)' }}>
+                    <span className={styles.collectorNameText}>
+                      {rec.collector}
+                    </span>
+                  </td>
+                  <td>
+                    <div className={styles.recyclerNameText}>
                       {rec.recycler}
                     </div>
-                    <div style={{ fontSize: '11px', color: 'var(--emerald-accent)' }}>
+                    <div className={styles.methodTag}>
                       {rec.method}
                     </div>
                   </td>
                   <td>
-                    <span style={{ fontWeight: 700 }}>{rec.scaleWeight}</span>
+                    <span className={styles.scaleWeightText}>{rec.scaleWeight}</span>
                   </td>
                   <td>
-                    <span style={{ fontWeight: 800, color: 'var(--emerald-accent)' }}>
+                    <span className={styles.payoutText}>
                       {rec.payout}
                     </span>
                   </td>
                   <td>
-                    <span className="badge badge-safe">
-                      <CheckCircle2 size={12} />
-                      {rec.status}
+                    <span className={styles.verifiedBadge}>
+                      <CheckCircle2 size={13} />
+                      <span>{rec.status}</span>
                     </span>
                   </td>
                 </tr>

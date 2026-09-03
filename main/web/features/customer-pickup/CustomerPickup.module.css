@@ -1,0 +1,352 @@
+/* Customer Pickup Feature Module CSS */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.pageHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.pageTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.pageSubtitle {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-top: 0.25rem;
+  max-width: 680px;
+}
+
+.tabNavRow {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.tabNavBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.45rem 0.85rem;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-subtle);
+  background-color: var(--bg-surface);
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.tabNavBtn:hover {
+  border-color: var(--brand-secondary);
+  color: var(--text-primary);
+}
+
+.tabNavBtnActive {
+  background-color: var(--brand-primary);
+  border-color: var(--brand-primary);
+  color: var(--text-inverse);
+}
+
+.formCenterWrapper {
+  max-width: 720px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.estimatorCenterWrapper {
+  max-width: 640px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.contentCard {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.cardHeaderBar {
+  margin-bottom: 0.25rem;
+}
+
+.estimatorTitle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.sparkleIcon {
+  color: var(--brand-primary);
+}
+
+.estimatorSubtitle {
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  margin-bottom: 1.25rem;
+}
+
+.bookingForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+.generatorToggle {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.generatorBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.85rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+  background-color: var(--bg-app);
+  color: var(--text-secondary);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.generatorBtn:hover {
+  background-color: var(--bg-surface-muted);
+  color: var(--text-primary);
+}
+
+.generatorBtnActive {
+  background-color: var(--brand-tint);
+  border-color: var(--brand-primary);
+  color: var(--brand-primary);
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.formLabel {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.formInput, .formSelect, .formTextarea {
+  width: 100%;
+  padding: 0.625rem 0.85rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+  background-color: var(--bg-app);
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  font-family: inherit;
+  transition: all var(--transition-fast);
+}
+
+.formInput:focus, .formSelect:focus, .formTextarea:focus {
+  outline: none;
+  border-color: var(--border-focus);
+  background-color: var(--bg-surface);
+}
+
+.twoColRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.submitBtn {
+  width: 100%;
+  padding: 0.85rem;
+  border-radius: var(--radius-md);
+  background-color: var(--brand-primary);
+  color: var(--text-inverse);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  transition: background-color var(--transition-fast);
+}
+
+.submitBtn:hover {
+  background-color: var(--brand-primary-hover);
+}
+
+.successState {
+  text-align: center;
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.successCheckIcon {
+  color: var(--brand-primary);
+}
+
+.successTitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--brand-primary);
+}
+
+.successDesc {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  max-width: 400px;
+}
+
+/* Estimator Result Box */
+.estimateResultBox {
+  background-color: var(--brand-tint);
+  border: 1px solid var(--brand-soft);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  text-align: center;
+  margin-top: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.estimateLabel {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+}
+
+.estimateValue {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: var(--brand-primary);
+  font-family: 'Outfit', sans-serif;
+  line-height: 1.1;
+}
+
+.estimateSub {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* Tracking Table */
+.tableCard {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.tableResponsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.customTable {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.customTable th {
+  padding: 0.85rem 1.25rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  background-color: var(--bg-app);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.customTable td {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--border-subtle);
+  font-size: 0.875rem;
+  vertical-align: middle;
+}
+
+.customTable tbody tr:hover {
+  background-color: var(--bg-app);
+}
+
+.requestIdText {
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.addressRow {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.locationPin {
+  color: var(--brand-primary);
+  flex-shrink: 0;
+}
+
+.typeBadge {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-full);
+}
+
+.bulkBadge {
+  background-color: var(--warning-bg);
+  color: var(--warning-text);
+  border: 1px solid var(--warning-border);
+}
+
+.householdBadge {
+  background-color: var(--brand-tint);
+  color: var(--brand-primary);
+  border: 1px solid var(--brand-soft);
+}
+
+.statusBadge {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-full);
+  background-color: var(--success-bg);
+  color: var(--success-text);
+  border: 1px solid var(--success-border);
+}
+
+@media (max-width: 640px) {
+  .generatorToggle {
+    grid-template-columns: 1fr;
+  }
+  .twoColRow {
+    grid-template-columns: 1fr;
+  }
+}

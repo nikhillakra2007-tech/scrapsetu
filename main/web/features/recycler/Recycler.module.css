@@ -1,0 +1,653 @@
+/* Recycler Feature Module CSS — LeafLine Ivory, Deep Pine & Emerald Theme */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.pageHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.pageTitle {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.03em;
+}
+
+.pageSubtitle {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-top: 0.25rem;
+  max-width: 680px;
+}
+
+/* KPI Stats Grid */
+.kpiGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+.kpiCard {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1.35rem 1.5rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  transition: all var(--transition-fast);
+}
+
+.kpiCard:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--brand-secondary);
+}
+
+.kpiHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.kpiIconBrand {
+  color: var(--brand-primary);
+}
+
+.kpiValue {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  font-family: 'Outfit', sans-serif;
+}
+
+.kpiSub {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.kpiSuccessIcon {
+  color: var(--brand-secondary);
+}
+
+.kpiSuccessText {
+  color: var(--brand-primary);
+  font-weight: 600;
+}
+
+/* Action Banner in Deep Pine & Caribbean Green */
+.bannerCard {
+  background: linear-gradient(135deg, #005F52 0%, #00453B 100%);
+  border: 1px solid rgba(0, 95, 82, 0.4);
+  border-radius: var(--radius-xl);
+  padding: 2rem 2.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  color: #FFFFFF;
+  box-shadow: var(--shadow-md);
+}
+
+.bannerContent {
+  flex: 1;
+  min-width: 280px;
+}
+
+.bannerBadgeRow {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 0.5rem;
+}
+
+.bannerBadge {
+  font-size: 0.6875rem;
+  font-weight: 800;
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-full);
+  background-color: var(--brand-secondary);
+  color: #020F12;
+  letter-spacing: 0.04em;
+}
+
+.bannerZone {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 600;
+}
+
+.bannerTitle {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin-bottom: 0.35rem;
+}
+
+.bannerDesc {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 620px;
+  line-height: 1.5;
+}
+
+.bannerActions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.primaryActionBtn {
+  padding: 0.75rem 1.4rem;
+  border-radius: var(--radius-full);
+  background-color: var(--brand-secondary);
+  color: #020F12;
+  font-size: 0.875rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-fast);
+}
+
+.primaryActionBtn:hover {
+  background-color: #15a37c;
+  transform: translateY(-1px);
+}
+
+.secondaryActionBtn {
+  padding: 0.75rem 1.4rem;
+  border-radius: var(--radius-full);
+  background-color: rgba(255, 255, 255, 0.12);
+  color: #FFFFFF;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.secondaryActionBtn:hover {
+  background-color: rgba(255, 255, 255, 0.22);
+}
+
+/* Tables */
+.tableCard {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+
+.cardHeaderBar {
+  padding: 1.35rem 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.cardTitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.viewAllBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: transparent;
+  border: 1px solid var(--border-subtle);
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--brand-primary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.viewAllBtn:hover {
+  background-color: var(--brand-tint);
+  border-color: var(--brand-secondary);
+}
+
+.tableResponsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.customTable {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.customTable th {
+  padding: 0.95rem 1.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  background-color: var(--bg-app);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.customTable td {
+  padding: 1.15rem 1.5rem;
+  border-bottom: 1px solid var(--border-subtle);
+  font-size: 0.875rem;
+  color: var(--text-primary);
+  vertical-align: middle;
+}
+
+.customTable tbody tr:hover {
+  background-color: var(--bg-app);
+}
+
+.tablePrimaryText {
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.tableSecondaryText {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 0.15rem;
+}
+
+.collectorNameRow {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-weight: 600;
+}
+
+.locationPin {
+  color: var(--brand-primary);
+  flex-shrink: 0;
+}
+
+.weightCell {
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.valuationCell {
+  font-weight: 800;
+  color: var(--brand-primary);
+  font-family: 'Outfit', sans-serif;
+}
+
+.matchScoreBadge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-full);
+  background-color: var(--success-bg);
+  color: var(--success-text);
+  border: 1px solid var(--success-border);
+}
+
+.inspectBtn {
+  padding: 0.45rem 1rem;
+  border-radius: var(--radius-full);
+  background-color: var(--brand-primary);
+  color: #FFFFFF;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.inspectBtn:hover {
+  background-color: var(--brand-primary-hover);
+  transform: translateY(-1px);
+}
+
+/* Filters */
+.filterRow {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.filterBtn {
+  padding: 0.45rem 1rem;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-subtle);
+  background-color: var(--bg-surface);
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.filterBtn:hover {
+  border-color: var(--brand-secondary);
+  color: var(--brand-primary);
+}
+
+.filterBtnActive {
+  background-color: var(--brand-primary);
+  border-color: var(--brand-primary);
+  color: #FFFFFF;
+}
+
+/* Matched Lots Grid */
+.lotsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 1.25rem;
+}
+
+.lotCard {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  padding: 1.75rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.25rem;
+  transition: all var(--transition-fast);
+}
+
+.lotCard:hover {
+  transform: translateY(-2px);
+  border-color: var(--brand-secondary);
+  box-shadow: var(--shadow-lg);
+}
+
+.lotCardAccepted {
+  border-color: var(--brand-primary);
+  background-color: var(--brand-tint);
+}
+
+.cardTopRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.lotCategoryBadge {
+  font-size: 0.6875rem;
+  font-weight: 800;
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--radius-sm);
+  background-color: var(--brand-primary);
+  color: #FFFFFF;
+  letter-spacing: 0.04em;
+}
+
+.lotScoreBadge {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-full);
+  background-color: var(--success-bg);
+  color: var(--success-text);
+  border: 1px solid var(--success-border);
+}
+
+.lotTitle {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.35rem;
+}
+
+.lotLocationRow {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.75rem;
+}
+
+.collectorSeparator {
+  color: var(--border-strong);
+}
+
+.hazardRow {
+  display: flex;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.85rem;
+}
+
+.hazardBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-sm);
+  background-color: var(--danger-bg);
+  color: var(--danger-text);
+  border: 1px solid var(--danger-border);
+}
+
+.metricsBox {
+  background-color: var(--bg-app);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1.15rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.metricItem {
+  display: flex;
+  flex-direction: column;
+}
+
+.metricItemLabel {
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+}
+
+.metricItemValue {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  font-family: 'Outfit', sans-serif;
+}
+
+.metricItemPayout {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--brand-primary);
+  font-family: 'Outfit', sans-serif;
+}
+
+.metricSubItem {
+  display: flex;
+  flex-direction: column;
+}
+
+.metricSubLabel {
+  font-size: 0.6875rem;
+  color: var(--text-muted);
+}
+
+.metricSubValue {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.metricSubAi {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--brand-primary);
+}
+
+.cardActions {
+  margin-top: auto;
+}
+
+.acceptLotBtn {
+  width: 100%;
+  padding: 0.85rem;
+  border-radius: var(--radius-full);
+  background-color: var(--brand-primary);
+  color: #FFFFFF;
+  font-size: 0.875rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.acceptLotBtn:hover {
+  background-color: var(--brand-primary-hover);
+  transform: translateY(-1px);
+}
+
+.proceedHandoverBtn {
+  width: 100%;
+  padding: 0.85rem;
+  border-radius: var(--radius-full);
+  background-color: var(--brand-primary);
+  color: #FFFFFF;
+  font-size: 0.875rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-fast);
+}
+
+.proceedHandoverBtn:hover {
+  background-color: var(--brand-primary-hover);
+  transform: translateY(-1px);
+}
+
+/* Rate Card Manager Styles */
+.saveRateBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.4rem;
+  border-radius: var(--radius-full);
+  background-color: var(--brand-primary);
+  color: #FFFFFF;
+  font-size: 0.875rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.saveRateBtn:hover {
+  background-color: var(--brand-primary-hover);
+}
+
+.saveSuccessNotice {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.15rem;
+  border-radius: var(--radius-md);
+  background-color: var(--success-bg);
+  border: 1px solid var(--success-border);
+  color: var(--success-text);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.cpcbTag {
+  font-size: 0.6875rem;
+  font-weight: 800;
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-sm);
+  background-color: var(--brand-primary);
+  color: #FFFFFF;
+}
+
+.rateInputWrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.currencySymbol {
+  font-weight: 700;
+  color: var(--brand-primary);
+}
+
+.rateInput {
+  width: 100%;
+  padding: 0.45rem 0.75rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-subtle);
+  background-color: var(--bg-app);
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.rateInput:focus {
+  outline: none;
+  border-color: var(--border-focus);
+  background-color: var(--bg-surface);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .kpiGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .kpiGrid {
+    grid-template-columns: 1fr;
+  }
+  .bannerCard {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .bannerActions {
+    width: 100%;
+  }
+  .primaryActionBtn, .secondaryActionBtn {
+    flex: 1;
+    text-align: center;
+  }
+}

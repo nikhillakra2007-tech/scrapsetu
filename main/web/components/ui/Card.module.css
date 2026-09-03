@@ -1,0 +1,45 @@
+.card {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--transition-fast), border-color var(--transition-fast);
+}
+
+/* Padding variants */
+.pad-none {
+  padding: 0;
+}
+
+.pad-sm {
+  padding: 0.75rem 1rem;
+}
+
+.pad-md {
+  padding: 1.25rem 1.5rem;
+}
+
+.pad-lg {
+  padding: 1.75rem 2rem;
+}
+
+/* Visual variants */
+.default {
+  background-color: var(--bg-surface);
+  border-color: var(--border-subtle);
+}
+
+.muted {
+  background-color: var(--bg-surface-muted);
+  border-color: var(--border-subtle);
+}
+
+.accent {
+  background-color: var(--bg-surface);
+  border-left: 4px solid var(--brand-primary);
+}
+
+.highlight {
+  background-color: var(--brand-tint);
+  border-color: var(--brand-soft);
+}

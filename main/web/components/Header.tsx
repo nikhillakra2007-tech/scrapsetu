@@ -6,9 +6,10 @@ import { CURRENT_RECYCLER } from '@/lib/mock-data';
 
 interface HeaderProps {
   currentTab: string;
+  onSelectTab?: (tab: string) => void;
 }
 
-export default function Header({ currentTab }: HeaderProps) {
+export default function Header({ currentTab, onSelectTab }: HeaderProps) {
   const getTabTitle = () => {
     switch (currentTab) {
       case 'collector-scan': return 'Collector Portal · Multimodal AI Scrap Scanner';
@@ -36,6 +37,24 @@ export default function Header({ currentTab }: HeaderProps) {
       </div>
 
       <div className="header-right">
+        {/* Role Quick Switcher */}
+        {onSelectTab && (
+          <div className="role-switcher">
+            <button
+              className={`role-btn ${currentTab === 'recycler-overview' ? 'active' : ''}`}
+              onClick={() => onSelectTab('recycler-overview')}
+            >
+              Recycler View
+            </button>
+            <button
+              className={`role-btn ${currentTab === 'collector-scan' ? 'active' : ''}`}
+              onClick={() => onSelectTab('collector-scan')}
+            >
+              Collector AI Scanner
+            </button>
+          </div>
+        )}
+
         {/* Recycler Authorization Badge */}
         <div
           style={{

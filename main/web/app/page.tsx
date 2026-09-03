@@ -16,7 +16,7 @@ import { MOCK_MATCHED_LOTS, MOCK_PICKUP_REQUESTS } from '@/lib/mock-data';
 import { LotMatch } from '@/types/database';
 
 export default function Home() {
-  const [activeTab, setActiveTab] = useState<string>('collector-scan');
+  const [activeTab, setActiveTab] = useState<string>('recycler-overview');
   const [matchedLots, setMatchedLots] = useState<LotMatch[]>(MOCK_MATCHED_LOTS);
   const [selectedHandoverMatch, setSelectedHandoverMatch] = useState<LotMatch | null>(null);
   const [isHandoverModalOpen, setIsHandoverModalOpen] = useState<boolean>(false);
@@ -54,7 +54,7 @@ export default function Home() {
 
       {/* Main Layout */}
       <div className="app-main">
-        <Header currentTab={activeTab} />
+        <Header currentTab={activeTab} onSelectTab={setActiveTab} />
 
         <main className="page-container">
           {activeTab === 'collector-scan' && (

@@ -196,3 +196,91 @@
 .doThisText {
   color: var(--text-primary);
 }
+
+/* Emergency Helpline Banner */
+.emergencyBanner {
+  background-color: var(--warning-bg);
+  border: 1px solid var(--warning-border);
+  border-radius: var(--radius-lg);
+  padding: 1rem 1.25rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.emergencyIconCircle {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  background-color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.emergencyIcon {
+  color: var(--warning-text);
+}
+
+.emergencyTextContent {
+  flex: 1;
+}
+
+.emergencyTitle {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--warning-text);
+  margin-bottom: 0.25rem;
+}
+
+.emergencyDesc {
+  font-size: 0.8125rem;
+  color: var(--text-primary);
+  line-height: 1.45;
+}
+
+/* PPE Gear Box */
+.ppeBox {
+  margin-top: 0.85rem;
+  padding: 0.65rem 0.85rem;
+  background-color: var(--bg-app);
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+}
+
+.ppeLabel {
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  font-size: 0.6875rem;
+}
+
+.ppeValue {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .pageTitle {
+    font-size: 1.35rem;
+  }
+  .cardsGrid {
+    grid-template-columns: 1fr;
+  }
+  .safetyCard {
+    padding: 1.15rem;
+  }
+  .langToggleGroup {
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+}

@@ -600,38 +600,132 @@
   color: #FFFFFF;
 }
 
-.rateInputWrapper {
+.desktopTableCard {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+
+.mobileRateCardsContainer {
+  display: none;
+}
+
+.mobileRateCard {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1.15rem 1.25rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  transition: all var(--transition-fast);
+}
+
+.mobileRateCard:hover {
+  border-color: var(--brand-secondary);
+  box-shadow: var(--shadow-md);
+}
+
+.mobileRateCardTop {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+}
+
+.mobileBenchmarkBadge {
+  display: inline-flex;
+  align-items: center;
   gap: 0.35rem;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-full);
+  background-color: var(--brand-tint);
+  color: var(--brand-primary);
+  border: 1px solid var(--brand-soft);
+}
+
+.mobileRateMaterialTitle {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.mobileRateInputRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding-top: 0.65rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.mobileRateLabel {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.rateInputWrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .currencySymbol {
-  font-weight: 700;
+  font-weight: 800;
   color: var(--brand-primary);
+  font-size: 1rem;
 }
 
 .rateInput {
-  width: 100%;
-  padding: 0.45rem 0.75rem;
+  min-width: 95px;
+  width: 105px;
+  padding: 0.5rem 0.65rem;
   border-radius: var(--radius-sm);
   border: 1px solid var(--border-subtle);
   background-color: var(--bg-app);
-  font-size: 0.875rem;
-  font-weight: 700;
-  color: var(--text-primary);
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--brand-primary);
+  text-align: left;
 }
 
 .rateInput:focus {
   outline: none;
-  border-color: var(--border-focus);
+  border-color: var(--brand-primary);
   background-color: var(--bg-surface);
+  box-shadow: 0 0 0 2px rgba(0, 95, 82, 0.15);
+}
+
+.rateUnitText {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  white-space: nowrap;
 }
 
 /* Responsive */
 @media (max-width: 1024px) {
   .kpiGrid {
     grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .desktopTableCard {
+    display: none;
+  }
+  .mobileRateCardsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
   }
 }
 

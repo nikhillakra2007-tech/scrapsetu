@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Save, CheckCircle2 } from 'lucide-react';
+import { Save, CheckCircle2, TrendingUp } from 'lucide-react';
 import { RecyclerRateCard } from '@/types/database';
 import { MOCK_RATE_CARDS } from '@/lib/mock-data';
 import styles from './Recycler.module.css';
@@ -45,15 +45,54 @@ export default function RateCardManager() {
         </div>
       )}
 
-      {/* Rate Cards Table */}
-      <div className={styles.tableCard}>
+      {/* 1. Mobile Adaptive Rate Cards (Zero horizontal scroll, full digits visible) */}
+      <div className={styles.mobileRateCardsContainer}>
+        {rates.map((card) => {
+          const minBench = Math.round(card.rate_per_kg * 0.96);
+          const maxBench = Math.round(card.rate_per_kg * 1.05);
+          return (
+            <div key={card.id} className={styles.mobileRateCard}>
+              <div className={styles.mobileRateCardTop}>
+                <span className={styles.cpcbTag}>{card.parent_code}</span>
+                <span className={styles.mobileBenchmarkBadge}>
+                  <TrendingUp size={12} />
+                  <span>Delhi: ₹{minBench}–₹{maxBench}</span>
+                </span>
+              </div>
+
+              <div className={styles.mobileRateMaterialTitle}>
+                {card.sub_code.replace(/_/g, ' ').toUpperCase()}
+              </div>
+
+              <div className={styles.mobileRateInputRow}>
+                <span className={styles.mobileRateLabel}>Your Offered Rate:</span>
+                <div className={styles.rateInputWrapper}>
+                  <span className={styles.currencySymbol}>₹</span>
+                  <input
+                    type="number"
+                    className={styles.rateInput}
+                    value={card.rate_per_kg}
+                    onChange={(e) =>
+                      handleRateChange(card.id, parseFloat(e.target.value) || 0)
+                    }
+                  />
+                  <span className={styles.rateUnitText}>/kg</span>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* 2. Desktop Full Table (Visible on screens > 768px) */}
+      <div className={styles.desktopTableCard}>
         <div className={styles.tableResponsive}>
           <table className={styles.customTable}>
             <thead>
               <tr>
                 <th>Category</th>
                 <th>Sub-Classification</th>
-                <th>Current Benchmark</th>
+                <th>Current Delhi Benchmark</th>
                 <th>Your Offered Rate (₹/kg)</th>
                 <th>Effective Date</th>
               </tr>
@@ -74,7 +113,7 @@ export default function RateCardManager() {
                       ₹{Math.round(card.rate_per_kg * 0.96)} - ₹{Math.round(card.rate_per_kg * 1.05)} /kg
                     </span>
                   </td>
-                  <td style={{ width: '180px' }}>
+                  <td style={{ minWidth: '180px' }}>
                     <div className={styles.rateInputWrapper}>
                       <span className={styles.currencySymbol}>₹</span>
                       <input
@@ -85,6 +124,7 @@ export default function RateCardManager() {
                           handleRateChange(card.id, parseFloat(e.target.value) || 0)
                         }
                       />
+                      <span className={styles.rateUnitText}>/kg</span>
                     </div>
                   </td>
                   <td>

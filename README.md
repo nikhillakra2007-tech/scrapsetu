@@ -73,19 +73,19 @@ Instead of cluttering users with an overwhelming 8-tab navigation, ScrapSetu seg
 ### 2.1 Informal Collector Portal
 - **AI Scrap Scanner** ([`CollectorPortal.tsx`](file:///main/web/features/collector/CollectorPortal.tsx)): Camera photo capture, image drag-and-drop, clipboard paste (`Ctrl+V`), and sample presets. Real-time Gemini 2.5 Flash classification.
 - **Physical Scale Input**: Enter lot weight in kilograms with instant value calculation.
-- **Category Quick Override Pills**: Instant one-tap inspection across PCB, Battery, Cable, CRT, Display, Motor, Metal Scrap, and Whole Devices.
+- **Category Quick Override Pills**: Instant one-tap inspection across PCB, Battery, Cable, CRT, Display, Motor, Metal Scrap, and Whole Devices (protected with `white-space: nowrap` against text clipping).
 - **Live Price Board** ([`LivePriceBoard.tsx`](file:///main/web/features/price-board/LivePriceBoard.tsx)): 7-day rolling Delhi market benchmarks with high/low spreads and Hindi audio readouts.
-- **Worker Safety Guides** ([`SafetyGuidanceView.tsx`](file:///main/web/features/safety/SafetyGuidanceView.tsx)): Bilingual (Hindi & English) pictorial hazard directives for handling swollen lithium-ion cells, leaded CRT glass, and open wiring.
+- **Worker Safety Guides** ([`SafetyGuidanceView.tsx`](file:///main/web/features/safety/SafetyGuidanceView.tsx)): **Trilingual** (English, हिंदी, and मराठी) pictorial hazard directives for handling swollen lithium-ion cells, leaded CRT glass, open wire burning, and acid circuit leaching, complete with mandatory PPE gear and Delhi Industrial Helpline contacts.
 - **Citizen Pickups** ([`CustomerPickupPortal.tsx`](file:///main/web/features/customer-pickup/CustomerPickupPortal.tsx)): Household and bulk generator collection requests broadcasted across Delhi wards.
 
 ### 2.2 DPCC Authorized Recycler Command Center
 - **Command Hub** ([`RecyclerOverview.tsx`](file:///main/web/features/recycler/RecyclerOverview.tsx)): Daily procurement KPIs, incoming candidate lots, and DPCC EPR compliance status.
 - **Incoming Lots Queue** ([`MatchedLotsQueue.tsx`](file:///main/web/features/recycler/MatchedLotsQueue.tsx)): Review offered scrap lots, AI confidence, hazard flags, and geographic proximity score before accepting.
 - **Handover & QR Scale Verification** ([`HandoverVerificationModal.tsx`](file:///main/web/features/handover/HandoverVerificationModal.tsx) & [`HandoverTraceabilityView.tsx`](file:///main/web/features/handover/HandoverTraceabilityView.tsx)): Weighbridge verification, variance calculation against declared weight, unique digital QR code generation, and immutable audit ledger.
-- **Rate Card Manager** ([`RateCardManager.tsx`](file:///main/web/features/recycler/RateCardManager.tsx)): Live configuration of procurement pricing per kg across all CPCB material categories.
+- **Rate Card Manager** ([`RateCardManager.tsx`](file:///main/web/features/recycler/RateCardManager.tsx)): Live configuration of procurement pricing per kg. Features **Adaptive Mobile Rate Cards** that eliminate horizontal table scrolling and ensure 3-digit rates (e.g. `₹380/kg`, `₹450/kg`) are 100% visible without clipping.
 
 ### 2.3 Setu Delhi Civic Assistant
-- **Floating Civic Support** ([`SetuAssistant.tsx`](file:///main/web/components/SetuAssistant.tsx)): Bottom-right floating assistant with isolated scrolling (`overscroll-behavior: contain`) preventing page interference. Answers citizen and collector inquiries regarding Delhi e-waste rates, doorstep pickup bookings, and hazardous material safety.
+- **Floating Civic Support** ([`SetuAssistant.tsx`](file:///main/web/components/SetuAssistant.tsx)): Floating assistant that transforms into an 80vh bottom sheet on mobile screens with isolated scrolling (`overscroll-behavior: contain`), preventing page interference. Answers citizen and collector inquiries regarding Delhi e-waste rates, doorstep pickup bookings, and hazardous material safety.
 
 ---
 
@@ -154,6 +154,12 @@ Modeled as a physical sliding toggle pill in the top header:
 - **1-Second Smooth Transitions**: Navigating between sections triggers a 0.95s transition (`section-transition-active`) with smooth deceleration.
 - **Inertial Smooth Scrolling**: Powered by [Lenis](https://github.com/darkroomengineering/lenis) for fluid, weighted momentum.
 
+### 4.4 Native Mobile App Shell & Bottom Navigation
+- **Fixed Bottom Navigation Bar** (`MobileNav.tsx`): On mobile devices ($\le 768\text{px}$), the desktop header links convert to a fixed, thumb-accessible mobile app bottom bar (44–48px touch targets) with live notification badges.
+- **Unclustered Top Bar**: Top header automatically strips horizontal navigation clutter on mobile, displaying only the minimalist brand wordmark and the physical role toggle pill.
+- **Adaptive Rate Cards**: Replaces wide desktop data tables with fluid vertical rate cards, completely eliminating left-to-right table scroll and ensuring 3-digit rates (e.g. `₹380/kg`) are always 100% visible.
+- **Mobile Bottom Sheet Assistant**: The Setu Assistant expands into a native 80vh bottom drawer with scroll isolation (`overscroll-behavior: contain`).
+
 ---
 
 ## 📁 Complete Repository & Folder Structure
@@ -187,6 +193,8 @@ scrapsetu/
         │   ├── shell/                         # Application Header & Navigation
         │   │   ├── Header.tsx                 # Wordmark, role navigation, Recycle toggle switch
         │   │   ├── Header.module.css          # Top bar & physical toggle styling
+        │   │   ├── MobileNav.tsx              # Fixed mobile app bottom thumb navigation bar
+        │   │   ├── MobileNav.module.css       # Mobile app bar styling & safe-area insets
         │   │   ├── Sidebar.tsx                # Alternative layout sidebar
         │   │   └── Sidebar.module.css
         │   └── ui/                            # Reusable UI Primitives

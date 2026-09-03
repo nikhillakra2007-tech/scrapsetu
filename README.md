@@ -120,53 +120,28 @@ graph TB
 
 ---
 
-## 📁 Complete Directory & Folder Structure
+## 📁 Complete Repository & Directory Structure
 
 ```
 scrapsetu/
-├── .gitignore                                 # Ignores docs/, node_modules/, .env*
 ├── README.md                                  # Master project reference (this file)
-│
-├── docs/                                      # Specification & Architecture Documentation
-│   ├── Kabadiwala_Connect_PRD.md              # Complete Product Requirements Document
-│   ├── Kabadiwala_Connect_Architecture_and_Backend_Plan.md # System architecture & database blueprint
-│   ├── all_in_one_quickstart.sql              # Consolidated 1-click database initialization runner
-│   ├── supabase_step_by_step_guide.md         # Database migration instructions & best practices
-│   ├── project_context_and_progress.md        # Activity log & milestone history
-│   ├── session_context_and_activity_dump.md   # Chronological implementation & debugging details
-│   └── migrations/                            # 10 Modular Sequential SQL Migrations
-│       ├── 01_extensions_and_enums.sql        # PostGIS, pgcrypto, 10 core domain enums
-│       ├── 02_geo_and_reference_tables.sql    # Delhi ward polygons, 11 material categories
-│       ├── 03_users_and_profiles.sql          # Decoupled users, collectors, authorized recyclers
-│       ├── 04_pricing_tables.sql              # Recycler rate cards & append-only price history
-│       ├── 05_lots_and_images.sql             # Scrap lots & image attachments
-│       ├── 06_transactions_and_handover.sql   # Matches, financial transactions, handover records
-│       ├── 07_bookings_and_reviews.sql        # Pickup requests, ratings, voice call logs
-│       ├── 08_helpers_views_triggers.sql      # Matching algorithms, valuation triggers, price views
-│       ├── 09_seed_data.sql                   # Delhi wards, DPCC recyclers, rates, safety data
-│       └── 10_storage_buckets_and_policies.sql# Storage buckets & RLS public access rules
-│
 └── main/                                      # Application Source Code
     ├── api/                                   # Python AI & Bot Service (FastAPI / Render target)
-    │   ├── .env.example                       # Committed environment variables template
-    │   ├── .env                               # Local secrets (Gemini API Key, Supabase Keys)
-    │   ├── .gitignore                         # API-specific git exclusions
     │   ├── requirements.txt                   # FastAPI, google-genai, supabase, uvicorn
     │   ├── runtime.txt                        # Python runtime specification (python-3.11)
     │   ├── main.py                            # FastAPI application entrypoint & REST endpoints
     │   ├── gemini_service.py                  # Gemini 2.5 Flash multimodal vision inspection
     │   ├── taxonomy_data.py                   # 11 CPCB categories, Delhi pilot rates, hazard definitions
     │   ├── check_models.py                    # Diagnostic script auditing Google GenAI models
-    │   └── test_live_vision.py                # Synthetic circuit board image generation & smoke test
+    │   ├── test_live_vision.py                # Synthetic circuit board image generation & smoke test
+    │   └── .env.example                       # Environment variables template
     │
     └── web/                                   # Next.js 15 Web Platform (App Router / Vercel target)
-        ├── .env.example                       # Committed environment variables template
-        ├── .env.local                         # Local web secrets (Supabase credentials)
-        ├── .gitignore                         # Next.js git exclusions
         ├── package.json                       # Next.js 15, React 19, TypeScript, Lucide icons
         ├── tsconfig.json                      # Strict TypeScript compilation rules
         ├── next.config.ts                     # Next.js runtime configuration
         ├── eslint.config.mjs                  # Linter rules
+        ├── .env.example                       # Environment variables template
         │
         ├── app/                               # Next.js App Router
         │   ├── layout.tsx                     # Root HTML shell, ambient background, global metadata
@@ -204,7 +179,7 @@ scrapsetu/
 
 ### 5.1 Supabase & PostgreSQL Layer
 - **PostGIS Geo-Spatial Engine**: Enables spatial distance calculations between scrap collectors and recycling facilities across 5 Delhi pilot clusters.
-- **10 Modular Migrations**:
+- **Database Schema & Data Model**:
   - Normalized schema supporting `users`, `collectors`, `recyclers`, `lots`, `lot_matches`, `transactions`, `handover_records`, `customer_pickup_requests`, and `price_history`.
   - Stored Procedure `fn_match_recyclers_for_lot`: Computes deterministic composite match score based on geographic proximity (40%), material acceptance (30%), and offered rate relative to benchmark (30%).
   - Trigger `fn_calculate_lot_estimated_value`: Automatically computes `estimated_value = weight_kg * rate_per_kg`.
@@ -528,7 +503,7 @@ npm run build
 
 ## 🔑 Environment Variables Reference
 
-### Web Application (`main/web/.env.local`)
+### Web Application Environment Settings (`main/web/`)
 | Variable | Description |
 |---|---|
 | `NEXT_PUBLIC_SUPABASE_URL` | Cloud Supabase Project URL (`https://[PROJECT-ID].supabase.co`) |
@@ -537,7 +512,7 @@ npm run build
 | `NEXT_PUBLIC_API_URL` | URL of the Python AI microservice (Default: `http://localhost:8000`) |
 | `NEXT_PUBLIC_APP_URL` | Base URL of the web application (Default: `http://localhost:3000`) |
 
-### Python AI Microservice (`main/api/.env`)
+### Python AI Microservice Environment Settings (`main/api/`)
 | Variable | Description |
 |---|---|
 | `PORT` | API server port (Default: `8000`) |

@@ -1,0 +1,785 @@
+/* ScrapSetu Authentication Component-Local Styles — Compact & Refined */
+
+.authContainer {
+  height: 100vh;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #F7FAF8;
+  padding: 1rem;
+  position: relative;
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Lighter, Softer Luminous Green Ambient Shade                               */
+/* -------------------------------------------------------------------------- */
+
+.refractionBackdrop {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  width: 680px;
+  height: 740px;
+  pointer-events: none;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+}
+
+/* Soft, light mint & fresh leaf green ambient aura */
+.cardAuraGlow {
+  position: absolute;
+  width: 620px;
+  height: 680px;
+  border-radius: 48px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(133, 214, 153, 0.48) 0%,
+    rgba(180, 231, 206, 0.38) 32%,
+    rgba(180, 231, 206, 0.22) 58%,
+    rgba(180, 231, 206, 0.08) 78%,
+    transparent 96%
+  );
+  filter: blur(34px);
+  transform: translate3d(0, 0, 0);
+  will-change: transform, opacity;
+  animation: softGreenAuraBreathing 4.8s ease-in-out infinite;
+}
+
+/* Gentle, soothing breathing flow with lighter green tones */
+@keyframes softGreenAuraBreathing {
+  0%, 100% {
+    opacity: 0.95;
+    transform: scale3d(1.04, 1.04, 1);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale3d(0.96, 0.96, 1);
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/* Entire Section Physical Drop -> Impact -> Bounce -> Rebound -> Settle       */
+/* (Recycle token + entire login box + text below drop and bounce together)   */
+/* -------------------------------------------------------------------------- */
+
+.authWrapper {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto 0;
+  /* Clean, soothing natural bounce with zero scale distortion or stress */
+  animation: cleanSmoothBounce 1.7s cubic-bezier(0.28, 0.84, 0.42, 1) forwards;
+  will-change: transform, opacity;
+}
+
+@keyframes cleanSmoothBounce {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -90px, 0);
+  }
+  25% {
+    opacity: 1;
+  }
+  /* First landing */
+  48% {
+    transform: translate3d(0, 0, 0);
+  }
+  /* Gentle rebound */
+  68% {
+    transform: translate3d(0, -20px, 0);
+  }
+  /* Second landing */
+  84% {
+    transform: translate3d(0, 0, 0);
+  }
+  /* Micro cushion */
+  93% {
+    transform: translate3d(0, -5px, 0);
+  }
+  /* Resting equilibrium — STOPS COMPLETELY */
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/* Compact 3D Circular "Recyclable Token"                                    */
+/* -------------------------------------------------------------------------- */
+
+.dropElementWrapper {
+  margin-bottom: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.recyclableToken {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #4D8F5C 0%, #3F784C 45%, #24492E 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  position: relative;
+  box-shadow: 
+    0 10px 20px -3px rgba(36, 73, 46, 0.35),
+    0 2px 6px rgba(0, 0, 0, 0.12),
+    inset 0 1.5px 3px rgba(255, 255, 255, 0.4),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.3);
+  border: 1.5px solid rgba(180, 231, 206, 0.6);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.recyclableToken:hover {
+  transform: scale(1.05);
+}
+
+.tokenRimGlow {
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(133, 214, 153, 0.6) 0%, transparent 70%);
+  opacity: 0.65;
+  pointer-events: none;
+}
+
+.recycleSymbolSvg {
+  width: 25px;
+  height: 25px;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.25));
+}
+
+/* -------------------------------------------------------------------------- */
+/* Compact Login Card (Unified inside the bouncing section)                   */
+/* -------------------------------------------------------------------------- */
+
+.authCard {
+  width: 100%;
+  background-color: #FFFFFF;
+  border: 1px solid rgba(133, 214, 153, 0.4);
+  border-radius: 16px;
+  padding: 1.35rem 1.4rem;
+  box-shadow: 
+    0 0 0 1px rgba(63, 120, 76, 0.12),
+    0 8px 24px -4px rgba(63, 120, 76, 0.16),
+    0 16px 40px -6px rgba(63, 120, 76, 0.1),
+    0 0 34px 2px rgba(133, 214, 153, 0.25),
+    0 0 0 1px rgba(255, 255, 255, 0.9) inset;
+  box-sizing: border-box;
+}
+
+/* Card Header */
+.brandHeader {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.logoTitle {
+  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #172019;
+  letter-spacing: -0.03em;
+  margin: 0 0 0.15rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.1rem;
+}
+
+.brandDot {
+  color: #85D699;
+}
+
+.tagline {
+  font-size: 0.78rem;
+  color: #5F6F65;
+  line-height: 1.35;
+  margin: 0;
+}
+
+/* Status Banners */
+.errorBanner, .sessionBanner, .successBanner {
+  font-size: 0.78rem;
+  font-weight: 500;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  margin-bottom: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  line-height: 1.35;
+}
+
+.errorBanner {
+  background-color: #FDF1F1;
+  border: 1px solid #F9C5C5;
+  color: #C94C4C;
+}
+
+.sessionBanner, .successBanner {
+  background-color: #E7F8F1;
+  border: 1px solid #9DE4C5;
+  color: #3F784C;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Form Inputs                                                                */
+/* -------------------------------------------------------------------------- */
+
+.authForm {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin-bottom: 0.75rem;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  text-align: left;
+}
+
+.inputLabel {
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: #172019;
+}
+
+.inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.inputIcon {
+  position: absolute;
+  left: 0.75rem;
+  color: #5F6F65;
+  pointer-events: none;
+}
+
+.textInput {
+  width: 100%;
+  height: 2.35rem;
+  padding: 0 2.25rem 0 2.25rem;
+  background-color: #FFFFFF;
+  border: 1px solid #DCE6DF;
+  border-radius: 8px;
+  font-size: 0.84rem;
+  color: #172019;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  box-sizing: border-box;
+}
+
+.textInput:focus {
+  border-color: #3F784C;
+  box-shadow: 0 0 0 2.5px rgba(63, 120, 76, 0.16);
+}
+
+.textInput::placeholder {
+  color: #98A59C;
+  font-size: 0.8rem;
+}
+
+.passwordToggleBtn {
+  position: absolute;
+  right: 0.6rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #5F6F65;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.2rem;
+  border-radius: 4px;
+}
+
+.passwordToggleBtn:hover {
+  color: #172019;
+}
+
+.primarySubmitBtn {
+  width: 100%;
+  height: 2.45rem;
+  background: linear-gradient(135deg, #3F784C 0%, #31603C 100%);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  transition: transform 0.1s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+  box-shadow: 0 3px 8px rgba(63, 120, 76, 0.22);
+  margin-top: 0.15rem;
+}
+
+.primarySubmitBtn:hover:not(:disabled) {
+  box-shadow: 0 4px 12px rgba(63, 120, 76, 0.3);
+  transform: translateY(-1px);
+}
+
+.primarySubmitBtn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.primarySubmitBtn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Divider                                                                    */
+/* -------------------------------------------------------------------------- */
+
+.dividerContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0.35rem 0 0.75rem;
+}
+
+.dividerLine {
+  flex: 1;
+  height: 1px;
+  background-color: #E2DDD0;
+}
+
+.dividerText {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #5F6F65;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Google Action Button                                                       */
+/* -------------------------------------------------------------------------- */
+
+.googleBtn {
+  width: 100%;
+  height: 2.45rem;
+  background-color: #FFFFFF;
+  border: 1px solid #DCE6DF;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  font-family: inherit;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: #172019;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+  box-shadow: 0 1px 3px rgba(23, 32, 25, 0.04);
+  padding: 0 1rem;
+  outline: none;
+}
+
+.googleBtn:hover:not(:disabled) {
+  background-color: #FAFDFB;
+  border-color: #85D699;
+  box-shadow: 0 3px 8px rgba(63, 120, 76, 0.1);
+}
+
+.googleBtn:focus-visible {
+  border-color: #3F784C;
+  box-shadow: 0 0 0 2.5px rgba(63, 120, 76, 0.2);
+}
+
+.googleBtn:disabled {
+  opacity: 0.75;
+  cursor: not-allowed;
+  background-color: #F7FAF8;
+}
+
+.googleIconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.btnSpinner {
+  width: 15px;
+  height: 15px;
+  border: 2px solid #DCE6DF;
+  border-top-color: #3F784C;
+  border-radius: 50%;
+  animation: spinnerRotate 0.75s linear infinite;
+}
+
+.btnSpinnerLight {
+  width: 15px;
+  height: 15px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: #FFFFFF;
+  border-radius: 50%;
+  animation: spinnerRotate 0.75s linear infinite;
+}
+
+@keyframes spinnerRotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/* Footer / Toggle & Navigation                                               */
+/* -------------------------------------------------------------------------- */
+
+.authFooter {
+  margin-top: 0.75rem;
+  text-align: center;
+  padding-top: 0.65rem;
+  border-top: 1px solid #F0F4F1;
+}
+
+.toggleModeBtn {
+  background: transparent;
+  border: none;
+  color: #5F6F65;
+  font-size: 0.78rem;
+  cursor: pointer;
+  padding: 0.15rem;
+}
+
+.toggleAccent {
+  color: #3F784C;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.toggleModeBtn:hover .toggleAccent {
+  color: #2D5838;
+}
+
+/* Trust Indicators */
+.trustBar {
+  margin-top: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.15rem;
+  flex-wrap: wrap;
+}
+
+.trustItem {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #5F6F65;
+  letter-spacing: 0.01em;
+}
+
+.trustIcon {
+  color: #3F784C;
+}
+
+/* Return / Back to home link */
+.homeLink {
+  margin-top: 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.76rem;
+  font-weight: 500;
+  color: #5F6F65;
+  text-decoration: none;
+  transition: color 0.15s ease;
+  border-radius: 6px;
+  padding: 0.2rem 0.4rem;
+}
+
+.homeLink:hover {
+  color: #3F784C;
+}
+
+.homeLink:focus-visible {
+  outline: 2px solid #3F784C;
+  outline-offset: 2px;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Accessibility: Reduced Motion Support                                     */
+/* -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .authWrapper {
+    animation: simpleFadeIn 0.4s ease-out forwards !important;
+    transform: none !important;
+  }
+
+  .cardAuraGlow {
+    animation: none !important;
+  }
+
+  @keyframes simpleFadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .googleBtn, .primarySubmitBtn, .recyclableToken {
+    transition: none !important;
+    transform: none !important;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/* Responsive Breakpoints                                                     */
+/* -------------------------------------------------------------------------- */
+
+@media (max-height: 600px) {
+  .authContainer {
+    height: auto;
+    padding: 1rem 0.5rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .authCard {
+    padding: 1.15rem 1rem;
+    border-radius: 14px;
+  }
+
+  .logoTitle {
+    font-size: 1.25rem;
+  }
+
+  .tagline {
+    font-size: 0.75rem;
+  }
+
+  .textInput, .primarySubmitBtn, .googleBtn {
+    height: 2.25rem;
+    font-size: 0.8rem;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/* Google Account Picker Modal                                                */
+/* -------------------------------------------------------------------------- */
+
+.modalBackdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(15, 25, 20, 0.48);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  animation: fadeInModal 0.2s ease-out;
+}
+
+@keyframes fadeInModal {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.accountModal {
+  background-color: #FFFFFF;
+  border: 1px solid #DCE6DF;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 20px 48px -10px rgba(15, 25, 20, 0.25);
+  padding: 1.75rem 1.5rem 1.5rem;
+  animation: scaleUpModal 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+}
+
+@keyframes scaleUpModal {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.modalHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 1.25rem;
+}
+
+.googleLogoBadge {
+  margin-bottom: 0.6rem;
+}
+
+.modalTitle {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #172019;
+  margin: 0 0 0.2rem;
+}
+
+.modalSubtitle {
+  font-size: 0.8rem;
+  color: #5F6F65;
+  margin: 0;
+}
+
+.accountList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.accountRow {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  width: 100%;
+  padding: 0.75rem 0.85rem;
+  background-color: #FFFFFF;
+  border: 1px solid #E5EBE6;
+  border-radius: 12px;
+  cursor: pointer;
+  text-align: left;
+  transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+}
+
+.accountRow:hover {
+  background-color: #F7FAF8;
+  border-color: #85D699;
+  transform: translateY(-1px);
+}
+
+.accountAvatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #FFFFFF;
+  flex-shrink: 0;
+}
+
+.avatarVinayak {
+  background: linear-gradient(135deg, #1A73E8 0%, #0D47A1 100%);
+}
+
+.avatarRamesh {
+  background: linear-gradient(135deg, #3F784C 0%, #1B5E20 100%);
+}
+
+.accountInfo {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.accountName {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #172019;
+  line-height: 1.2;
+}
+
+.accountEmail {
+  font-size: 0.75rem;
+  color: #5F6F65;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.accountRoleTag {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: #3F784C;
+  background-color: #E7F8F1;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+  align-self: flex-start;
+  margin-top: 0.25rem;
+}
+
+.modalFooterActions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  align-items: center;
+}
+
+.directOauthBtn {
+  background: transparent;
+  border: none;
+  font-size: 0.76rem;
+  color: #3F784C;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.directOauthBtn:hover {
+  color: #1B5E20;
+}
+
+.cancelModalBtn {
+  background: transparent;
+  border: 1px solid #DCE6DF;
+  border-radius: 8px;
+  padding: 0.45rem 1.25rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #5F6F65;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  width: 100%;
+}
+
+.cancelModalBtn:hover {
+  background-color: #F7FAF8;
+  color: #172019;
+}

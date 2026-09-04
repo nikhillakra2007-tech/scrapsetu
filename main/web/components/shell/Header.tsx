@@ -11,9 +11,8 @@ import {
   AlertTriangle,
   Truck,
   CheckCircle2,
-  Recycle,
+  LogOut,
 } from 'lucide-react';
-import { CURRENT_RECYCLER } from '@/lib/mock-data';
 import styles from './Header.module.css';
 
 interface HeaderProps {
@@ -23,6 +22,8 @@ interface HeaderProps {
   pickupCount?: number;
   activeRole: 'recycler' | 'collector';
   onToggleRole: () => void;
+  currentUser?: { name: string; email?: string; role?: 'recycler' | 'collector' } | null;
+  onSignOut?: () => void;
 }
 
 interface NavItem {
@@ -39,7 +40,8 @@ export default function Header({
   matchedCount = 0,
   pickupCount = 0,
   activeRole,
-  onToggleRole,
+  currentUser,
+  onSignOut,
 }: HeaderProps) {
   // Segregated Feature Sets per Role (PRD Architecture)
   const recyclerNavItems: NavItem[] = [
@@ -58,6 +60,17 @@ export default function Header({
 
   const currentNavItems = activeRole === 'recycler' ? recyclerNavItems : collectorNavItems;
 
+  const handleLogout = () => {
+    if (onSignOut) {
+      onSignOut();
+    } else {
+      try {
+        localStorage.removeItem('scrapsetu_auth_user');
+        window.location.href = '/auth';
+      } catch (e) {}
+    }
+  };
+
   return (
     <header className={`${styles.header} drop-segment-1`}>
       <div className={styles.headerInner}>
@@ -66,15 +79,15 @@ export default function Header({
           type="button"
           className={styles.logoBtn}
           onClick={() => onSelectTab(activeRole === 'recycler' ? 'recycler-overview' : 'collector-scan')}
-          title="Return to Home"
+          title="Return to Dashboard Home"
         >
           <span className={styles.logoText}>ScrapSetu<span className={styles.logoDot}>.</span></span>
           <span className={styles.roleSubtext}>
-            {activeRole === 'recycler' ? 'Recycler Portal' : 'Collector App'}
+            {activeRole === 'recycler' ? 'Recycler Facility Portal' : 'Field Collector App'}
           </span>
         </button>
 
-        {/* Center: Clean Role-Specific Navigation Links */}
+        {/* Center: Clean Role-Specific Navigation Links (Strictly for the active role) */}
         <nav className={styles.navLinks} aria-label="Role Navigation">
           {currentNavItems.map((item) => {
             const isActive = currentTab === item.id;
@@ -95,30 +108,44 @@ export default function Header({
           })}
         </nav>
 
-        {/* Right: LeafLine Role Switcher Pill & Verification Tag */}
+        {/* Right: Facility / Role Badge, User Info, and Logout Button */}
         <div className={styles.headerRight}>
-          <div className={styles.dpccTag}>
-            <CheckCircle2 size={13} className={styles.dpccIcon} />
-            <span>DPCC Facility</span>
+          {/* Strict Role Locked Verification Badge — switching roles is locked */}
+          <div
+            className={`${styles.roleLockedBadge} ${
+              activeRole === 'collector' ? styles.roleLockedCollector : ''
+            }`}
+          >
+            <CheckCircle2 size={13} />
+            <span>
+              {activeRole === 'recycler'
+                ? 'DPCC Authorized Recycler'
+                : 'Verified Field Collector'}
+            </span>
           </div>
 
-          {/* LeafLine Physical Switch Toggle */}
-          <div className={styles.loginSwitchBox}>
-            <span className={styles.loginLabel}>
-              {activeRole === 'recycler' ? 'RECYCLER' : 'COLLECTOR'}
-            </span>
-            <div
-              className={`${styles.switchTrack} ${activeRole === 'collector' ? styles.switchTrackCollector : ''}`}
-              onClick={onToggleRole}
-              role="button"
-              tabIndex={0}
-              title={`Currently viewing ${activeRole.toUpperCase()} workspace. Click to switch.`}
-            >
-              <div className={`${styles.switchThumb} ${activeRole === 'collector' ? styles.switchThumbCollector : ''}`}>
-                <Recycle size={12} className={styles.recycleIcon} strokeWidth={2.6} />
+          {/* User Profile Pill */}
+          {currentUser && (
+            <div className={styles.userProfilePill} title={`Signed in as ${currentUser.name}`}>
+              <div className={styles.userAvatar}>
+                {currentUser.name.charAt(0).toUpperCase()}
               </div>
+              <span className={styles.userNameText}>
+                {currentUser.name.split(' ')[0]}
+              </span>
             </div>
-          </div>
+          )}
+
+          {/* Logout Button right in the dashboard */}
+          <button
+            type="button"
+            className={styles.logoutBtn}
+            onClick={handleLogout}
+            title="Log out of ScrapSetu"
+          >
+            <LogOut size={13} />
+            <span>Logout</span>
+          </button>
         </div>
       </div>
     </header>

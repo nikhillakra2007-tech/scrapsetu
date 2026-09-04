@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from '@/components/shell/Header';
 import MobileNav from '@/components/shell/MobileNav';
 import SmoothScroll from '@/components/SmoothScroll';
@@ -19,21 +19,55 @@ import { LotMatch } from '@/types/database';
 import { ArrowLeft } from 'lucide-react';
 
 export default function Home() {
+  const [currentUser, setCurrentUser] = useState<{
+    name: string;
+    email?: string;
+    role?: 'recycler' | 'collector';
+  } | null>(null);
+  const [isAuthLoading, setIsAuthLoading] = useState<boolean>(true);
   const [activeRole, setActiveRole] = useState<'recycler' | 'collector'>('recycler');
   const [activeTab, setActiveTab] = useState<string>('recycler-overview');
   const [matchedLots, setMatchedLots] = useState<LotMatch[]>(MOCK_MATCHED_LOTS);
   const [selectedHandoverMatch, setSelectedHandoverMatch] = useState<LotMatch | null>(null);
   const [isHandoverModalOpen, setIsHandoverModalOpen] = useState<boolean>(false);
 
-  // Toggle between Recycler and Collector personas
-  const handleToggleRole = () => {
-    if (activeRole === 'recycler') {
-      setActiveRole('collector');
-      setActiveTab('collector-scan');
-    } else {
-      setActiveRole('recycler');
-      setActiveTab('recycler-overview');
+  // Authentication gate: Redirect to /auth if not logged in
+  useEffect(() => {
+    try {
+      const stored = typeof window !== 'undefined'
+        ? localStorage.getItem('scrapsetu_auth_user')
+        : null;
+
+      if (!stored) {
+        // No authenticated session -> Redirect directly to login
+        window.location.href = '/auth';
+        return;
+      }
+
+      const user = JSON.parse(stored);
+      setCurrentUser(user);
+
+      // Lock role strictly to the authenticated account's assigned persona
+      if (user.role === 'collector') {
+        setActiveRole('collector');
+        setActiveTab('collector-scan');
+      } else {
+        setActiveRole('recycler');
+        setActiveTab('recycler-overview');
+      }
+    } catch (e) {
+      window.location.href = '/auth';
+      return;
+    } finally {
+      setIsAuthLoading(false);
     }
+  }, []);
+
+  const handleSignOut = () => {
+    try {
+      localStorage.removeItem('scrapsetu_auth_user');
+      window.location.href = '/auth';
+    } catch (e) {}
   };
 
   const handleLotCreated = (newMatch: LotMatch) => {
@@ -57,17 +91,52 @@ export default function Home() {
     // Handover record locked
   };
 
+  // Splash screen while verifying session
+  if (isAuthLoading) {
+    return (
+      <div
+        style={{
+          minHeight: '100vh',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          backgroundColor: '#F7FAF8',
+          fontFamily: "'Outfit', sans-serif",
+          color: '#172019',
+        }}
+      >
+        <div
+          style={{
+            width: 32,
+            height: 32,
+            border: '3px solid #DCE6DF',
+            borderTopColor: '#3F784C',
+            borderRadius: '50%',
+            animation: 'spin 0.8s linear infinite',
+            marginBottom: '1rem',
+          }}
+        />
+        <span style={{ fontSize: '0.9rem', color: '#5F6F65', fontWeight: 600 }}>
+          Verifying ScrapSetu authentication...
+        </span>
+      </div>
+    );
+  }
+
   return (
     <SmoothScroll>
       <div className="app-container">
-        {/* LeafLine-Inspired Navigation Header with Physical Role Switch */}
+        {/* Navigation Header with Strict Single-Role Access and Dashboard Logout */}
         <Header
           currentTab={activeTab}
           onSelectTab={setActiveTab}
           matchedCount={matchedLots.length}
           pickupCount={MOCK_PICKUP_REQUESTS.length}
           activeRole={activeRole}
-          onToggleRole={handleToggleRole}
+          onToggleRole={() => {}} // Role switching is locked
+          currentUser={currentUser}
+          onSignOut={handleSignOut}
         />
 
         {/* Main Content Surface with 1-Second Smooth Section Transition */}
@@ -104,51 +173,50 @@ export default function Home() {
           )}
 
           <main className="page-container section-transition-active" key={activeTab}>
-            {/* COLLECTOR FEATURES */}
-            {activeTab === 'collector-scan' && (
-              <CollectorPortal
-                onLotCreated={handleLotCreated}
-                onNavigateToRecyclerQueue={() => {
-                  setActiveRole('recycler');
-                  setActiveTab('matched-lots');
-                }}
-              />
+            {/* STRICT ROLE GATED CONTENT: COLLECTOR ONLY */}
+            {activeRole === 'collector' && (
+              <>
+                {activeTab === 'collector-scan' && (
+                  <CollectorPortal
+                    onLotCreated={handleLotCreated}
+                    onNavigateToRecyclerQueue={() => {}}
+                  />
+                )}
+                {activeTab === 'price-board' && <LivePriceBoard />}
+                {activeTab === 'safety-guidance' && <SafetyGuidanceView />}
+                {activeTab === 'customer-pickup' && <CustomerPickupPortal />}
+              </>
             )}
 
-            {activeTab === 'price-board' && <LivePriceBoard />}
-
-            {activeTab === 'safety-guidance' && <SafetyGuidanceView />}
-
-            {activeTab === 'customer-pickup' && <CustomerPickupPortal />}
-
-            {/* RECYCLER FEATURES */}
-            {activeTab === 'recycler-overview' && (
-              <RecyclerOverview
-                matchedLots={matchedLots}
-                onNavigateToLots={() => setActiveTab('matched-lots')}
-                onNavigateToHandover={() => {
-                  if (matchedLots.length > 0) {
-                    setSelectedHandoverMatch(matchedLots[0]);
-                    setIsHandoverModalOpen(true);
-                  } else {
-                    setActiveTab('handover');
-                  }
-                }}
-                onNavigateToRateCards={() => setActiveTab('rate-cards')}
-              />
+            {/* STRICT ROLE GATED CONTENT: RECYCLER ONLY */}
+            {activeRole === 'recycler' && (
+              <>
+                {activeTab === 'recycler-overview' && (
+                  <RecyclerOverview
+                    matchedLots={matchedLots}
+                    onNavigateToLots={() => setActiveTab('matched-lots')}
+                    onNavigateToHandover={() => {
+                      if (matchedLots.length > 0) {
+                        setSelectedHandoverMatch(matchedLots[0]);
+                        setIsHandoverModalOpen(true);
+                      } else {
+                        setActiveTab('handover');
+                      }
+                    }}
+                    onNavigateToRateCards={() => setActiveTab('rate-cards')}
+                  />
+                )}
+                {activeTab === 'matched-lots' && (
+                  <MatchedLotsQueue
+                    lots={matchedLots}
+                    onAcceptLot={handleAcceptLot}
+                    onInitiateHandover={handleInitiateHandover}
+                  />
+                )}
+                {activeTab === 'handover' && <HandoverTraceabilityView />}
+                {activeTab === 'rate-cards' && <RateCardManager />}
+              </>
             )}
-
-            {activeTab === 'matched-lots' && (
-              <MatchedLotsQueue
-                lots={matchedLots}
-                onAcceptLot={handleAcceptLot}
-                onInitiateHandover={handleInitiateHandover}
-              />
-            )}
-
-            {activeTab === 'handover' && <HandoverTraceabilityView />}
-
-            {activeTab === 'rate-cards' && <RateCardManager />}
           </main>
         </div>
 
@@ -161,7 +229,7 @@ export default function Home() {
           />
         )}
 
-        {/* Mobile Fixed App Navigation Bar */}
+        {/* Mobile Fixed App Navigation Bar — strictly filtered to active role */}
         <MobileNav
           currentTab={activeTab}
           onSelectTab={setActiveTab}

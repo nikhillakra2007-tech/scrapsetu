@@ -229,6 +229,118 @@
   transform: rotate(45deg);
 }
 
+/* User Auth Status Button / Pill */
+.logoutBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.38rem 0.85rem;
+  background-color: #FFFFFF;
+  border: 1px solid #E2DDD0;
+  color: #C94C4C;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  box-shadow: var(--shadow-sm);
+}
+
+.logoutBtn:hover {
+  background-color: #FDF1F1;
+  border-color: #F9C5C5;
+  color: #A62424;
+  transform: translateY(-1px);
+}
+
+.roleLockedBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.32rem 0.75rem;
+  background-color: #E7F8F1;
+  border: 1px solid #9DE4C5;
+  border-radius: var(--radius-full);
+  color: #0B6141;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.roleLockedCollector {
+  background-color: #E8F7F3;
+  border-color: #B2EAD9;
+  color: #005F52;
+}
+
+.signInBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.38rem 0.85rem;
+  background-color: var(--brand-primary);
+  color: #FFFFFF !important;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  box-shadow: 0 2px 6px rgba(0, 95, 82, 0.2);
+}
+
+.signInBtn:hover {
+  background-color: var(--brand-primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0, 95, 82, 0.28);
+}
+
+.userProfilePill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.25rem 0.6rem 0.25rem 0.35rem;
+  background-color: #FFFFFF;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-sm);
+}
+
+.userAvatar {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-secondary) 100%);
+  color: #FFFFFF;
+  font-size: 0.75rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.userNameText {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.signOutIconBtn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.2rem;
+  border-radius: 4px;
+  transition: color var(--transition-fast);
+}
+
+.signOutIconBtn:hover {
+  color: var(--danger-text, #A62424);
+}
+
 /* Responsive adjustments */
 @media (max-width: 1024px) {
   .dpccTag {

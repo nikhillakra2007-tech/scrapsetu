@@ -20,7 +20,7 @@
    - [3.2 Grounded Delhi Material Classification Engine](#32-grounded-delhi-material-classification-engine)
    - [3.3 2-Way Vernacular Voice Assistant (Hindi STT & TTS)](#33-2-way-vernacular-voice-assistant-hindi-stt--tts)
 4. [Design System & UI Experience](#-design-system--ui-experience)
-   - [4.1 LeafLine Organic Color Palette](#41-leafline-organic-color-palette)
+   - [4.1 Leaf Organic Color Palette](#41-leaf-organic-color-palette)
    - [4.2 Physical Sliding Role Switch (Recycle Icon)](#42-physical-sliding-role-switch-recycle-icon)
    - [4.3 Cascading Drop Intro Animations & Smooth Transitions](#43-cascading-drop-intro-animations--smooth-transitions)
 5. [Complete Repository & Folder Structure](#-complete-repository--folder-structure)

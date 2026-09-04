@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { supabase } from '@/lib/supabase';
+import { supabase, isSupabaseConfigured } from '@/lib/supabase';
 import {
   ShieldCheck,
   ArrowLeft,
@@ -22,29 +22,37 @@ interface DemoAccount {
   id: string;
   name: string;
   email: string;
-  role: 'recycler' | 'collector';
+  role: 'recycler' | 'collector' | 'admin';
   roleLabel: string;
   initial: string;
   avatarClass: string;
 }
 
+// Helper to resolve route by user role
+const getRoleDestination = (role?: string) => {
+  if (role === 'collector') return '/collector';
+  if (role === 'admin') return '/admin';
+  return '/recycler';
+};
+
 export default function AuthPage() {
   const [authMode, setAuthMode] = useState<'signin' | 'signup'>('signin');
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const [showPassword, setShowPassword] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [isGoogleLoading, setIsGoogleLoading] = useState<boolean>(false);
-  const [isGoogleModalOpen, setIsGoogleModalOpen] = useState<boolean>(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isGoogleLoading, setIsGoogleLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
-  const [hasExistingSession, setHasExistingSession] = useState<boolean>(false);
+  const [hasExistingSession, setHasExistingSession] = useState(false);
+  const [isGoogleModalOpen, setIsGoogleModalOpen] = useState(false);
 
+  // Pre-configured Pilot Demo Accounts (All 3 Canonical Roles)
   const DEMO_ACCOUNTS: DemoAccount[] = [
     {
       id: 'demo-vinayak',
       name: 'Vinayak Sharma',
-      email: 'vinayak.sharma@scrapsetu.in',
+      email: 'vinayak.recycler@scrapsetu.in',
       role: 'recycler',
       roleLabel: 'Verified Recycler Partner',
       initial: 'V',
@@ -59,6 +67,15 @@ export default function AuthPage() {
       initial: 'R',
       avatarClass: styles.avatarRamesh,
     },
+    {
+      id: 'demo-admin',
+      name: 'Priya Verma',
+      email: 'priya.admin@scrapsetu.in',
+      role: 'admin',
+      roleLabel: 'DPCC Platform Administrator',
+      initial: 'P',
+      avatarClass: styles.avatarVinayak,
+    },
   ];
 
   // Detect existing Supabase or Demo session
@@ -66,56 +83,64 @@ export default function AuthPage() {
     let isMounted = true;
 
     async function checkExistingSession() {
+      // 1. Instant local storage check
       try {
-        // Check localStorage first
         const storedUser = typeof window !== 'undefined'
           ? localStorage.getItem('scrapsetu_auth_user')
           : null;
 
         if (storedUser && isMounted) {
           setHasExistingSession(true);
-          const timer = setTimeout(() => {
-            window.location.href = '/';
-          }, 900);
-          return () => clearTimeout(timer);
+          const parsed = JSON.parse(storedUser);
+          const target = getRoleDestination(parsed?.role);
+          window.location.href = target;
+          return;
         }
+      } catch (e) {
+        // Ignore parse error
+      }
 
-        const {
-          data: { session },
-          error,
-        } = await supabase.auth.getSession();
-        if (error) throw error;
+      // 2. Only check remote Supabase session if valid credentials exist
+      if (isSupabaseConfigured) {
+        try {
+          const {
+            data: { session },
+            error,
+          } = await supabase.auth.getSession();
+          if (error) throw error;
 
-        if (session && isMounted) {
-          setHasExistingSession(true);
-          const timer = setTimeout(() => {
-            window.location.href = '/';
-          }, 900);
-          return () => clearTimeout(timer);
+          if (session && isMounted) {
+            setHasExistingSession(true);
+            window.location.href = '/recycler';
+            return;
+          }
+        } catch (err) {
+          // Silent catch for initial check
         }
-      } catch (err) {
-        // Silent catch for initial check
       }
     }
 
     checkExistingSession();
 
-    // Subscribe to auth state updates
-    const { data: authSubscription } = supabase.auth.onAuthStateChange(
-      (event, session) => {
-        if (session && isMounted) {
-          setHasExistingSession(true);
-          const timer = setTimeout(() => {
-            window.location.href = '/';
-          }, 800);
-          return () => clearTimeout(timer);
+    // Only subscribe to remote auth events if configured
+    if (isSupabaseConfigured) {
+      const { data: authSubscription } = supabase.auth.onAuthStateChange(
+        (event, session) => {
+          if (session && isMounted) {
+            setHasExistingSession(true);
+            window.location.href = '/recycler';
+          }
         }
-      }
-    );
+      );
+
+      return () => {
+        isMounted = false;
+        authSubscription?.subscription?.unsubscribe();
+      };
+    }
 
     return () => {
       isMounted = false;
-      authSubscription?.subscription?.unsubscribe();
     };
   }, []);
 
@@ -134,29 +159,28 @@ export default function AuthPage() {
       setErrorMessage(null);
       setSuccessMessage(null);
 
+      // Fast pilot demo path if remote Supabase is unconfigured
+      if (!isSupabaseConfigured) {
+        const demoUser = {
+          name: email.split('@')[0],
+          email: email.trim(),
+          role: 'recycler' as const,
+        };
+        localStorage.setItem('scrapsetu_auth_user', JSON.stringify(demoUser));
+        setHasExistingSession(true);
+        setTimeout(() => {
+          window.location.href = getRoleDestination(demoUser.role);
+        }, 200);
+        return;
+      }
+
       if (authMode === 'signin') {
         const { data, error } = await supabase.auth.signInWithPassword({
           email: email.trim(),
           password,
         });
 
-        if (error) {
-          // If Supabase credentials are in mock mode, provide a friendly demo fallback
-          if (error.message.includes('mock') || error.message.includes('fetch')) {
-            const demoUser = {
-              name: email.split('@')[0],
-              email: email.trim(),
-              role: 'recycler' as const,
-            };
-            localStorage.setItem('scrapsetu_auth_user', JSON.stringify(demoUser));
-            setHasExistingSession(true);
-            setTimeout(() => {
-              window.location.href = '/';
-            }, 800);
-            return;
-          }
-          throw error;
-        }
+        if (error) throw error;
 
         if (data.session) {
           localStorage.setItem(
@@ -168,9 +192,7 @@ export default function AuthPage() {
             })
           );
           setHasExistingSession(true);
-          setTimeout(() => {
-            window.location.href = '/';
-          }, 800);
+          window.location.href = '/recycler';
         }
       } else {
         const { data, error } = await supabase.auth.signUp({
@@ -182,9 +204,7 @@ export default function AuthPage() {
 
         if (data.session) {
           setHasExistingSession(true);
-          setTimeout(() => {
-            window.location.href = '/';
-          }, 800);
+          window.location.href = '/recycler';
         } else {
           setSuccessMessage(
             'Account created! If confirmation is required, please check your inbox.'
@@ -208,7 +228,7 @@ export default function AuthPage() {
     }
   };
 
-  // Select Demo Google Account
+  // Select Demo Google Account (Instant, Zero Buffering)
   const handleSelectDemoAccount = (account: DemoAccount) => {
     setIsGoogleModalOpen(false);
     setIsGoogleLoading(true);
@@ -224,13 +244,11 @@ export default function AuthPage() {
       })
     );
 
-    // Brief confirmation then redirect into workspace
+    setHasExistingSession(true);
+    // Instant redirect to the designated workspace
     setTimeout(() => {
-      setHasExistingSession(true);
-      setTimeout(() => {
-        window.location.href = '/';
-      }, 700);
-    }, 500);
+      window.location.href = getRoleDestination(account.role);
+    }, 200);
   };
 
   // Direct Supabase Google OAuth sign in

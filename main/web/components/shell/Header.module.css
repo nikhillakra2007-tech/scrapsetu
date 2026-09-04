@@ -354,23 +354,23 @@
     padding: 0;
   }
   .headerInner {
-    padding: 0 1rem;
-    gap: 0.75rem;
+    padding: 0 0.85rem;
+    gap: 0.5rem;
   }
   .navLinks {
     display: none; /* Shifted to Mobile Bottom Navigation Bar */
   }
   .logoText {
-    font-size: 1.35rem;
+    font-size: 1.25rem;
   }
   .roleSubtext {
     display: none;
   }
-  .loginSwitchBox {
-    padding: 0.25rem 0.5rem;
-    gap: 0.5rem;
+  .badgeText {
+    display: none; /* Icon only on mobile to save space */
   }
-  .loginLabel {
-    font-size: 0.625rem;
+  .roleLockedBadge {
+    padding: 0.32rem 0.45rem;
   }
 }
+

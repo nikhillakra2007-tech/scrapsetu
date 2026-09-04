@@ -10,6 +10,7 @@ import {
   TrendingUp,
   AlertTriangle,
   Truck,
+  LogOut,
 } from 'lucide-react';
 import styles from './MobileNav.module.css';
 
@@ -44,6 +45,13 @@ export default function MobileNav({
 
   const items = activeRole === 'recycler' ? recyclerItems : collectorItems;
 
+  const handleMobileExit = () => {
+    try {
+      localStorage.removeItem('scrapsetu_auth_user');
+    } catch (e) {}
+    window.location.href = '/';
+  };
+
   return (
     <nav className={styles.mobileNav} aria-label="Mobile Navigation">
       {items.map((item) => {
@@ -66,6 +74,21 @@ export default function MobileNav({
           </button>
         );
       })}
+
+      {/* Exit Button: Effortlessly exit collector/recycler workspace back to landing page */}
+      <button
+        type="button"
+        className={styles.mobileNavItem}
+        onClick={handleMobileExit}
+        title="Exit to Public Website"
+      >
+        <div className={styles.iconWrapper}>
+          <LogOut size={18} color="#C94C4C" />
+        </div>
+        <span className={styles.mobileNavLabel} style={{ color: '#C94C4C' }}>
+          Exit
+        </span>
+      </button>
     </nav>
   );
 }

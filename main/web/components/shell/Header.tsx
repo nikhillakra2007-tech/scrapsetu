@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import {
   Sparkles,
   LayoutDashboard,
@@ -22,7 +23,7 @@ interface HeaderProps {
   pickupCount?: number;
   activeRole: 'recycler' | 'collector';
   onToggleRole: () => void;
-  currentUser?: { name: string; email?: string; role?: 'recycler' | 'collector' } | null;
+  currentUser?: { name: string; email?: string; role?: 'recycler' | 'collector' | 'admin' } | null;
   onSignOut?: () => void;
 }
 
@@ -61,33 +62,33 @@ export default function Header({
   const currentNavItems = activeRole === 'recycler' ? recyclerNavItems : collectorNavItems;
 
   const handleLogout = () => {
+    try {
+      localStorage.removeItem('scrapsetu_auth_user');
+    } catch (e) {}
     if (onSignOut) {
       onSignOut();
     } else {
-      try {
-        localStorage.removeItem('scrapsetu_auth_user');
-        window.location.href = '/auth';
-      } catch (e) {}
+      window.location.href = '/';
     }
   };
 
   return (
     <header className={`${styles.header} drop-segment-1`}>
       <div className={styles.headerInner}>
-        {/* Left: Brand Logo in LeafLine style */}
-        <button
-          type="button"
+        {/* Left: Brand Logo that links back to public landing page */}
+        <Link
+          href="/"
           className={styles.logoBtn}
-          onClick={() => onSelectTab(activeRole === 'recycler' ? 'recycler-overview' : 'collector-scan')}
-          title="Return to Dashboard Home"
+          title="Return to Public Homepage"
+          style={{ textDecoration: 'none' }}
         >
           <span className={styles.logoText}>ScrapSetu<span className={styles.logoDot}>.</span></span>
           <span className={styles.roleSubtext}>
             {activeRole === 'recycler' ? 'Recycler Facility Portal' : 'Field Collector App'}
           </span>
-        </button>
+        </Link>
 
-        {/* Center: Clean Role-Specific Navigation Links (Strictly for the active role) */}
+        {/* Center: Clean Role-Specific Navigation Links */}
         <nav className={styles.navLinks} aria-label="Role Navigation">
           {currentNavItems.map((item) => {
             const isActive = currentTab === item.id;
@@ -108,19 +109,19 @@ export default function Header({
           })}
         </nav>
 
-        {/* Right: Facility / Role Badge, User Info, and Logout Button */}
+        {/* Right: Role Badge, User Info, and Logout Button */}
         <div className={styles.headerRight}>
-          {/* Strict Role Locked Verification Badge — switching roles is locked */}
+          {/* Strict Role Locked Verification Badge */}
           <div
             className={`${styles.roleLockedBadge} ${
               activeRole === 'collector' ? styles.roleLockedCollector : ''
             }`}
           >
             <CheckCircle2 size={13} />
-            <span>
+            <span className={styles.badgeText}>
               {activeRole === 'recycler'
-                ? 'DPCC Authorized Recycler'
-                : 'Verified Field Collector'}
+                ? 'DPCC Recycler'
+                : 'Verified Collector'}
             </span>
           </div>
 
@@ -141,7 +142,7 @@ export default function Header({
             type="button"
             className={styles.logoutBtn}
             onClick={handleLogout}
-            title="Log out of ScrapSetu"
+            title="Log out and return to home"
           >
             <LogOut size={13} />
             <span>Logout</span>

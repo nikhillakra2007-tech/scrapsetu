@@ -51,40 +51,59 @@ Over **95% of India's e-waste** is collected by the informal sector—local *kab
 
 ---
 
-## 👥 Dual-Persona System Architecture
+## 👥 Multi-Role System & Routing Architecture
 
-Instead of cluttering users with an overwhelming 8-tab navigation, ScrapSetu segregates capabilities strictly by role:
+ScrapSetu separates the public entry point from authenticated operational workspaces:
 
 ```
-                             ┌──────────────────────────────┐
-                             │    ScrapSetu Platform        │
-                             │  (Physical Switch: Recycle)  │
-                             └──────────────┬───────────────┘
-                                            │
-                     ┌──────────────────────┴──────────────────────┐
-                     ▼                                             ▼
-          [ COLLECTOR APP ]                             [ RECYCLER PORTAL ]
-   ⚡ AI Scrap Scanner & Scale                     📊 Facility Command Hub
-   📈 Live Price Board (Delhi Rates)              📥 Incoming Matched Lots Queue
-   ⚠️ Pictorial Worker Safety                     🛡️ Handover & QR Scale Verification
-   🚚 Citizen Doorstep Pickups                    💳 Rate Card Manager (₹/kg)
+                             ┌────────────────────────────────┐
+                             │       Public Landing Page      │
+                             │        (Route: / )             │
+                             └───────────────┬────────────────┘
+                                             │
+                                             ▼
+                             ┌────────────────────────────────┐
+                             │     Authentication Gateway     │
+                             │      (Route: /auth)            │
+                             │  (Google Demo Accounts & Auth) │
+                             └───────────────┬────────────────┘
+                                             │ Role-Based Redirection
+                      ┌──────────────────────┼──────────────────────┐
+                      ▼                      ▼                      ▼
+             [ COLLECTOR APP ]      [ RECYCLER PORTAL ]      [ ADMIN CONSOLE ]
+              ( /collector )           ( /recycler )            ( /admin )
+       ⚡ AI Scrap Scanner & Scale    📊 Facility Command Hub  🛡️ DPCC Regulatory Console
+       📈 Live Price Board            📥 Incoming Lots Queue   🏭 Facility Registry
+       ⚠️ Pictorial Worker Safety     🛡️ Handover & QR Scale   📋 Digital Audit Manifests
+       🚚 Citizen Doorstep Pickups    💳 Rate Card Manager (₹) 🚪 Single-Click Logout
 ```
 
-### 2.1 Informal Collector Portal
+### 2.1 Public Front Door (`/`)
+- **Public Landing Page** ([`LandingPage.tsx`](file:///main/web/components/landing/LandingPage.tsx)): Modern, green, high-contrast entry point introducing ScrapSetu's purpose, capabilities, and regulatory alignment.
+- **Interactive Live Flow Simulator**: Real-time interactive scrap category picker (Telecom PCB, End-of-Life Phones, Stripped Copper, Server Chassis) allowing visitors to test AI inspection, recycler pricing, and QR handover verification.
+- **Spotlight Focus Interaction**: Interactive grid transitions that gently soften siblings on hover, drawing clean visual focus to active capability cards.
+- **Lenis Inertial Scrolling**: Smooth-scroll anchor jumps between sections (*What It Does*, *How It Works*, *Why It Matters*).
+
+### 2.2 Dedicated Field Collector Workspace (`/collector`)
 - **AI Scrap Scanner** ([`CollectorPortal.tsx`](file:///main/web/features/collector/CollectorPortal.tsx)): Camera photo capture, image drag-and-drop, clipboard paste (`Ctrl+V`), and sample presets. Real-time Gemini 2.5 Flash classification.
 - **Physical Scale Input**: Enter lot weight in kilograms with instant value calculation.
-- **Category Quick Override Pills**: Instant one-tap inspection across PCB, Battery, Cable, CRT, Display, Motor, Metal Scrap, and Whole Devices (protected with `white-space: nowrap` against text clipping).
+- **Category Quick Override Pills**: Instant one-tap inspection across PCB, Battery, Cable, CRT, Display, Motor, Metal Scrap, and Whole Devices.
 - **Live Price Board** ([`LivePriceBoard.tsx`](file:///main/web/features/price-board/LivePriceBoard.tsx)): 7-day rolling Delhi market benchmarks with high/low spreads and Hindi audio readouts.
-- **Worker Safety Guides** ([`SafetyGuidanceView.tsx`](file:///main/web/features/safety/SafetyGuidanceView.tsx)): **Trilingual** (English, हिंदी, and मराठी) pictorial hazard directives for handling swollen lithium-ion cells, leaded CRT glass, open wire burning, and acid circuit leaching, complete with mandatory PPE gear and Delhi Industrial Helpline contacts.
+- **Worker Safety Guides** ([`SafetyGuidanceView.tsx`](file:///main/web/features/safety/SafetyGuidanceView.tsx)): Pictorial hazard directives for handling swollen lithium-ion cells, leaded CRT glass, and open wire burning.
 - **Citizen Pickups** ([`CustomerPickupPortal.tsx`](file:///main/web/features/customer-pickup/CustomerPickupPortal.tsx)): Household and bulk generator collection requests broadcasted across Delhi wards.
 
-### 2.2 DPCC Authorized Recycler Command Center
+### 2.3 DPCC Authorized Recycler Command Hub (`/recycler`)
 - **Command Hub** ([`RecyclerOverview.tsx`](file:///main/web/features/recycler/RecyclerOverview.tsx)): Daily procurement KPIs, incoming candidate lots, and DPCC EPR compliance status.
 - **Incoming Lots Queue** ([`MatchedLotsQueue.tsx`](file:///main/web/features/recycler/MatchedLotsQueue.tsx)): Review offered scrap lots, AI confidence, hazard flags, and geographic proximity score before accepting.
 - **Handover & QR Scale Verification** ([`HandoverVerificationModal.tsx`](file:///main/web/features/handover/HandoverVerificationModal.tsx) & [`HandoverTraceabilityView.tsx`](file:///main/web/features/handover/HandoverTraceabilityView.tsx)): Weighbridge verification, variance calculation against declared weight, unique digital QR code generation, and immutable audit ledger.
-- **Rate Card Manager** ([`RateCardManager.tsx`](file:///main/web/features/recycler/RateCardManager.tsx)): Live configuration of procurement pricing per kg. Features **Adaptive Mobile Rate Cards** that eliminate horizontal table scrolling and ensure 3-digit rates (e.g. `₹380/kg`, `₹450/kg`) are 100% visible without clipping.
+- **Rate Card Manager** ([`RateCardManager.tsx`](file:///main/web/features/recycler/RateCardManager.tsx)): Live configuration of procurement pricing per kg.
 
-### 2.3 Setu Delhi Civic Assistant
+### 2.4 DPCC Platform Administrator Console (`/admin`)
+- **Regulatory Oversight** ([`AdminWorkspace.tsx`](file:///main/web/components/admin/AdminWorkspace.tsx)): Dedicated console for DPCC platform regulators (*Priya Verma*).
+- **Authorized Facilities Registry**: Audited registry of DPCC-approved recycling units across Okhla, Mayapuri, Bawana, and Narela.
+- **Digital Handover Audit Manifests**: Real-time compliance ledger recording dual-party cryptographic QR transfers and certified scale weights.
+
+### 2.5 Setu Delhi Civic Assistant
 - **Floating Civic Support** ([`SetuAssistant.tsx`](file:///main/web/components/SetuAssistant.tsx)): Floating assistant that transforms into an 80vh bottom sheet on mobile screens with isolated scrolling (`overscroll-behavior: contain`), preventing page interference. Answers citizen and collector inquiries regarding Delhi e-waste rates, doorstep pickup bookings, and hazardous material safety.
 
 ---
@@ -183,20 +202,39 @@ scrapsetu/
         │
         ├── app/                               # Next.js App Router
         │   ├── layout.tsx                     # Root shell & SEO metadata
-        │   ├── page.tsx                       # Role-segregated coordinator & state manager
-        │   └── globals.css                    # LeafLine design tokens & drop-in keyframes
+        │   ├── page.tsx                       # Public Landing Page route
+        │   ├── auth/page.tsx                  # Standalone Authentication route
+        │   ├── collector/page.tsx             # Field Collector Portal route
+        │   ├── recycler/page.tsx              # Authorized Recycler Command Hub route
+        │   ├── admin/page.tsx                 # DPCC Platform Admin Console route
+        │   └── globals.css                    # LeafLine design tokens & global styles
         │
-        ├── components/                        # Core Shared Shell & Components
+        ├── components/                        # Feature-First Architecture & Shared Shell
+        │   ├── landing/                       # Public Landing Page Feature
+        │   │   ├── LandingPage.tsx            # Hero, interactive scrap simulator, 5-step flow
+        │   │   └── LandingPage.module.css     # Scoped green styling & spotlight hover transitions
+        │   │
+        │   ├── collector/                     # Collector Workspace Feature
+        │   │   └── CollectorWorkspace.tsx     # Role guard, scanner, price board & pickups
+        │   │
+        │   ├── recycler/                      # Recycler Workspace Feature
+        │   │   └── RecyclerWorkspace.tsx      # Role guard, lots queue, rate cards & QR modal
+        │   │
+        │   ├── admin/                         # Admin Workspace Feature
+        │   │   ├── AdminWorkspace.tsx         # Regulator oversight, registry & audit manifests
+        │   │   └── AdminWorkspace.module.css  # Scoped admin table styling
+        │   │
+        │   ├── auth/                          # Standalone Authentication Feature
+        │   │   ├── AuthPage.tsx               # Google demo accounts, role resolver & email auth
+        │   │   └── AuthPage.module.css        # Physics-based drop bounce & ambient aura
+        │   │
         │   ├── SmoothScroll.tsx               # Lenis inertial scrolling wrapper
-        │   ├── SetuAssistant.tsx              # Floating civic chat assistant with isolated scroll
-        │   ├── SetuAssistant.module.css       # Assistant styling & overscroll containment
+        │   ├── SetuAssistant.tsx              # Floating civic chat assistant
         │   ├── shell/                         # Application Header & Navigation
-        │   │   ├── Header.tsx                 # Wordmark, role navigation, Recycle toggle switch
-        │   │   ├── Header.module.css          # Top bar & physical toggle styling
-        │   │   ├── MobileNav.tsx              # Fixed mobile app bottom thumb navigation bar
-        │   │   ├── MobileNav.module.css       # Mobile app bar styling & safe-area insets
-        │   │   ├── Sidebar.tsx                # Alternative layout sidebar
-        │   │   └── Sidebar.module.css
+        │   │   ├── Header.tsx                 # Logo, role navigation, user pill, single-click logout
+        │   │   ├── Header.module.css          # Clean, uncluttered header styling
+        │   │   ├── MobileNav.tsx              # Mobile bottom navigation bar with Exit button
+        │   │   └── MobileNav.module.css
         │   └── ui/                            # Reusable UI Primitives
         │       ├── Badge.tsx & .module.css
         │       ├── Button.tsx & .module.css

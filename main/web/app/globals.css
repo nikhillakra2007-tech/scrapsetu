@@ -1,67 +1,117 @@
-@import url('https://fonts.googleapis.com/css2?family=Special+Elite&family=Geist:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Space+Grotesk:wght@600;700&display=swap');
 
 :root {
-  /* LeafLine Ivory & Delhi Civic Sustainability Palette */
-  --bg-app: #FAF8EE; /* Warm Leaf Ivory - clean, soothing, zero eye strain */
-  --bg-surface: #FFFFFF;
-  --bg-surface-glass: rgba(255, 255, 255, 0.92);
-  --bg-surface-muted: #F3EFE3;
-  --bg-surface-hover: #EAE5D4;
+  /* ==========================================================================
+     ScrapSetu Digital Infrastructure Design Tokens (70 / 20 / 10 Architecture)
+     ========================================================================== */
 
-  /* LeafLine Brand Greens */
-  --brand-primary: #005F52; /* Deep Pine / Bangladesh Green */
-  --brand-primary-hover: #00473D;
-  --brand-secondary: #1CC596; /* Caribbean / Leaf Emerald */
-  --brand-soft: #B2EAD9;
-  --brand-tint: #E8F7F3;
+  /* 70–75% Neutral-First Canvas & Structural Surfaces */
+  --bg-app: #F6F8F5;              /* Soft Organic Neutral Ground — Anti-Glare */
+  --bg-surface: #FFFFFF;          /* Pure Crisp Elevated Surface */
+  --bg-surface-glass: rgba(246, 248, 245, 0.88);
+  --bg-surface-muted: #EFF3EF;    /* Restrained Substrate */
+  --bg-surface-hover: #E4EAE4;
+  --bg-dark: #0B1220;             /* Authoritative Deep Obsidian Charcoal */
+  --bg-dark-surface: #131E30;
 
-  /* High Contrast Earth Accent */
-  --accent-earth: #7A3F18;
-  --accent-earth-soft: #FBF0E8;
-  --accent-earth-border: #E8CCB8;
-
-  /* Text Colors - High Contrast & Crisp Visibility */
-  --text-primary: #020F12; /* Rich Dark Charcoal */
-  --text-secondary: #3D5A47; /* Eucalyptus Sage */
-  --text-muted: #647D6D;
+  /* Typography Colors — High-Contrast Accessible Ratio */
+  --text-primary: #0B1220;        /* Deep Obsidian Headline Face */
+  --text-secondary: #52606D;      /* Slate Gray for High-Readability Body */
+  --text-muted: #748391;          /* Neutral Muted for Meta & Timestamps */
   --text-inverse: #FFFFFF;
 
-  /* Borders & Dividers */
-  --border-subtle: #E2DDD0;
-  --border-strong: #C8C2AF;
-  --border-glass: rgba(255, 255, 255, 0.95);
-  --border-focus: #005F52;
+  /* Structural Dividers & Hairlines */
+  --border-subtle: #DCE5E0;
+  --border-strong: #BDCDC5;
+  --border-glass: rgba(255, 255, 255, 0.85);
+  --border-focus: #087F5B;
 
-  /* Semantic Feedback */
-  --success-text: #0B6141;
-  --success-bg: #E7F8F1;
-  --success-border: #9DE4C5;
+  /* 5–10% ScrapSetu Forest Green — Strictly Reserved for Brand Action & Active States */
+  --brand-primary: #087F5B;       /* Deep Sustainable Forest Green */
+  --brand-primary-hover: #07543F; /* Deep Pine */
+  --brand-secondary: #10B981;     /* Vibrant Micro-Indicator */
+  --brand-tint: #E8F6F0;          /* Subtle Active Tint */
+  --brand-border: #A3D9C4;
+  --brand-soft: #A3D9C4;
 
-  --warning-text: #8E4410;
-  --warning-bg: #FCF1E6;
-  --warning-border: #F3CCA8;
+  /* Technology & AI Inferences — Reserved for Computer Vision & Telemetry */
+  --accent-tech: #0F9F9A;         /* Precision Infrastructure Cyan/Teal */
+  --accent-tech-soft: #E6F7F7;
+  --accent-tech-border: #9FE3E0;
+  --accent-ai: #0F9F9A;
+  --accent-ai-soft: #E6F7F7;
+  --accent-ai-border: #9FE3E0;
 
-  --danger-text: #A62424;
-  --danger-bg: #FDF1F1;
-  --danger-border: #F9C5C5;
+  /* Market Valuation & Benchmark Pricing */
+  --accent-amber: #D97706;        /* High-Visibility Market Index Amber */
+  --accent-amber-soft: #FEF3C7;
+  --accent-amber-border: #FDE68A;
+  --accent-earth: #78350F;
+  --accent-earth-soft: #FEF3C7;
+  --accent-earth-border: #FDE68A;
 
-  --info-text: #005F52;
-  --info-bg: #E8F7F3;
-  --info-border: #B2EAD9;
+  /* Verification & Cryptographic Manifests */
+  --accent-verification: #059669;
+  --accent-verification-soft: #ECFDF5;
+  --accent-verification-border: #A7F3D0;
+
+  /* Semantic Feedback States */
+  --success-text: #065F46;
+  --success-bg: #E8F6F0;
+  --success-border: #A3D9C4;
+
+  --warning-text: #9A3412;
+  --warning-bg: #FFF7ED;
+  --warning-border: #FED7AA;
+
+  --danger-text: #991B1B;
+  --danger-bg: #FEF2F2;
+  --danger-border: #FECACA;
+
+  --info-text: #0A6C74;
+  --info-bg: #E6F7F7;
+  --info-border: #9FE3E0;
+
+  /* Typography Font Families */
+  --font-display: 'Manrope', -apple-system, BlinkMacSystemFont, 'Space Grotesk', sans-serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
+  --font-mono: 'Geist Mono', 'SF Mono', 'JetBrains Mono', monospace;
+
+  /* Spacing Scale (8px Grid Alignment) */
+  --space-1: 0.25rem;   /* 4px */
+  --space-2: 0.5rem;    /* 8px */
+  --space-3: 0.75rem;   /* 12px */
+  --space-4: 1rem;      /* 16px */
+  --space-5: 1.25rem;   /* 20px */
+  --space-6: 1.5rem;    /* 24px */
+  --space-8: 2rem;      /* 32px */
+  --space-10: 2.5rem;   /* 40px */
+  --space-12: 3rem;     /* 48px */
+  --space-16: 4rem;     /* 64px */
+  --space-20: 5rem;     /* 80px */
+  --space-24: 6rem;     /* 96px */
+  --space-28: 7rem;     /* 112px */
+  --space-32: 8rem;     /* 128px */
 
   /* Border Radii */
+  --radius-xs: 4px;
   --radius-sm: 8px;
-  --radius-md: 14px;
-  --radius-lg: 20px;
-  --radius-xl: 30px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
   --radius-full: 9999px;
 
-  /* Soft Organic Shadows */
-  --shadow-sm: 0 1px 3px 0 rgba(2, 15, 18, 0.05);
-  --shadow-md: 0 4px 16px -2px rgba(2, 15, 18, 0.07), 0 2px 6px -1px rgba(2, 15, 18, 0.04);
-  --shadow-lg: 0 14px 30px -4px rgba(2, 15, 18, 0.09), 0 4px 12px -2px rgba(2, 15, 18, 0.04);
-  --shadow-glass: 0 8px 32px 0 rgba(0, 95, 82, 0.08);
-  --shadow-modal: 0 24px 50px -12px rgba(2, 15, 18, 0.28);
+  /* Subtle Crisp Shadows */
+  --shadow-sm: 0 1px 3px 0 rgba(11, 18, 32, 0.04);
+  --shadow-md: 0 4px 14px -2px rgba(11, 18, 32, 0.06), 0 2px 4px -1px rgba(11, 18, 32, 0.02);
+  --shadow-lg: 0 12px 30px -4px rgba(11, 18, 32, 0.08), 0 4px 12px -2px rgba(11, 18, 32, 0.03);
+  --shadow-glass: 0 8px 30px 0 rgba(11, 18, 32, 0.04);
+  --shadow-modal: 0 24px 48px -12px rgba(11, 18, 32, 0.16);
+
+  /* Shell Layout Dimensions */
+  --sidebar-width: 260px;
+  --topbar-height: 64px;
+  --header-height: 64px;
 
   /* Transitions */
   --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
@@ -86,15 +136,17 @@ body {
   min-height: 100vh;
   background-color: var(--bg-app);
   color: var(--text-primary);
-  font-family: 'Geist', -apple-system, BlinkMacSystemFont, 'Plus Jakarta Sans', sans-serif;
-  line-height: 1.5;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.6;
+  letter-spacing: -0.01em;
   overflow-x: hidden;
 }
 
 /* Selection */
 ::selection {
-  background-color: var(--brand-secondary);
-  color: #020F12;
+  background-color: var(--brand-tint);
+  color: var(--brand-primary);
 }
 
 /* Lenis smooth scrolling helper styles */
@@ -118,16 +170,39 @@ html.lenis, html.lenis body {
   pointer-events: none;
 }
 
+/* Typography Hierarchy (Manrope Display + Plus Jakarta Sans UI) */
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Outfit', sans-serif;
+  font-family: var(--font-display);
   color: var(--text-primary);
   font-weight: 700;
-  line-height: 1.15;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.025em;
 }
 
-.font-display {
-  font-family: 'Special Elite', serif;
+h1 {
+  font-size: clamp(2.5rem, 4.8vw, 3.85rem);
+  line-height: 1.12;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+}
+
+h2 {
+  font-size: clamp(1.85rem, 3.2vw, 2.5rem);
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+
+h3 {
+  font-size: 1.25rem;
+  line-height: 1.35;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+
+p {
+  color: var(--text-secondary);
+  line-height: 1.65;
+  max-width: 65ch;
 }
 
 a {

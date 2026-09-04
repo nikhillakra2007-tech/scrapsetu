@@ -1,269 +1,541 @@
-/* ScrapSetu Authentication Component-Local Styles — Compact & Refined */
+/* ScrapSetu Two-Column Authentication — Design System Module */
 
 .authContainer {
-  height: 100vh;
   min-height: 100vh;
   width: 100%;
+  background-color: var(--bg-app, #F6F8F5);
+  display: flex;
+  font-family: var(--font-sans);
+  color: var(--text-primary);
+}
+
+.authSplitGrid {
+  display: grid;
+  grid-template-columns: 46% 54%;
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* ==========================================================================
+   LEFT COLUMN: BRAND IDENTITY & INFRASTRUCTURE VERIFICATION
+   ========================================================================== */
+
+.leftBrandCol {
+  background-color: var(--bg-dark, #0B1220);
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  color: #FFFFFF;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: #F7FAF8;
-  padding: 1rem;
   position: relative;
   overflow-y: auto;
-  overflow-x: hidden;
-  box-sizing: border-box;
 }
 
-/* -------------------------------------------------------------------------- */
-/* Lighter, Softer Luminous Green Ambient Shade                               */
-/* -------------------------------------------------------------------------- */
-
-.refractionBackdrop {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate3d(-50%, -50%, 0);
-  width: 680px;
-  height: 740px;
-  pointer-events: none;
-  z-index: 0;
+.brandColInner {
+  padding: 3.5rem 3.5rem 3rem;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: visible;
-}
-
-/* Soft, light mint & fresh leaf green ambient aura */
-.cardAuraGlow {
-  position: absolute;
-  width: 620px;
-  height: 680px;
-  border-radius: 48px;
-  background: radial-gradient(
-    ellipse at center,
-    rgba(133, 214, 153, 0.48) 0%,
-    rgba(180, 231, 206, 0.38) 32%,
-    rgba(180, 231, 206, 0.22) 58%,
-    rgba(180, 231, 206, 0.08) 78%,
-    transparent 96%
-  );
-  filter: blur(34px);
-  transform: translate3d(0, 0, 0);
-  will-change: transform, opacity;
-  animation: softGreenAuraBreathing 4.8s ease-in-out infinite;
-}
-
-/* Gentle, soothing breathing flow with lighter green tones */
-@keyframes softGreenAuraBreathing {
-  0%, 100% {
-    opacity: 0.95;
-    transform: scale3d(1.04, 1.04, 1);
-  }
-  50% {
-    opacity: 0.45;
-    transform: scale3d(0.96, 0.96, 1);
-  }
-}
-
-/* -------------------------------------------------------------------------- */
-/* Entire Section Physical Drop -> Impact -> Bounce -> Rebound -> Settle       */
-/* (Recycle token + entire login box + text below drop and bounce together)   */
-/* -------------------------------------------------------------------------- */
-
-.authWrapper {
-  position: relative;
-  z-index: 1;
+  flex-direction: column;
+  height: 100%;
+  max-width: 620px;
+  margin: 0 auto;
   width: 100%;
-  max-width: 380px;
+  gap: 2.25rem;
+}
+
+.brandHeader {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  margin: auto 0;
-  /* Clean, soothing natural bounce with zero scale distortion or stress */
-  animation: cleanSmoothBounce 1.7s cubic-bezier(0.28, 0.84, 0.42, 1) forwards;
-  will-change: transform, opacity;
+  gap: 0.75rem;
+  text-decoration: none;
 }
 
-@keyframes cleanSmoothBounce {
-  0% {
-    opacity: 0;
-    transform: translate3d(0, -90px, 0);
-  }
-  25% {
-    opacity: 1;
-  }
-  /* First landing */
-  48% {
-    transform: translate3d(0, 0, 0);
-  }
-  /* Gentle rebound */
-  68% {
-    transform: translate3d(0, -20px, 0);
-  }
-  /* Second landing */
-  84% {
-    transform: translate3d(0, 0, 0);
-  }
-  /* Micro cushion */
-  93% {
-    transform: translate3d(0, -5px, 0);
-  }
-  /* Resting equilibrium — STOPS COMPLETELY */
-  100% {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
-}
-
-/* -------------------------------------------------------------------------- */
-/* Compact 3D Circular "Recyclable Token"                                    */
-/* -------------------------------------------------------------------------- */
-
-.dropElementWrapper {
-  margin-bottom: 0.75rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-}
-
-.recyclableToken {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 30%, #4D8F5C 0%, #3F784C 45%, #24492E 100%);
+.brandIconWrap {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--radius-sm, 8px);
+  background: linear-gradient(135deg, var(--brand-primary, #087F5B), #065F46);
+  border: 1px solid rgba(16, 185, 129, 0.4);
   display: flex;
   align-items: center;
   justify-content: center;
   color: #FFFFFF;
-  position: relative;
-  box-shadow: 
-    0 10px 20px -3px rgba(36, 73, 46, 0.35),
-    0 2px 6px rgba(0, 0, 0, 0.12),
-    inset 0 1.5px 3px rgba(255, 255, 255, 0.4),
-    inset 0 -2px 4px rgba(0, 0, 0, 0.3);
-  border: 1.5px solid rgba(180, 231, 206, 0.6);
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 14px rgba(8, 127, 91, 0.3);
 }
 
-.recyclableToken:hover {
-  transform: scale(1.05);
+.brandIcon {
+  color: #FFFFFF;
 }
 
-.tokenRimGlow {
-  position: absolute;
-  inset: -2px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(133, 214, 153, 0.6) 0%, transparent 70%);
-  opacity: 0.65;
-  pointer-events: none;
-}
-
-.recycleSymbolSvg {
-  width: 25px;
-  height: 25px;
-  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.25));
-}
-
-/* -------------------------------------------------------------------------- */
-/* Compact Login Card (Unified inside the bouncing section)                   */
-/* -------------------------------------------------------------------------- */
-
-.authCard {
-  width: 100%;
-  background-color: #FFFFFF;
-  border: 1px solid rgba(133, 214, 153, 0.4);
-  border-radius: 16px;
-  padding: 1.35rem 1.4rem;
-  box-shadow: 
-    0 0 0 1px rgba(63, 120, 76, 0.12),
-    0 8px 24px -4px rgba(63, 120, 76, 0.16),
-    0 16px 40px -6px rgba(63, 120, 76, 0.1),
-    0 0 34px 2px rgba(133, 214, 153, 0.25),
-    0 0 0 1px rgba(255, 255, 255, 0.9) inset;
-  box-sizing: border-box;
-}
-
-/* Card Header */
-.brandHeader {
-  text-align: center;
-  margin-bottom: 1rem;
-}
-
-.logoTitle {
-  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 1.35rem;
-  font-weight: 800;
-  color: #172019;
-  letter-spacing: -0.03em;
-  margin: 0 0 0.15rem;
+.brandTitleWrap {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.1rem;
+  align-items: baseline;
+  line-height: 1;
+}
+
+.brandName {
+  font-family: var(--font-display, 'Manrope', sans-serif);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  letter-spacing: -0.02em;
 }
 
 .brandDot {
-  color: #85D699;
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--brand-secondary, #10B981);
 }
 
-.tagline {
-  font-size: 0.78rem;
-  color: #5F6F65;
-  line-height: 1.35;
+/* Positioning Block */
+.positioningBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.pulsePill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.3rem 0.75rem;
+  background-color: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-radius: var(--radius-full);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: var(--brand-secondary, #10B981);
+  letter-spacing: 0.06em;
+  font-family: var(--font-mono, monospace);
+  width: fit-content;
+}
+
+.pulseDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--brand-secondary, #10B981);
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.8);
+  animation: pulseDot 2s ease infinite;
+}
+
+@keyframes pulseDot {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.3); opacity: 0.7; }
+}
+
+.brandHeroTitle {
+  font-family: var(--font-display, 'Manrope', sans-serif);
+  font-size: 1.85rem;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  color: #FFFFFF;
+}
+
+.brandHeroSub {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+/* 4 Trust Pillars */
+.trustPillarsList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.trustPillar {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+}
+
+.pillarIconWrap {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--brand-secondary, #10B981);
+  flex-shrink: 0;
+}
+
+.pillarText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.pillarTitle {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #FFFFFF;
   margin: 0;
 }
 
-/* Status Banners */
-.errorBanner, .sessionBanner, .successBanner {
-  font-size: 0.78rem;
-  font-weight: 500;
-  padding: 0.5rem 0.75rem;
-  border-radius: 8px;
-  margin-bottom: 0.85rem;
+.pillarDesc {
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+}
+
+/* Telemetry Card */
+.telemetryCard {
+  background-color: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.telemetryHeader {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  line-height: 1.35;
+  justify-content: space-between;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: var(--accent-tech, #0F9F9A);
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding-bottom: 0.5rem;
 }
 
-.errorBanner {
-  background-color: #FDF1F1;
-  border: 1px solid #F9C5C5;
-  color: #C94C4C;
+.telemetryLatency {
+  color: rgba(255, 255, 255, 0.5);
 }
 
-.sessionBanner, .successBanner {
-  background-color: #E7F8F1;
-  border: 1px solid #9DE4C5;
-  color: #3F784C;
+.telemetryGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
 }
 
-/* -------------------------------------------------------------------------- */
-/* Form Inputs                                                                */
-/* -------------------------------------------------------------------------- */
+.telemetryMetric {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
 
-.authForm {
+.metricLabel {
+  font-size: 0.5625rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.4);
+  font-family: var(--font-mono, monospace);
+  letter-spacing: 0.06em;
+}
+
+.metricValue {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  font-family: var(--font-mono, monospace);
+}
+
+/* Left Col Footer */
+.leftColFooter {
+  margin-top: auto;
+  padding-top: 1rem;
+}
+
+.backHomeBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.backHomeBtn:hover {
+  color: #FFFFFF;
+}
+
+/* ==========================================================================
+   RIGHT COLUMN: AUTHENTICATION FORM & ROLE SELECTION
+   ========================================================================== */
+
+.rightFormCol {
+  background-color: var(--bg-surface, #FFFFFF);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 2.5rem;
+  overflow-y: auto;
+}
+
+.formContainer {
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.mobileBrandBanner {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.mobileSubtitle {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--brand-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.formHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.formTitle {
+  font-family: var(--font-display, 'Manrope', sans-serif);
+  font-size: 1.65rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+.formSubtitle {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+/* Role Selection Section */
+.roleSelectionSection {
   display: flex;
   flex-direction: column;
   gap: 0.65rem;
-  margin-bottom: 0.75rem;
 }
 
-.inputGroup {
+.roleSelectionLabelRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.roleSelectionLabel {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-secondary);
+}
+
+.pilotBadge {
+  font-size: 0.625rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-full);
+  background-color: var(--brand-tint, #E8F6F0);
+  color: var(--brand-primary, #087F5B);
+  border: 1px solid var(--brand-soft, #A3D9C4);
+}
+
+.roleCardsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.65rem;
+}
+
+.roleCard {
+  background-color: var(--bg-surface);
+  border: 1.5px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 0.65rem;
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
+  align-items: flex-start;
   text-align: left;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  gap: 0.5rem;
 }
 
-.inputLabel {
-  font-size: 0.74rem;
+.roleCard:hover {
+  border-color: var(--border-strong);
+  background-color: var(--bg-surface-muted);
+}
+
+.roleCardActive {
+  border-color: var(--brand-primary, #087F5B);
+  background-color: var(--brand-tint, #E8F6F0);
+  box-shadow: 0 0 0 1px var(--brand-primary, #087F5B);
+}
+
+.roleCardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.roleIconBadge {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-sm);
+  background-color: var(--bg-surface-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary);
+}
+
+.roleCardActive .roleIconBadge {
+  background-color: var(--brand-primary);
+  color: #FFFFFF;
+}
+
+.selectedCheck {
+  color: var(--brand-primary);
+}
+
+.roleCardBody {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.roleCardTitle {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.roleCardDesc {
+  font-size: 0.6875rem;
+  color: var(--text-muted);
+  line-height: 1.35;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.roleCardPilotUser {
+  margin-top: auto;
+  padding-top: 0.35rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.65rem;
+}
+
+.pilotUserLabel {
+  color: var(--text-muted);
   font-weight: 600;
-  color: #172019;
+}
+
+.pilotUserName {
+  color: var(--brand-primary);
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Divider */
+.dividerRow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.dividerLine {
+  flex: 1;
+  height: 1px;
+  background-color: var(--border-subtle);
+}
+
+.dividerText {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+/* Feedback Banners */
+.bannerSuccess {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.75rem 1rem;
+  background-color: var(--success-bg, #E8F6F0);
+  border: 1px solid var(--success-border, #A3D9C4);
+  border-radius: var(--radius-md);
+  color: var(--success-text, #065F46);
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.bannerError {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.75rem 1rem;
+  background-color: var(--danger-bg, #FEF2F2);
+  border: 1px solid var(--danger-border, #FECACA);
+  border-radius: var(--radius-md);
+  color: var(--danger-text, #991B1B);
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+/* Credential Form */
+.credentialForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.fieldLabel {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.labelWithLink {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.forgotPassLink {
+  background: transparent;
+  border: none;
+  color: var(--brand-primary);
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.forgotPassLink:hover {
+  text-decoration: underline;
 }
 
 .inputWrapper {
@@ -272,369 +544,195 @@
   align-items: center;
 }
 
-.inputIcon {
+.fieldIcon {
   position: absolute;
-  left: 0.75rem;
-  color: #5F6F65;
+  left: 0.85rem;
+  color: var(--text-muted);
   pointer-events: none;
 }
 
-.textInput {
+.formInput {
   width: 100%;
-  height: 2.35rem;
-  padding: 0 2.25rem 0 2.25rem;
-  background-color: #FFFFFF;
-  border: 1px solid #DCE6DF;
-  border-radius: 8px;
-  font-size: 0.84rem;
-  color: #172019;
+  height: 44px;
+  padding: 0 2.5rem 0 2.5rem;
+  border: 1.5px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  color: var(--text-primary);
+  background-color: var(--bg-surface);
+  transition: all var(--transition-fast);
+}
+
+.formInput:focus {
   outline: none;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
-  box-sizing: border-box;
+  border-color: var(--brand-primary);
+  box-shadow: 0 0 0 3px var(--brand-tint);
 }
 
-.textInput:focus {
-  border-color: #3F784C;
-  box-shadow: 0 0 0 2.5px rgba(63, 120, 76, 0.16);
-}
-
-.textInput::placeholder {
-  color: #98A59C;
-  font-size: 0.8rem;
-}
-
-.passwordToggleBtn {
+.eyeToggleBtn {
   position: absolute;
-  right: 0.6rem;
+  right: 0.85rem;
   background: transparent;
   border: none;
+  color: var(--text-muted);
   cursor: pointer;
-  color: #5F6F65;
+  padding: 0.25rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0.2rem;
-  border-radius: 4px;
 }
 
-.passwordToggleBtn:hover {
-  color: #172019;
+.eyeToggleBtn:hover {
+  color: var(--text-primary);
 }
 
-.primarySubmitBtn {
-  width: 100%;
-  height: 2.45rem;
-  background: linear-gradient(135deg, #3F784C 0%, #31603C 100%);
-  color: #FFFFFF;
+.submitBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  height: 46px;
+  background-color: var(--brand-primary);
+  color: var(--text-inverse);
   border: none;
-  border-radius: 8px;
-  font-size: 0.85rem;
-  font-weight: 600;
+  border-radius: var(--radius-md);
+  font-size: 0.9375rem;
+  font-weight: 700;
   cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.4rem;
-  transition: transform 0.1s ease, box-shadow 0.15s ease, opacity 0.15s ease;
-  box-shadow: 0 3px 8px rgba(63, 120, 76, 0.22);
-  margin-top: 0.15rem;
+  transition: all var(--transition-fast);
+  box-shadow: var(--shadow-sm);
+  margin-top: 0.25rem;
 }
 
-.primarySubmitBtn:hover:not(:disabled) {
-  box-shadow: 0 4px 12px rgba(63, 120, 76, 0.3);
+.submitBtn:hover:not(:disabled) {
+  background-color: var(--brand-primary-hover);
   transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
 }
 
-.primarySubmitBtn:active:not(:disabled) {
-  transform: translateY(0);
-}
-
-.primarySubmitBtn:disabled {
-  opacity: 0.7;
+.submitBtn:disabled {
+  opacity: 0.65;
   cursor: not-allowed;
-}
-
-/* -------------------------------------------------------------------------- */
-/* Divider                                                                    */
-/* -------------------------------------------------------------------------- */
-
-.dividerContainer {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  margin: 0.35rem 0 0.75rem;
-}
-
-.dividerLine {
-  flex: 1;
-  height: 1px;
-  background-color: #E2DDD0;
-}
-
-.dividerText {
-  font-size: 0.7rem;
-  font-weight: 600;
-  color: #5F6F65;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-}
-
-/* -------------------------------------------------------------------------- */
-/* Google Action Button                                                       */
-/* -------------------------------------------------------------------------- */
-
-.googleBtn {
-  width: 100%;
-  height: 2.45rem;
-  background-color: #FFFFFF;
-  border: 1px solid #DCE6DF;
-  border-radius: 8px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.65rem;
-  font-family: inherit;
-  font-size: 0.84rem;
-  font-weight: 600;
-  color: #172019;
-  cursor: pointer;
-  transition: background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
-  box-shadow: 0 1px 3px rgba(23, 32, 25, 0.04);
-  padding: 0 1rem;
-  outline: none;
-}
-
-.googleBtn:hover:not(:disabled) {
-  background-color: #FAFDFB;
-  border-color: #85D699;
-  box-shadow: 0 3px 8px rgba(63, 120, 76, 0.1);
-}
-
-.googleBtn:focus-visible {
-  border-color: #3F784C;
-  box-shadow: 0 0 0 2.5px rgba(63, 120, 76, 0.2);
-}
-
-.googleBtn:disabled {
-  opacity: 0.75;
-  cursor: not-allowed;
-  background-color: #F7FAF8;
-}
-
-.googleIconWrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
 }
 
 .btnSpinner {
-  width: 15px;
-  height: 15px;
-  border: 2px solid #DCE6DF;
-  border-top-color: #3F784C;
-  border-radius: 50%;
-  animation: spinnerRotate 0.75s linear infinite;
-}
-
-.btnSpinnerLight {
-  width: 15px;
-  height: 15px;
+  width: 16px;
+  height: 16px;
   border: 2px solid rgba(255, 255, 255, 0.4);
   border-top-color: #FFFFFF;
   border-radius: 50%;
-  animation: spinnerRotate 0.75s linear infinite;
+  animation: spin 0.8s linear infinite;
 }
 
-@keyframes spinnerRotate {
-  to {
-    transform: rotate(360deg);
-  }
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
-/* -------------------------------------------------------------------------- */
-/* Footer / Toggle & Navigation                                               */
-/* -------------------------------------------------------------------------- */
-
-.authFooter {
-  margin-top: 0.75rem;
-  text-align: center;
-  padding-top: 0.65rem;
-  border-top: 1px solid #F0F4F1;
+/* OAuth Row */
+.oauthRow {
+  display: flex;
+  flex-direction: column;
 }
 
-.toggleModeBtn {
-  background: transparent;
-  border: none;
-  color: #5F6F65;
-  font-size: 0.78rem;
-  cursor: pointer;
-  padding: 0.15rem;
-}
-
-.toggleAccent {
-  color: #3F784C;
-  font-weight: 600;
-  text-decoration: underline;
-  text-underline-offset: 2px;
-}
-
-.toggleModeBtn:hover .toggleAccent {
-  color: #2D5838;
-}
-
-/* Trust Indicators */
-.trustBar {
-  margin-top: 0.85rem;
+.googleAuthBtn {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1.15rem;
-  flex-wrap: wrap;
-}
-
-.trustItem {
-  display: flex;
-  align-items: center;
-  gap: 0.3rem;
-  font-size: 0.72rem;
+  gap: 0.65rem;
+  height: 44px;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-size: 0.875rem;
   font-weight: 600;
-  color: #5F6F65;
-  letter-spacing: 0.01em;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  box-shadow: var(--shadow-sm);
 }
 
-.trustIcon {
-  color: #3F784C;
+.googleAuthBtn:hover:not(:disabled) {
+  background-color: var(--bg-surface-hover);
+  border-color: var(--border-strong);
 }
 
-/* Return / Back to home link */
-.homeLink {
-  margin-top: 0.75rem;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  font-size: 0.76rem;
-  font-weight: 500;
-  color: #5F6F65;
-  text-decoration: none;
-  transition: color 0.15s ease;
-  border-radius: 6px;
-  padding: 0.2rem 0.4rem;
+.googleAuthBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
-.homeLink:hover {
-  color: #3F784C;
+/* Mode Switch Footer */
+.modeSwitchFooter {
+  text-align: center;
+  padding-top: 0.25rem;
 }
 
-.homeLink:focus-visible {
-  outline: 2px solid #3F784C;
-  outline-offset: 2px;
+.switchPrompt {
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
 }
 
-/* -------------------------------------------------------------------------- */
-/* Accessibility: Reduced Motion Support                                     */
-/* -------------------------------------------------------------------------- */
-
-@media (prefers-reduced-motion: reduce) {
-  .authWrapper {
-    animation: simpleFadeIn 0.4s ease-out forwards !important;
-    transform: none !important;
-  }
-
-  .cardAuraGlow {
-    animation: none !important;
-  }
-
-  @keyframes simpleFadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-
-  .googleBtn, .primarySubmitBtn, .recyclableToken {
-    transition: none !important;
-    transform: none !important;
-  }
+.switchModeAction {
+  background: transparent;
+  border: none;
+  color: var(--brand-primary);
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0;
 }
 
-/* -------------------------------------------------------------------------- */
-/* Responsive Breakpoints                                                     */
-/* -------------------------------------------------------------------------- */
-
-@media (max-height: 600px) {
-  .authContainer {
-    height: auto;
-    padding: 1rem 0.5rem;
-  }
+.switchModeAction:hover {
+  text-decoration: underline;
 }
 
-@media (max-width: 420px) {
-  .authCard {
-    padding: 1.15rem 1rem;
-    border-radius: 14px;
-  }
-
-  .logoTitle {
-    font-size: 1.25rem;
-  }
-
-  .tagline {
-    font-size: 0.75rem;
-  }
-
-  .textInput, .primarySubmitBtn, .googleBtn {
-    height: 2.25rem;
-    font-size: 0.8rem;
-  }
+/* Regulatory Footnote */
+.regulatoryFootnote {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 0.75rem 0.85rem;
+  background-color: var(--bg-app);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  font-size: 0.6875rem;
+  line-height: 1.45;
+  color: var(--text-muted);
 }
 
-/* -------------------------------------------------------------------------- */
-/* Google Account Picker Modal                                                */
-/* -------------------------------------------------------------------------- */
+.shieldFootnoteIcon {
+  color: var(--brand-primary);
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+/* ==========================================================================
+   GOOGLE DEMO MODAL
+   ========================================================================== */
 
 .modalBackdrop {
   position: fixed;
   inset: 0;
-  background-color: rgba(15, 25, 20, 0.48);
+  background-color: rgba(11, 18, 32, 0.6);
   backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  z-index: 100;
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 100;
   padding: 1rem;
-  animation: fadeInModal 0.2s ease-out;
-}
-
-@keyframes fadeInModal {
-  from { opacity: 0; }
-  to { opacity: 1; }
 }
 
 .accountModal {
   background-color: #FFFFFF;
-  border: 1px solid #DCE6DF;
-  border-radius: 20px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-modal);
   width: 100%;
-  max-width: 400px;
-  box-shadow: 0 20px 48px -10px rgba(15, 25, 20, 0.25);
-  padding: 1.75rem 1.5rem 1.5rem;
-  animation: scaleUpModal 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  box-sizing: border-box;
-}
-
-@keyframes scaleUpModal {
-  from {
-    opacity: 0;
-    transform: scale(0.95) translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
+  max-width: 440px;
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
 }
 
 .modalHeader {
@@ -642,144 +740,157 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  margin-bottom: 1.25rem;
+  gap: 0.35rem;
 }
 
 .googleLogoBadge {
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.25rem;
 }
 
 .modalTitle {
-  font-family: 'Outfit', sans-serif;
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   font-weight: 700;
-  color: #172019;
-  margin: 0 0 0.2rem;
+  color: var(--text-primary);
 }
 
 .modalSubtitle {
-  font-size: 0.8rem;
-  color: #5F6F65;
-  margin: 0;
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
 }
 
 .accountList {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  margin-bottom: 1.25rem;
 }
 
 .accountRow {
   display: flex;
   align-items: center;
-  gap: 0.85rem;
-  width: 100%;
+  gap: 0.75rem;
   padding: 0.75rem 0.85rem;
-  background-color: #FFFFFF;
-  border: 1px solid #E5EBE6;
-  border-radius: 12px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+  background-color: var(--bg-surface);
   cursor: pointer;
   text-align: left;
-  transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+  transition: all var(--transition-fast);
+  width: 100%;
 }
 
 .accountRow:hover {
-  background-color: #F7FAF8;
-  border-color: #85D699;
-  transform: translateY(-1px);
+  background-color: var(--brand-tint);
+  border-color: var(--brand-soft);
 }
 
 .accountAvatar {
-  width: 38px;
-  height: 38px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
+  background: linear-gradient(135deg, var(--brand-primary), #065F46);
+  color: #FFFFFF;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 700;
-  font-size: 0.95rem;
-  color: #FFFFFF;
+  font-size: 0.875rem;
   flex-shrink: 0;
 }
 
-.avatarVinayak {
-  background: linear-gradient(135deg, #1A73E8 0%, #0D47A1 100%);
-}
-
-.avatarRamesh {
-  background: linear-gradient(135deg, #3F784C 0%, #1B5E20 100%);
-}
-
 .accountInfo {
-  flex: 1;
-  min-width: 0;
   display: flex;
   flex-direction: column;
+  flex: 1;
+  min-width: 0;
 }
 
 .accountName {
-  font-size: 0.85rem;
+  font-size: 0.875rem;
   font-weight: 700;
-  color: #172019;
-  line-height: 1.2;
+  color: var(--text-primary);
 }
 
 .accountEmail {
   font-size: 0.75rem;
-  color: #5F6F65;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  color: var(--text-muted);
 }
 
 .accountRoleTag {
-  font-size: 0.68rem;
+  font-size: 0.6875rem;
   font-weight: 600;
-  color: #3F784C;
-  background-color: #E7F8F1;
-  padding: 0.15rem 0.45rem;
-  border-radius: 4px;
-  align-self: flex-start;
-  margin-top: 0.25rem;
+  color: var(--brand-primary);
+  margin-top: 0.15rem;
 }
 
 .modalFooterActions {
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
-  align-items: center;
+  gap: 0.5rem;
 }
 
 .directOauthBtn {
-  background: transparent;
-  border: none;
-  font-size: 0.76rem;
-  color: #3F784C;
+  background-color: var(--bg-surface-muted);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 0.6rem;
+  font-size: 0.8125rem;
   font-weight: 600;
+  color: var(--text-secondary);
   cursor: pointer;
-  text-decoration: underline;
-  text-underline-offset: 2px;
+  transition: all var(--transition-fast);
 }
 
 .directOauthBtn:hover {
-  color: #1B5E20;
+  background-color: var(--bg-surface-hover);
+  color: var(--text-primary);
 }
 
 .cancelModalBtn {
   background: transparent;
-  border: 1px solid #DCE6DF;
-  border-radius: 8px;
-  padding: 0.45rem 1.25rem;
-  font-size: 0.78rem;
+  border: none;
+  padding: 0.5rem;
+  font-size: 0.8125rem;
   font-weight: 600;
-  color: #5F6F65;
+  color: var(--text-muted);
   cursor: pointer;
-  transition: background-color 0.15s ease;
-  width: 100%;
 }
 
 .cancelModalBtn:hover {
-  background-color: #F7FAF8;
-  color: #172019;
+  color: var(--text-primary);
+}
+
+/* ==========================================================================
+   RESPONSIVE BEHAVIOR
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+  .authSplitGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .leftBrandCol {
+    display: none;
+  }
+
+  .mobileBrandBanner {
+    display: flex;
+  }
+
+  .rightFormCol {
+    padding: 2.5rem 1.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .roleCardsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .formContainer {
+    gap: 1.25rem;
+  }
+
+  .formTitle {
+    font-size: 1.4rem;
+  }
 }

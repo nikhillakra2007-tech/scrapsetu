@@ -1,0 +1,358 @@
+/* ScrapSetu Recycler Workspace Styles */
+
+.recyclerContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+}
+
+/* Facility Operational Header */
+.facilityHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding-bottom: 1.75rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.facilityHeaderLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.facilityTitle {
+  font-family: var(--font-display, 'Manrope', sans-serif);
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.03em;
+  margin: 0;
+}
+
+.verifiedBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-full);
+  background-color: var(--brand-tint, #E8F6F0);
+  color: var(--brand-primary, #087F5B);
+  font-size: 0.75rem;
+  font-weight: 700;
+  border: 1px solid var(--brand-soft, #A3D9C4);
+}
+
+.facilitySubtitle {
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  max-width: 70ch;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.facilityMetaRow {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding-top: 0.25rem;
+  flex-wrap: wrap;
+}
+
+.facilityMetaItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.facilityMetaMono {
+  font-family: var(--font-mono, monospace);
+  color: var(--brand-primary);
+  background-color: var(--bg-surface-muted);
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-xs);
+  border: 1px solid var(--border-subtle);
+  font-weight: 700;
+}
+
+/* Facility Operational Panel */
+.facilityPanel {
+  background: linear-gradient(135deg, #0B1220, #131E30);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-xl);
+  padding: 1.5rem 1.75rem;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  box-shadow: var(--shadow-md);
+}
+
+.facilityIdentity {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.facilityLogoIcon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, var(--brand-primary), #065F46);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  box-shadow: 0 4px 14px rgba(8, 127, 91, 0.3);
+  flex-shrink: 0;
+}
+
+.facilityInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.facilityHubName {
+  font-family: var(--font-display, 'Manrope', sans-serif);
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  letter-spacing: -0.01em;
+}
+
+.facilityTags {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.facTag {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-xs);
+  background-color: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.85);
+  font-family: var(--font-mono, monospace);
+  letter-spacing: 0.04em;
+}
+
+.facTagEpr {
+  background-color: rgba(16, 185, 129, 0.2);
+  color: var(--brand-secondary, #10B981);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+}
+
+.facilityTelemetryStats {
+  display: flex;
+  align-items: center;
+  gap: 2.25rem;
+}
+
+.telemetryStat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  text-align: right;
+}
+
+.telemetryStatLabel {
+  font-size: 0.625rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.5);
+  font-family: var(--font-mono, monospace);
+  letter-spacing: 0.06em;
+}
+
+.telemetryStatValue {
+  font-size: 1.35rem;
+  font-weight: 800;
+  font-family: var(--font-display, 'Manrope', sans-serif);
+  color: #FFFFFF;
+}
+
+/* 4 Clean Centered Section Switcher Cards */
+.sectionSwitcherContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.sectionSwitcherLabel {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+}
+
+.sectionCardsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+.sectionCard {
+  background-color: var(--bg-surface);
+  border: 1.5px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1.15rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  gap: 0.65rem;
+  position: relative;
+}
+
+.sectionCard:hover {
+  background-color: var(--bg-surface-hover);
+  border-color: var(--border-strong);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.sectionCardActive {
+  background-color: #FFFFFF !important;
+  border-color: var(--brand-primary) !important;
+  box-shadow: 0 0 0 1px var(--brand-primary), var(--shadow-md) !important;
+}
+
+.sectionCardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.sectionIconBadge {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  background-color: var(--bg-app);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  transition: all var(--transition-fast);
+}
+
+.sectionCardActive .sectionIconBadge {
+  background-color: var(--brand-primary);
+  color: #FFFFFF;
+}
+
+.activeSectionIndicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--brand-primary);
+  box-shadow: 0 0 6px rgba(8, 127, 91, 0.6);
+}
+
+.sectionCardContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.sectionCardTitle {
+  font-family: var(--font-display, 'Manrope', sans-serif);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.sectionCardActive .sectionCardTitle {
+  color: var(--brand-primary);
+}
+
+.sectionCardDesc {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.sectionCardTag {
+  font-size: 0.625rem;
+  font-weight: 800;
+  padding: 0.1rem 0.4rem;
+  border-radius: var(--radius-xs);
+  background-color: var(--brand-tint);
+  color: var(--brand-primary);
+  border: 1px solid var(--brand-soft);
+}
+
+/* Active Feature Subview Surface */
+.activeViewSurface {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  padding: 2rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+@media (max-width: 1024px) {
+  .facilityPanel {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .facilityTelemetryStats {
+    width: 100%;
+    justify-content: space-between;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 1rem;
+  }
+
+  .telemetryStat {
+    text-align: left;
+  }
+
+  .sectionCardsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .facilityHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .facilityTelemetryStats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+
+  .sectionCardsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .activeViewSurface {
+    padding: 1rem;
+    border-radius: var(--radius-lg);
+  }
+}

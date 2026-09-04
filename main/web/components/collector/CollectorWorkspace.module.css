@@ -1,0 +1,662 @@
+/* ScrapSetu Collector Workspace Styles */
+
+.collectorContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+}
+
+/* Operational Header Banner */
+.opHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding-bottom: 1.75rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.opHeaderMain {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.opTitleRow {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.opTitle {
+  font-family: var(--font-display, 'Manrope', sans-serif);
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.03em;
+  margin: 0;
+}
+
+.opStatusPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-full);
+  background-color: var(--brand-tint, #E8F6F0);
+  color: var(--brand-primary, #087F5B);
+  font-size: 0.75rem;
+  font-weight: 700;
+  border: 1px solid var(--brand-soft, #A3D9C4);
+}
+
+.opSubtitle {
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  max-width: 68ch;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+.createLotBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.4rem;
+  background-color: var(--brand-primary);
+  color: var(--text-inverse);
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  box-shadow: 0 2px 8px rgba(8, 127, 91, 0.25);
+  white-space: nowrap;
+}
+
+.createLotBtn:hover {
+  background-color: var(--brand-primary-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+/* 4 Metrics Cards */
+.metricsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+}
+
+.metricCard {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-fast);
+}
+
+.metricCard:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-md);
+}
+
+.metricHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.metricTitle {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+}
+
+.metricIconWrap {
+  width: 30px;
+  height: 30px;
+  border-radius: var(--radius-sm);
+  background-color: var(--bg-app);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--brand-primary);
+}
+
+.metricValueRow {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.metricValue {
+  font-family: var(--font-display, 'Manrope', sans-serif);
+  font-size: 1.65rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.metricSubtext {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+/* Clean Centered 4-Section Switcher Cards */
+.sectionSwitcherContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.sectionSwitcherLabel {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+}
+
+.sectionCardsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+.sectionCard {
+  background-color: var(--bg-surface);
+  border: 1.5px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1.15rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  gap: 0.65rem;
+  position: relative;
+}
+
+.sectionCard:hover {
+  background-color: var(--bg-surface-hover);
+  border-color: var(--border-strong);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.sectionCardActive {
+  background-color: #FFFFFF !important;
+  border-color: var(--brand-primary) !important;
+  box-shadow: 0 0 0 1px var(--brand-primary), var(--shadow-md) !important;
+}
+
+.sectionCardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.sectionIconBadge {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  background-color: var(--bg-app);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  transition: all var(--transition-fast);
+}
+
+.sectionCardActive .sectionIconBadge {
+  background-color: var(--brand-primary);
+  color: #FFFFFF;
+}
+
+.activeSectionIndicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--brand-primary);
+  box-shadow: 0 0 6px rgba(8, 127, 91, 0.6);
+}
+
+.sectionCardContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.sectionCardTitleRow {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.sectionCardTitle {
+  font-family: var(--font-display, 'Manrope', sans-serif);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.sectionCardActive .sectionCardTitle {
+  color: var(--brand-primary);
+}
+
+.sectionCardDesc {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.sectionCardTag {
+  font-size: 0.625rem;
+  font-weight: 800;
+  padding: 0.1rem 0.4rem;
+  border-radius: var(--radius-xs);
+  background-color: var(--brand-tint);
+  color: var(--brand-primary);
+  border: 1px solid var(--brand-soft);
+}
+
+/* Active Feature Subview Surface */
+.activeViewSurface {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  padding: 2rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Create Lot Modal Styles */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(11, 18, 32, 0.65);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 1.5rem;
+  overscroll-behavior: contain;
+}
+
+.modalCard {
+  background-color: #FFFFFF;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-modal);
+  width: 100%;
+  max-width: 580px;
+  max-height: min(88vh, 680px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  overscroll-behavior: contain;
+}
+
+.modalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.75rem;
+  border-bottom: 1px solid var(--border-subtle);
+  flex-shrink: 0;
+  background-color: #FFFFFF;
+}
+
+.modalTitleRow {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.modalTitle {
+  font-family: var(--font-display, 'Manrope', sans-serif);
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.modalSubtitle {
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.closeModalBtn {
+  background: var(--bg-surface-muted);
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.closeModalBtn:hover {
+  background-color: var(--bg-surface-hover);
+  color: var(--text-primary);
+}
+
+.modalForm {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.modalBody {
+  padding: 1.5rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  overflow-y: auto;
+  flex: 1;
+  min-height: 0;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.formLabel {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.materialPillsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.65rem;
+}
+
+.materialSelectBtn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 0.85rem;
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--border-subtle);
+  background-color: var(--bg-surface);
+  cursor: pointer;
+  text-align: left;
+  transition: all var(--transition-fast);
+}
+
+.materialSelectBtn:hover {
+  border-color: var(--border-strong);
+  background-color: var(--bg-app);
+}
+
+.materialSelectBtnActive {
+  border-color: var(--brand-primary) !important;
+  background-color: var(--brand-tint) !important;
+}
+
+.matBtnText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.matName {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.matRate {
+  font-size: 0.6875rem;
+  color: var(--brand-primary);
+  font-weight: 600;
+}
+
+.weightInputRow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.weightInputWrap {
+  position: relative;
+  flex: 1;
+}
+
+.weightInput {
+  width: 100%;
+  height: 46px;
+  padding: 0 3rem 0 1rem;
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--border-subtle);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  font-family: var(--font-mono, monospace);
+  background-color: var(--bg-surface);
+}
+
+.weightUnit {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.weightPresets {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.presetBtn {
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-subtle);
+  background-color: var(--bg-app);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.presetBtn:hover {
+  border-color: var(--brand-soft);
+  color: var(--brand-primary);
+}
+
+/* AI Valuation Card in Modal */
+.valuationPreviewCard {
+  background: linear-gradient(135deg, #0B1220, #131E30);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem 1.4rem;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.valLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.valHeading {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: var(--brand-secondary, #10B981);
+  letter-spacing: 0.06em;
+  font-family: var(--font-mono, monospace);
+}
+
+.valFacility {
+  font-size: 0.8125rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.valRight {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.1rem;
+}
+
+.valAmount {
+  font-family: var(--font-display, 'Manrope', sans-serif);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #FFFFFF;
+}
+
+.valRateSub {
+  font-size: 0.6875rem;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.modalFooter {
+  padding: 1.15rem 1.75rem;
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  flex-shrink: 0;
+  background-color: #FFFFFF;
+}
+
+.cancelBtn {
+  padding: 0.65rem 1.25rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+  background: transparent;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.submitLotBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.5rem;
+  border-radius: var(--radius-md);
+  border: none;
+  background-color: var(--brand-primary);
+  color: #FFFFFF;
+  font-size: 0.875rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  box-shadow: var(--shadow-sm);
+}
+
+.submitLotBtn:hover {
+  background-color: var(--brand-primary-hover);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 1024px) {
+  .metricsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .sectionCardsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .opHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .createLotBtn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .metricsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .sectionCardsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .materialPillsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .activeViewSurface {
+    padding: 1rem;
+    border-radius: var(--radius-lg);
+  }
+
+  .modalOverlay {
+    padding: 0.75rem;
+  }
+
+  .modalHeader {
+    padding: 1rem 1.25rem;
+  }
+
+  .modalBody {
+    padding: 1.25rem 1rem;
+  }
+
+  .modalFooter {
+    padding: 1rem 1.25rem;
+  }
+
+  .weightInputRow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .weightPresets {
+    justify-content: space-between;
+  }
+}

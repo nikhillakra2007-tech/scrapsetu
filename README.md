@@ -150,42 +150,44 @@ ScrapSetu features a dual-engine architecture to guarantee reliable, instantaneo
 
 ## 🎨 Design System & UI Experience
 
-### 4.1 LeafLine Organic Color Palette
+### 4.1 LeafLine Organic Color Palette & Brand Consistency
 Inspired by the calm, grounded aesthetic of [LeafLine Ivory](https://leaf-line-ivory.vercel.app/), ScrapSetu eliminates bright white glare and eye strain:
-- **Canvas Background**: Warm Leaf Ivory (`#FAF8EE`)
-- **Primary Brand Color**: Deep Pine / Bangladesh Green (`#005F52`)
-- **Accent Indicator**: Caribbean Emerald (`#1CC596`)
-- **Surfaces**: Crisp White Cards (`#FFFFFF`) with organic borders (`#E2DDD0`)
-- **Typography**: Rich Dark Charcoal (`#020F12`) for headers, Eucalyptus Sage (`#3D5A47`) for body copy
+- **Canvas Background**: Warm Leaf Ivory / Off-White (`#F6F8F5` / `#FAF8EE`)
+- **Primary Brand Color**: Deep Pine / Bangladesh Green (`#087F5B` / `#005F52`)
+- **Accent Indicator**: Caribbean Emerald (`#10B981` / `#1CC596`)
+- **Surfaces**: Crisp White Cards (`#FFFFFF`) with organic borders (`#DCE5E0` / `#E2DDD0`)
+- **Typography**: Rich Dark Charcoal (`#0B1220`) for headers, Muted Slate (`#52606D`) for body copy
+- **Universal Brand Iconography**: A consistent emerald/green rounded badge featuring the **Recycle** icon (`strokeWidth={2.4}`) across the public landing page, authentication gateway, and authenticated workspaces.
 
-### 4.2 Physical Sliding Role Switch (Recycle Icon)
-Modeled as a physical sliding toggle pill in the top header:
-- **States**: Displays **`RECYCLER`** ↔ **`COLLECTOR`**
-- **Iconography**: Houses a bold, heavy-weight **Recycle symbol** (`strokeWidth={2.6}`) with a 45° rotation micro-interaction on hover.
-- **Single-Click Workflow**: Instantly switches the entire application layout, loaded tools, and active context.
+### 4.2 Modern Top-Nav Application Shell (`AppShell.tsx`)
+- **Full-Width Header**: Eliminates cramped sidebars in favor of a clean, responsive top navigation bar with sticky positioning, backdrop blur (`14px`), and role indicators.
+- **Centered Golden-Ratio Content**: Workspace content is gracefully centered in a high-readability container (`max-width: 1360px`) with balanced padding across desktop, tablet, and mobile viewports.
+- **Interactive Notification Center**: Real-time operational alerts popover with unread counters, notification categories (lots matched, bids submitted, compliance alerts), and single-click "Mark all as read".
+- **One-Click Role Switching**: Integrated role tabs allowing instant switching between Collector, Recycler, and Admin perspectives during demonstrations.
 
-### 4.3 Cascading Drop Intro Animations & Smooth Transitions
-- **Cascading Drop-In**: Page segments drop into place sequentially on load:
-  - `drop-segment-1` (0.08s delay): Header, brand wordmark, and role subtitle.
-  - `drop-segment-2` (0.25s delay): KPI grid and quick category pills.
-  - `drop-segment-3` (0.45s delay): Procurement action banner and photo dropzone.
-  - `drop-segment-4` (0.65s delay): Candidate lots table and AI valuation card.
-- **1-Second Smooth Transitions**: Navigating between sections triggers a 0.95s transition (`section-transition-active`) with smooth deceleration.
-- **Inertial Smooth Scrolling**: Powered by [Lenis](https://github.com/darkroomengineering/lenis) for fluid, weighted momentum.
+### 4.3 Clean Centered Section Switchers
+- **Minimalist Dashboard Nav**: Rather than sprawling side navigation, each workspace provides 3–4 prominent, centered feature cards (e.g., *AI Scrap Scanner*, *Delhi Benchmark Rates*, *Worker Safety Directives*, *Citizen Doorstep Pickups*).
+- **Sub-View Isolation**: Clicking any card activates the corresponding operational view directly inside a clean, bordered surface card without page jumping or layout flickering.
 
-### 4.4 Native Mobile App Shell & Bottom Navigation
-- **Fixed Bottom Navigation Bar** (`MobileNav.tsx`): On mobile devices ($\le 768\text{px}$), the desktop header links convert to a fixed, thumb-accessible mobile app bottom bar (44–48px touch targets) with live notification badges.
-- **Unclustered Top Bar**: Top header automatically strips horizontal navigation clutter on mobile, displaying only the minimalist brand wordmark and the physical role toggle pill.
-- **Adaptive Rate Cards**: Replaces wide desktop data tables with fluid vertical rate cards, completely eliminating left-to-right table scroll and ensuring 3-digit rates (e.g. `₹380/kg`) are always 100% visible.
-- **Mobile Bottom Sheet Assistant**: The Setu Assistant expands into a native 80vh bottom drawer with scroll isolation (`overscroll-behavior: contain`).
+### 4.4 Workable "+ Create New Lot" Intake Modal
+- **Live AI Valuation**: Selecting material presets (PCB, Lithium Batteries, Stripped Copper, CRT Glass) and entering weight calculates instant payout valuations.
+- **Zero Scroll Leak**: Employs strict background scroll locking (`document.body.style.overflow = 'hidden'`), containerized modal scrolling, and `data-lenis-prevent="true"` with event propagation stops to guarantee that background pages never scroll when interacting with modal forms.
+- **Instant Queue Updates**: Submitting a new lot immediately generates a verified tracking identifier (`LOT-DEL-XXX`) and prepends it directly into the active matched lots queue with success feedback.
+
+### 4.5 Responsive Mobile Experience
+- **Adaptive Stacking**: Metrics grids, operational action headers, and section switcher cards smoothly collapse from multi-column grids to clean vertical cards on mobile screens ($\le 640\text{px}$).
+- **Touch-Optimized Touch Targets**: Touch targets meet or exceed 44px with comfortable padding and scroll-isolated bottom drawer support.
+- **No Clutter or Horizontal Overflows**: All tables and cards are bounded with containerized overflow handling and responsive typography.
 
 ---
 
 ## 📁 Complete Repository & Folder Structure
 
+All frontend components adhere to a strict **1–2 files per folder** modular convention for effortless maintainability:
+
 ```
 scrapsetu/
-├── README.md                                  # Comprehensive Master Documentation (This file)
+├── README.md                                  # Master Platform Documentation
 └── main/                                      # Application Root
     ├── api/                                   # Python AI Microservice (FastAPI)
     │   ├── requirements.txt                   # FastAPI, google-genai, supabase, uvicorn
@@ -200,78 +202,60 @@ scrapsetu/
         ├── next.config.ts                     # Next.js configuration
         ├── tsconfig.json                      # Strict TypeScript compiler options
         │
-        ├── app/                               # Next.js App Router
+        ├── app/                               # Next.js App Router (Clean 1-page routes)
         │   ├── layout.tsx                     # Root shell & SEO metadata
         │   ├── page.tsx                       # Public Landing Page route
         │   ├── auth/page.tsx                  # Standalone Authentication route
         │   ├── collector/page.tsx             # Field Collector Portal route
         │   ├── recycler/page.tsx              # Authorized Recycler Command Hub route
         │   ├── admin/page.tsx                 # DPCC Platform Admin Console route
-        │   └── globals.css                    # LeafLine design tokens & global styles
+        │   └── globals.css                    # Design tokens & global resets
         │
-        ├── components/                        # Feature-First Architecture & Shared Shell
-        │   ├── landing/                       # Public Landing Page Feature
+        ├── components/                        # Feature-First Modular Components (1-2 files/folder)
+        │   ├── landing/                       # Public Landing Page
         │   │   ├── LandingPage.tsx            # Hero, interactive scrap simulator, 5-step flow
         │   │   └── LandingPage.module.css     # Scoped green styling & spotlight hover transitions
         │   │
-        │   ├── collector/                     # Collector Workspace Feature
-        │   │   └── CollectorWorkspace.tsx     # Role guard, scanner, price board & pickups
+        │   ├── collector/                     # Collector Workspace
+        │   │   ├── CollectorWorkspace.tsx     # Role guard, section switchers, lot intake modal
+        │   │   └── CollectorWorkspace.module.css
         │   │
-        │   ├── recycler/                      # Recycler Workspace Feature
-        │   │   └── RecyclerWorkspace.tsx      # Role guard, lots queue, rate cards & QR modal
+        │   ├── recycler/                      # Recycler Workspace
+        │   │   ├── RecyclerWorkspace.tsx      # Role guard, facility telemetry, lots queue
+        │   │   └── RecyclerWorkspace.module.css
         │   │
-        │   ├── admin/                         # Admin Workspace Feature
+        │   ├── admin/                         # Admin Workspace
         │   │   ├── AdminWorkspace.tsx         # Regulator oversight, registry & audit manifests
-        │   │   └── AdminWorkspace.module.css  # Scoped admin table styling
+        │   │   └── AdminWorkspace.module.css
         │   │
-        │   ├── auth/                          # Standalone Authentication Feature
+        │   ├── auth/                          # Standalone Authentication
         │   │   ├── AuthPage.tsx               # Google demo accounts, role resolver & email auth
-        │   │   └── AuthPage.module.css        # Physics-based drop bounce & ambient aura
+        │   │   └── AuthPage.module.css
+        │   │
+        │   ├── shell/                         # Shared Application Shell & Navigation
+        │   │   ├── AppShell.tsx               # Top-Nav shell container
+        │   │   ├── AppShell.module.css
+        │   │   ├── Header.tsx                 # Universal Recycle logo, notifications, user pill
+        │   │   ├── Header.module.css
+        │   │   ├── MobileNav.tsx              # Mobile navigation bar
+        │   │   └── MobileNav.module.css
+        │   │
+        │   ├── ui/                            # Clean Reusable UI Primitives (1 tsx + 1 css module)
+        │   │   ├── Badge.tsx & Badge.module.css
+        │   │   ├── Button.tsx & Button.module.css
+        │   │   ├── Card.tsx & Card.module.css
+        │   │   └── Modal.tsx & Modal.module.css
         │   │
         │   ├── SmoothScroll.tsx               # Lenis inertial scrolling wrapper
-        │   ├── SetuAssistant.tsx              # Floating civic chat assistant
-        │   ├── shell/                         # Application Header & Navigation
-        │   │   ├── Header.tsx                 # Logo, role navigation, user pill, single-click logout
-        │   │   ├── Header.module.css          # Clean, uncluttered header styling
-        │   │   ├── MobileNav.tsx              # Mobile bottom navigation bar with Exit button
-        │   │   └── MobileNav.module.css
-        │   └── ui/                            # Reusable UI Primitives
-        │       ├── Badge.tsx & .module.css
-        │       ├── Button.tsx & .module.css
-        │       ├── Card.tsx & .module.css
-        │       └── Modal.tsx & .module.css
+        │   └── SetuAssistant.tsx              # Floating civic chat assistant
         │
-        ├── features/                          # Feature-First Architecture
-        │   ├── collector/                     # Collector Feature Module
-        │   │   ├── CollectorPortal.tsx        # Camera upload, Hindi voice STT, Gemini caller
-        │   │   ├── Collector.module.css       # High-contrast LeafLine styling
-        │   │   ├── ImageUploader.tsx          # Dropzone, presets, and clipboard paste
-        │   │   ├── AiInspectionCard.tsx       # AI diagnostic readout & audio TTS button
-        │   │   ├── WeightInput.tsx            # Physical scale weight entry
-        │   │   └── LocationSelector.tsx       # Delhi industrial cluster selector
-        │   │
-        │   ├── recycler/                      # Recycler Feature Module
-        │   │   ├── RecyclerOverview.tsx       # Facility dashboard & procurement KPIs
-        │   │   ├── Recycler.module.css        # Pine and emerald card styling
-        │   │   ├── MatchedLotsQueue.tsx       # Incoming lots filter & acceptance queue
-        │   │   └── RateCardManager.tsx        # Procurement rate list manager (₹/kg)
-        │   │
-        │   ├── handover/                      # Handover & QR Traceability Module
-        │   │   ├── HandoverVerificationModal.tsx # Scale verification & QR generator
-        │   │   ├── HandoverTraceabilityView.tsx  # Immutable audit ledger
-        │   │   └── Handover.module.css
-        │   │
-        │   ├── price-board/                   # Delhi Price Board Module
-        │   │   ├── LivePriceBoard.tsx         # 7-day rolling benchmarks & Hindi TTS
-        │   │   └── PriceBoard.module.css
-        │   │
-        │   ├── safety/                        # Worker Safety Guidance Module
-        │   │   ├── SafetyGuidanceView.tsx     # Pictorial safety guides (Lithium, CRT, Cables)
-        │   │   └── Safety.module.css
-        │   │
-        │   └── customer-pickup/               # Citizen Doorstep Pickups Module
-        │       ├── CustomerPickupPortal.tsx   # Household/Bulk generator booking & estimator
-        │       └── CustomerPickup.module.css
+        ├── features/                          # Sub-feature modules (Scanner, Prices, Pickups, Safety)
+        │   ├── collector/                     # Scanner & AI vision inputs
+        │   ├── recycler/                      # Overview & rate card manager
+        │   ├── handover/                      # QR code & weighbridge verification
+        │   ├── price-board/                   # Live Delhi benchmark rates
+        │   ├── safety/                        # Pictorial worker safety guides
+        │   └── customer-pickup/               # Citizen doorstep pickup booking
         │
         ├── lib/                               # Infrastructure Clients & Mock Data
         │   ├── supabase.ts                    # Supabase client with sandbox fallback

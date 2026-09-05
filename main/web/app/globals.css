@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Space+Grotesk:wght@600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap");
 
 :root {
   /* ==========================================================================
@@ -6,92 +6,94 @@
      ========================================================================== */
 
   /* 70–75% Neutral-First Canvas & Structural Surfaces */
-  --bg-app: #F6F8F5;              /* Soft Organic Neutral Ground — Anti-Glare */
-  --bg-surface: #FFFFFF;          /* Pure Crisp Elevated Surface */
+  --bg-app: #f6f8f5; /* Soft Organic Neutral Ground — Anti-Glare */
+  --bg-surface: #ffffff; /* Pure Crisp Elevated Surface */
   --bg-surface-glass: rgba(246, 248, 245, 0.88);
-  --bg-surface-muted: #EFF3EF;    /* Restrained Substrate */
-  --bg-surface-hover: #E4EAE4;
-  --bg-dark: #0B1220;             /* Authoritative Deep Obsidian Charcoal */
-  --bg-dark-surface: #131E30;
+  --bg-surface-muted: #eff3ef; /* Restrained Substrate */
+  --bg-surface-hover: #e4eae4;
+  --bg-dark: #0b1220; /* Authoritative Deep Obsidian Charcoal */
+  --bg-dark-surface: #131e30;
 
   /* Typography Colors — High-Contrast Accessible Ratio */
-  --text-primary: #0B1220;        /* Deep Obsidian Headline Face */
-  --text-secondary: #52606D;      /* Slate Gray for High-Readability Body */
-  --text-muted: #748391;          /* Neutral Muted for Meta & Timestamps */
-  --text-inverse: #FFFFFF;
+  --text-primary: #0b1220; /* Deep Obsidian Headline Face */
+  --text-secondary: #52606d; /* Slate Gray for High-Readability Body */
+  --text-muted: #748391; /* Neutral Muted for Meta & Timestamps */
+  --text-inverse: #ffffff;
 
   /* Structural Dividers & Hairlines */
-  --border-subtle: #DCE5E0;
-  --border-strong: #BDCDC5;
+  --border-subtle: #dce5e0;
+  --border-strong: #bdcdc5;
   --border-glass: rgba(255, 255, 255, 0.85);
-  --border-focus: #087F5B;
+  --border-focus: #087f5b;
 
   /* 5–10% ScrapSetu Forest Green — Strictly Reserved for Brand Action & Active States */
-  --brand-primary: #087F5B;       /* Deep Sustainable Forest Green */
-  --brand-primary-hover: #07543F; /* Deep Pine */
-  --brand-secondary: #10B981;     /* Vibrant Micro-Indicator */
-  --brand-tint: #E8F6F0;          /* Subtle Active Tint */
-  --brand-border: #A3D9C4;
-  --brand-soft: #A3D9C4;
+  --brand-primary: #087f5b; /* Deep Sustainable Forest Green */
+  --brand-primary-hover: #07543f; /* Deep Pine */
+  --brand-secondary: #10b981; /* Vibrant Micro-Indicator */
+  --brand-tint: #e8f6f0; /* Subtle Active Tint */
+  --brand-border: #a3d9c4;
+  --brand-soft: #a3d9c4;
 
   /* Technology & AI Inferences — Reserved for Computer Vision & Telemetry */
-  --accent-tech: #0F9F9A;         /* Precision Infrastructure Cyan/Teal */
-  --accent-tech-soft: #E6F7F7;
-  --accent-tech-border: #9FE3E0;
-  --accent-ai: #0F9F9A;
-  --accent-ai-soft: #E6F7F7;
-  --accent-ai-border: #9FE3E0;
+  --accent-tech: #0f9f9a; /* Precision Infrastructure Cyan/Teal */
+  --accent-tech-soft: #e6f7f7;
+  --accent-tech-border: #9fe3e0;
+  --accent-ai: #0f9f9a;
+  --accent-ai-soft: #e6f7f7;
+  --accent-ai-border: #9fe3e0;
 
   /* Market Valuation & Benchmark Pricing */
-  --accent-amber: #D97706;        /* High-Visibility Market Index Amber */
-  --accent-amber-soft: #FEF3C7;
-  --accent-amber-border: #FDE68A;
-  --accent-earth: #78350F;
-  --accent-earth-soft: #FEF3C7;
-  --accent-earth-border: #FDE68A;
+  --accent-amber: #d97706; /* High-Visibility Market Index Amber */
+  --accent-amber-soft: #fef3c7;
+  --accent-amber-border: #fde68a;
+  --accent-earth: #78350f;
+  --accent-earth-soft: #fef3c7;
+  --accent-earth-border: #fde68a;
 
   /* Verification & Cryptographic Manifests */
   --accent-verification: #059669;
-  --accent-verification-soft: #ECFDF5;
-  --accent-verification-border: #A7F3D0;
+  --accent-verification-soft: #ecfdf5;
+  --accent-verification-border: #a7f3d0;
 
   /* Semantic Feedback States */
-  --success-text: #065F46;
-  --success-bg: #E8F6F0;
-  --success-border: #A3D9C4;
+  --success-text: #065f46;
+  --success-bg: #e8f6f0;
+  --success-border: #a3d9c4;
 
-  --warning-text: #9A3412;
-  --warning-bg: #FFF7ED;
-  --warning-border: #FED7AA;
+  --warning-text: #9a3412;
+  --warning-bg: #fff7ed;
+  --warning-border: #fed7aa;
 
-  --danger-text: #991B1B;
-  --danger-bg: #FEF2F2;
-  --danger-border: #FECACA;
+  --danger-text: #991b1b;
+  --danger-bg: #fef2f2;
+  --danger-border: #fecaca;
 
-  --info-text: #0A6C74;
-  --info-bg: #E6F7F7;
-  --info-border: #9FE3E0;
+  --info-text: #0a6c74;
+  --info-bg: #e6f7f7;
+  --info-border: #9fe3e0;
 
   /* Typography Font Families */
-  --font-display: 'Manrope', -apple-system, BlinkMacSystemFont, 'Space Grotesk', sans-serif;
-  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
-  --font-mono: 'Geist Mono', 'SF Mono', 'JetBrains Mono', monospace;
+  --font-display:
+    "Manrope", -apple-system, BlinkMacSystemFont, "Space Grotesk", sans-serif;
+  --font-sans:
+    "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+  --font-mono: "Geist Mono", "SF Mono", "JetBrains Mono", monospace;
 
   /* Spacing Scale (8px Grid Alignment) */
-  --space-1: 0.25rem;   /* 4px */
-  --space-2: 0.5rem;    /* 8px */
-  --space-3: 0.75rem;   /* 12px */
-  --space-4: 1rem;      /* 16px */
-  --space-5: 1.25rem;   /* 20px */
-  --space-6: 1.5rem;    /* 24px */
-  --space-8: 2rem;      /* 32px */
-  --space-10: 2.5rem;   /* 40px */
-  --space-12: 3rem;     /* 48px */
-  --space-16: 4rem;     /* 64px */
-  --space-20: 5rem;     /* 80px */
-  --space-24: 6rem;     /* 96px */
-  --space-28: 7rem;     /* 112px */
-  --space-32: 8rem;     /* 128px */
+  --space-1: 0.25rem; /* 4px */
+  --space-2: 0.5rem; /* 8px */
+  --space-3: 0.75rem; /* 12px */
+  --space-4: 1rem; /* 16px */
+  --space-5: 1.25rem; /* 20px */
+  --space-6: 1.5rem; /* 24px */
+  --space-8: 2rem; /* 32px */
+  --space-10: 2.5rem; /* 40px */
+  --space-12: 3rem; /* 48px */
+  --space-16: 4rem; /* 64px */
+  --space-20: 5rem; /* 80px */
+  --space-24: 6rem; /* 96px */
+  --space-28: 7rem; /* 112px */
+  --space-32: 8rem; /* 128px */
 
   /* Border Radii */
   --radius-xs: 4px;
@@ -103,8 +105,12 @@
 
   /* Subtle Crisp Shadows */
   --shadow-sm: 0 1px 3px 0 rgba(11, 18, 32, 0.04);
-  --shadow-md: 0 4px 14px -2px rgba(11, 18, 32, 0.06), 0 2px 4px -1px rgba(11, 18, 32, 0.02);
-  --shadow-lg: 0 12px 30px -4px rgba(11, 18, 32, 0.08), 0 4px 12px -2px rgba(11, 18, 32, 0.03);
+  --shadow-md:
+    0 4px 14px -2px rgba(11, 18, 32, 0.06),
+    0 2px 4px -1px rgba(11, 18, 32, 0.02);
+  --shadow-lg:
+    0 12px 30px -4px rgba(11, 18, 32, 0.08),
+    0 4px 12px -2px rgba(11, 18, 32, 0.03);
   --shadow-glass: 0 8px 30px 0 rgba(11, 18, 32, 0.04);
   --shadow-modal: 0 24px 48px -12px rgba(11, 18, 32, 0.16);
 
@@ -119,7 +125,9 @@
 }
 
 /* Global Reset */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -150,7 +158,8 @@ body {
 }
 
 /* Lenis smooth scrolling helper styles */
-html.lenis, html.lenis body {
+html.lenis,
+html.lenis body {
   height: auto;
 }
 
@@ -171,7 +180,12 @@ html.lenis, html.lenis body {
 }
 
 /* Typography Hierarchy (Manrope Display + Plus Jakarta Sans UI) */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-display);
   color: var(--text-primary);
   font-weight: 700;
@@ -215,7 +229,10 @@ a:hover {
   color: var(--brand-secondary);
 }
 
-button, input, select, textarea {
+button,
+input,
+select,
+textarea {
   font-family: inherit;
 }
 
@@ -306,8 +323,12 @@ button, input, select, textarea {
 }
 
 @keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .spin-animation {
@@ -315,7 +336,8 @@ button, input, select, textarea {
 }
 
 @keyframes pulseGlow {
-  0%, 100% {
+  0%,
+  100% {
     box-shadow: 0 0 0 0 rgba(28, 197, 150, 0.45);
   }
   50% {
@@ -325,4 +347,60 @@ button, input, select, textarea {
 
 .pulse-recording {
   animation: pulseGlow 1.4s infinite;
+}
+:root {
+  --bg-app: #f5f7ef;
+  --bg-surface: #fffefa;
+  --bg-surface-muted: #edf1e5;
+  --bg-surface-hover: #e5ecd9;
+  --text-primary: #173d2c;
+  --text-secondary: #61725c;
+  --text-muted: #74836c;
+  --brand-primary: #214d32;
+  --brand-primary-hover: #123821;
+  --brand-tint: #eaf0dc;
+  --brand-border: #c6d5b0;
+  --brand-soft: #c6d5b0;
+  --border-subtle: #dce3d0;
+  --border-strong: #becdac;
+  --font-display: "Manrope", sans-serif;
+  --font-sans: "DM Sans", sans-serif;
+  --shadow-sm: 0 2px 8px #16371b04;
+  --shadow-md: 0 10px 30px #16371b08;
+  --shadow-lg: 0 18px 50px #16371b0c;
+}
+.ambient-glow {
+  display: none;
+}
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+}
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid #83a056;
+  outline-offset: 4px;
+}
+h1,
+h2,
+h3 {
+  font-weight: 500;
+}
+::selection {
+  background: #d7ef88;
+  color: #143523;
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+  *,
+  *:before,
+  *:after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

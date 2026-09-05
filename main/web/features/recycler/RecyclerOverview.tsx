@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import React from 'react';
+import React from "react";
 import {
   Package,
   ShieldCheck,
@@ -9,9 +9,9 @@ import {
   Sparkles,
   MapPin,
   ArrowRight,
-} from 'lucide-react';
-import { LotMatch } from '@/types/database';
-import styles from './Recycler.module.css';
+} from "lucide-react";
+import { LotMatch } from "@/types/database";
+import styles from "./Recycler.module.css";
 
 interface RecyclerOverviewProps {
   matchedLots: LotMatch[];
@@ -28,45 +28,37 @@ export default function RecyclerOverview({
 }: RecyclerOverviewProps) {
   const totalOfferedWeight = matchedLots.reduce(
     (acc, m) => acc + (m.lot?.weight_kg || 0),
-    0
+    0,
   );
   const totalOfferedValue = matchedLots.reduce(
     (acc, m) => acc + (m.lot?.estimated_value || 0),
-    0
+    0,
   );
 
   return (
     <div className={styles.container}>
-      {/* Page Header */}
-      <div className={`${styles.pageHeader} drop-segment-1`}>
-        <div>
-          <h2 className={styles.pageTitle}>Procurement & Facility Dashboard</h2>
-          <p className={styles.pageSubtitle}>
-            Real-time matched e-waste lots from informal collectors across Delhi Industrial Clusters.
-          </p>
-        </div>
-      </div>
-
       {/* KPI Stats Grid */}
       <div className={`${styles.kpiGrid} drop-segment-2`}>
         <div className={styles.kpiCard}>
           <div className={styles.kpiHeader}>
-            <span>Incoming Matched Lots</span>
+            <span>Incoming lots</span>
             <Package size={18} className={styles.kpiIconBrand} />
           </div>
           <div className={styles.kpiValue}>{matchedLots.length}</div>
           <div className={styles.kpiSub}>
             <ArrowUpRight size={14} className={styles.kpiSuccessIcon} />
-            <span>Deterministic matches in Delhi</span>
+            <span>Ready for your review</span>
           </div>
         </div>
 
         <div className={styles.kpiCard}>
           <div className={styles.kpiHeader}>
-            <span>Available Volume</span>
+            <span>Available material</span>
             <Sparkles size={18} className={styles.kpiIconBrand} />
           </div>
-          <div className={styles.kpiValue}>{totalOfferedWeight.toFixed(1)} kg</div>
+          <div className={styles.kpiValue}>
+            {totalOfferedWeight.toFixed(1)} kg
+          </div>
           <div className={styles.kpiSub}>
             <span>Across PCB, Batteries & Cables</span>
           </div>
@@ -74,10 +66,12 @@ export default function RecyclerOverview({
 
         <div className={styles.kpiCard}>
           <div className={styles.kpiHeader}>
-            <span>Estimated Lot Value</span>
+            <span>Estimated value</span>
             <IndianRupee size={18} className={styles.kpiIconBrand} />
           </div>
-          <div className={styles.kpiValue}>₹{totalOfferedValue.toLocaleString()}</div>
+          <div className={styles.kpiValue}>
+            ₹{totalOfferedValue.toLocaleString()}
+          </div>
           <div className={styles.kpiSub}>
             <span>Based on 7-day rolling benchmark</span>
           </div>
@@ -85,12 +79,14 @@ export default function RecyclerOverview({
 
         <div className={styles.kpiCard}>
           <div className={styles.kpiHeader}>
-            <span>Traceable Handovers</span>
+            <span>Digital records</span>
             <ShieldCheck size={18} className={styles.kpiIconBrand} />
           </div>
-          <div className={styles.kpiValue}>100%</div>
+          <div className={styles.kpiValue}>QR</div>
           <div className={styles.kpiSub}>
-            <span className={styles.kpiSuccessText}>DPCC EPR Compliance Ready</span>
+            <span className={styles.kpiSuccessText}>
+              Keep a record of each exchange
+            </span>
           </div>
         </div>
       </div>
@@ -99,22 +95,31 @@ export default function RecyclerOverview({
       <div className={`${styles.bannerCard} drop-segment-3`}>
         <div className={styles.bannerContent}>
           <div className={styles.bannerBadgeRow}>
-            <span className={styles.bannerBadge}>NEW LOTS AWAITING REVIEW</span>
+            <span className={styles.bannerBadge}>A LITTLE MOMENTUM</span>
             <span className={styles.bannerZone}>Mandoli & Okhla Zones</span>
           </div>
           <h3 className={styles.bannerTitle}>
-            {matchedLots.length} High-Affinity E-Waste Lots Ready for Procurement
+            Your next good exchange is waiting.
           </h3>
           <p className={styles.bannerDesc}>
-            Pre-classified via Gemini Vision AI and scored by PostGIS geographic proximity to your facility.
+            Explore materials matched to your facility. Review the details and
+            choose what works for you.
           </p>
         </div>
         <div className={styles.bannerActions}>
-          <button type="button" className={styles.primaryActionBtn} onClick={onNavigateToLots}>
-            Review Matched Lots
+          <button
+            type="button"
+            className={styles.primaryActionBtn}
+            onClick={onNavigateToLots}
+          >
+            Explore incoming lots
           </button>
-          <button type="button" className={styles.secondaryActionBtn} onClick={onNavigateToRateCards}>
-            Update My Rates
+          <button
+            type="button"
+            className={styles.secondaryActionBtn}
+            onClick={onNavigateToRateCards}
+          >
+            Manage rates
           </button>
         </div>
       </div>
@@ -122,7 +127,7 @@ export default function RecyclerOverview({
       {/* Recent Candidate Lots Table */}
       <div className={`${styles.tableCard} drop-segment-4`}>
         <div className={styles.cardHeaderBar}>
-          <h3 className={styles.cardTitle}>Top Candidate Lots</h3>
+          <h3 className={styles.cardTitle}>Materials worth a closer look</h3>
           <button
             type="button"
             className={styles.viewAllBtn}
@@ -140,9 +145,9 @@ export default function RecyclerOverview({
                 <th>Category</th>
                 <th>Collector</th>
                 <th>Weight</th>
-                <th>AI Suggested Rate</th>
+                <th>Indicative rate</th>
                 <th>Estimated Total</th>
-                <th>Match Score</th>
+                <th>Match</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -151,7 +156,7 @@ export default function RecyclerOverview({
                 <tr key={match.id}>
                   <td>
                     <div className={styles.tablePrimaryText}>
-                      {match.lot?.sub_code.replace(/_/g, ' ').toUpperCase()}
+                      {match.lot?.sub_code.replace(/_/g, " ").toUpperCase()}
                     </div>
                     <div className={styles.tableSecondaryText}>
                       {match.lot?.parent_code}

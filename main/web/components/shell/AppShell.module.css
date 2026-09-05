@@ -5,7 +5,7 @@
   flex-direction: column;
   min-height: 100vh;
   width: 100%;
-  background-color: var(--bg-app, #F6F8F5);
+  background-color: var(--bg-app, #f6f8f5);
   font-family: var(--font-sans);
 }
 
@@ -34,5 +34,20 @@
 @media (max-width: 640px) {
   .contentContainer {
     padding: 1rem 1rem 4rem;
+  }
+}
+.contentContainer {
+  max-width: 1320px;
+  padding: 52px 5% 75px;
+}
+.appShell {
+  background: #f5f7ef;
+}
+.mainContent {
+  background: linear-gradient(#f1f5e8 0, #f5f7ef 300px);
+}
+@media (max-width: 700px) {
+  .contentContainer {
+    padding: 28px 5% 60px;
   }
 }

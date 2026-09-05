@@ -31,7 +31,7 @@
 }
 
 .facilityTitle {
-  font-family: var(--font-display, 'Manrope', sans-serif);
+  font-family: var(--font-display, "Manrope", sans-serif);
   font-size: 1.75rem;
   font-weight: 800;
   color: var(--text-primary);
@@ -45,11 +45,11 @@
   gap: 0.35rem;
   padding: 0.25rem 0.75rem;
   border-radius: var(--radius-full);
-  background-color: var(--brand-tint, #E8F6F0);
-  color: var(--brand-primary, #087F5B);
+  background-color: var(--brand-tint, #e8f6f0);
+  color: var(--brand-primary, #087f5b);
   font-size: 0.75rem;
   font-weight: 700;
-  border: 1px solid var(--brand-soft, #A3D9C4);
+  border: 1px solid var(--brand-soft, #a3d9c4);
 }
 
 .facilitySubtitle {
@@ -89,11 +89,11 @@
 
 /* Facility Operational Panel */
 .facilityPanel {
-  background: linear-gradient(135deg, #0B1220, #131E30);
+  background: linear-gradient(135deg, #0b1220, #131e30);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: var(--radius-xl);
   padding: 1.5rem 1.75rem;
-  color: #FFFFFF;
+  color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -111,12 +111,12 @@
   width: 48px;
   height: 48px;
   border-radius: var(--radius-md);
-  background: linear-gradient(135deg, var(--brand-primary), #065F46);
+  background: linear-gradient(135deg, var(--brand-primary), #065f46);
   border: 1px solid rgba(16, 185, 129, 0.4);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #FFFFFF;
+  color: #ffffff;
   box-shadow: 0 4px 14px rgba(8, 127, 91, 0.3);
   flex-shrink: 0;
 }
@@ -128,10 +128,10 @@
 }
 
 .facilityHubName {
-  font-family: var(--font-display, 'Manrope', sans-serif);
+  font-family: var(--font-display, "Manrope", sans-serif);
   font-size: 1.25rem;
   font-weight: 800;
-  color: #FFFFFF;
+  color: #ffffff;
   letter-spacing: -0.01em;
 }
 
@@ -155,7 +155,7 @@
 
 .facTagEpr {
   background-color: rgba(16, 185, 129, 0.2);
-  color: var(--brand-secondary, #10B981);
+  color: var(--brand-secondary, #10b981);
   border: 1px solid rgba(16, 185, 129, 0.4);
 }
 
@@ -183,8 +183,8 @@
 .telemetryStatValue {
   font-size: 1.35rem;
   font-weight: 800;
-  font-family: var(--font-display, 'Manrope', sans-serif);
-  color: #FFFFFF;
+  font-family: var(--font-display, "Manrope", sans-serif);
+  color: #ffffff;
 }
 
 /* 4 Clean Centered Section Switcher Cards */
@@ -231,9 +231,11 @@
 }
 
 .sectionCardActive {
-  background-color: #FFFFFF !important;
+  background-color: #ffffff !important;
   border-color: var(--brand-primary) !important;
-  box-shadow: 0 0 0 1px var(--brand-primary), var(--shadow-md) !important;
+  box-shadow:
+    0 0 0 1px var(--brand-primary),
+    var(--shadow-md) !important;
 }
 
 .sectionCardHeader {
@@ -257,7 +259,7 @@
 
 .sectionCardActive .sectionIconBadge {
   background-color: var(--brand-primary);
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 .activeSectionIndicator {
@@ -275,7 +277,7 @@
 }
 
 .sectionCardTitle {
-  font-family: var(--font-display, 'Manrope', sans-serif);
+  font-family: var(--font-display, "Manrope", sans-serif);
   font-size: 0.9375rem;
   font-weight: 700;
   color: var(--text-primary);
@@ -354,5 +356,59 @@
   .activeViewSurface {
     padding: 1rem;
     border-radius: var(--radius-lg);
+  }
+}
+.facilityHeader {
+  border-bottom: 0;
+  padding: 0 0 15px;
+}
+.facilityTitle {
+  font-size: 36px;
+  font-weight: 400;
+  letter-spacing: -1.7px;
+}
+.facilitySubtitle {
+  font-size: 14px;
+  line-height: 1.8;
+  max-width: 580px;
+  margin-top: 8px;
+}
+.verifiedBadge {
+  font-size: 11px;
+  font-weight: 400;
+  border: 0;
+  background: #e5ecd8;
+}
+.facilityMetaRow {
+  margin-top: 12px;
+  gap: 15px;
+}
+.facilityMetaItem {
+  font-size: 11px;
+  font-weight: 400;
+}
+.facilityMetaMono {
+  background: none;
+  border: 0;
+  font-weight: 400;
+}
+.activeViewSurface {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  padding: 0;
+}
+.recyclerContainer {
+  gap: 25px;
+}
+@media (max-width: 700px) {
+  .facilityTitle {
+    font-size: 29px;
+  }
+  .facilityHeader {
+    align-items: flex-start;
+  }
+  .facilityMetaRow {
+    gap: 10px;
   }
 }

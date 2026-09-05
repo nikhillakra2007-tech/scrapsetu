@@ -72,7 +72,7 @@
   font-size: 1.6rem;
   font-weight: 800;
   color: var(--text-primary);
-  font-family: 'Outfit', sans-serif;
+  font-family: "Outfit", sans-serif;
 }
 
 .kpiSub {
@@ -94,7 +94,7 @@
 
 /* Action Banner in Deep Pine & Caribbean Green */
 .bannerCard {
-  background: linear-gradient(135deg, #005F52 0%, #00453B 100%);
+  background: linear-gradient(135deg, #005f52 0%, #00453b 100%);
   border: 1px solid rgba(0, 95, 82, 0.4);
   border-radius: var(--radius-xl);
   padding: 2rem 2.25rem;
@@ -103,7 +103,7 @@
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 1.5rem;
-  color: #FFFFFF;
+  color: #ffffff;
   box-shadow: var(--shadow-md);
 }
 
@@ -125,7 +125,7 @@
   padding: 0.2rem 0.6rem;
   border-radius: var(--radius-full);
   background-color: var(--brand-secondary);
-  color: #020F12;
+  color: #020f12;
   letter-spacing: 0.04em;
 }
 
@@ -138,7 +138,7 @@
 .bannerTitle {
   font-size: 1.35rem;
   font-weight: 700;
-  color: #FFFFFF;
+  color: #ffffff;
   margin-bottom: 0.35rem;
 }
 
@@ -159,7 +159,7 @@
   padding: 0.75rem 1.4rem;
   border-radius: var(--radius-full);
   background-color: var(--brand-secondary);
-  color: #020F12;
+  color: #020f12;
   font-size: 0.875rem;
   font-weight: 700;
   border: none;
@@ -177,7 +177,7 @@
   padding: 0.75rem 1.4rem;
   border-radius: var(--radius-full);
   background-color: rgba(255, 255, 255, 0.12);
-  color: #FFFFFF;
+  color: #ffffff;
   font-size: 0.875rem;
   font-weight: 600;
   border: 1px solid rgba(255, 255, 255, 0.3);
@@ -297,7 +297,7 @@
 .valuationCell {
   font-weight: 800;
   color: var(--brand-primary);
-  font-family: 'Outfit', sans-serif;
+  font-family: "Outfit", sans-serif;
 }
 
 .matchScoreBadge {
@@ -314,7 +314,7 @@
   padding: 0.45rem 1rem;
   border-radius: var(--radius-full);
   background-color: var(--brand-primary);
-  color: #FFFFFF;
+  color: #ffffff;
   font-size: 0.75rem;
   font-weight: 600;
   border: none;
@@ -354,7 +354,7 @@
 .filterBtnActive {
   background-color: var(--brand-primary);
   border-color: var(--brand-primary);
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 /* Matched Lots Grid */
@@ -401,7 +401,7 @@
   padding: 0.25rem 0.6rem;
   border-radius: var(--radius-sm);
   background-color: var(--brand-primary);
-  color: #FFFFFF;
+  color: #ffffff;
   letter-spacing: 0.04em;
 }
 
@@ -481,14 +481,14 @@
   font-size: 1.25rem;
   font-weight: 800;
   color: var(--text-primary);
-  font-family: 'Outfit', sans-serif;
+  font-family: "Outfit", sans-serif;
 }
 
 .metricItemPayout {
   font-size: 1.25rem;
   font-weight: 800;
   color: var(--brand-primary);
-  font-family: 'Outfit', sans-serif;
+  font-family: "Outfit", sans-serif;
 }
 
 .metricSubItem {
@@ -522,7 +522,7 @@
   padding: 0.85rem;
   border-radius: var(--radius-full);
   background-color: var(--brand-primary);
-  color: #FFFFFF;
+  color: #ffffff;
   font-size: 0.875rem;
   font-weight: 700;
   border: none;
@@ -540,7 +540,7 @@
   padding: 0.85rem;
   border-radius: var(--radius-full);
   background-color: var(--brand-primary);
-  color: #FFFFFF;
+  color: #ffffff;
   font-size: 0.875rem;
   font-weight: 700;
   border: none;
@@ -566,7 +566,7 @@
   padding: 0.75rem 1.4rem;
   border-radius: var(--radius-full);
   background-color: var(--brand-primary);
-  color: #FFFFFF;
+  color: #ffffff;
   font-size: 0.875rem;
   font-weight: 700;
   border: none;
@@ -597,7 +597,7 @@
   padding: 0.2rem 0.5rem;
   border-radius: var(--radius-sm);
   background-color: var(--brand-primary);
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 .desktopTableCard {
@@ -756,7 +756,8 @@
   .bannerActions {
     width: 100%;
   }
-  .primaryActionBtn, .secondaryActionBtn {
+  .primaryActionBtn,
+  .secondaryActionBtn {
     flex: 1;
     text-align: center;
     padding: 0.65rem 1rem;
@@ -771,5 +772,187 @@
   }
   .customTable {
     min-width: 620px;
+  }
+}
+.container {
+  gap: 30px;
+}
+.kpiGrid {
+  gap: 0;
+  background: #fffefa;
+  border: 1px solid #dce3d0;
+  border-radius: 14px;
+  overflow: hidden;
+}
+.kpiCard {
+  border: 0;
+  border-right: 1px solid #e2e7d9;
+  border-radius: 0;
+  background: none;
+  padding: 25px;
+  box-shadow: none;
+}
+.kpiCard:last-child {
+  border: 0;
+}
+.kpiCard:hover {
+  transform: none;
+  box-shadow: none;
+}
+.kpiHeader {
+  font-size: 12px;
+  font-weight: 400;
+  color: #697a60;
+}
+.kpiValue {
+  font-size: 34px;
+  font-weight: 400;
+  letter-spacing: -1.5px;
+  margin: 14px 0 7px;
+}
+.kpiSub {
+  font-size: 11px;
+  font-weight: 400;
+}
+.bannerCard {
+  background: #173e2b;
+  border: 0;
+  border-radius: 13px;
+  padding: 35px 36px;
+  box-shadow: none;
+  position: relative;
+  overflow: hidden;
+}
+.bannerTitle {
+  font-size: 28px;
+  font-weight: 400;
+  letter-spacing: -1px;
+  color: #f3f7e9;
+  max-width: 520px;
+}
+.bannerDesc {
+  font-size: 13px;
+  line-height: 1.8;
+  color: #bbceb1;
+  max-width: 470px;
+}
+.bannerBadge {
+  background: none;
+  border: 0;
+  color: #d7ef88;
+  font-size: 10px;
+  letter-spacing: 2px;
+  padding: 0;
+}
+.bannerZone {
+  color: #adbf9e;
+  font-size: 10px;
+}
+.primaryActionBtn {
+  background: #d7ef88;
+  color: #203d23;
+  border: 0;
+  border-radius: 30px;
+  font-size: 13px;
+  padding: 13px 22px;
+}
+.secondaryActionBtn {
+  background: transparent;
+  border-color: #ffffff40;
+  color: #e2eccc;
+  border-radius: 30px;
+  font-size: 12px;
+}
+.tableCard {
+  background: #fffefa;
+  border-radius: 13px;
+  box-shadow: none;
+}
+.cardHeaderBar {
+  padding: 26px;
+  border-bottom: 1px solid #e1e6d8;
+}
+.cardTitle {
+  font-size: 19px;
+  font-weight: 500;
+}
+.customTable th {
+  font-size: 11px;
+  letter-spacing: 0.3px;
+  text-transform: none;
+  font-weight: 500;
+  background: #f4f6ed;
+  color: #738168;
+  padding: 16px 20px;
+}
+.customTable td {
+  font-size: 13px;
+  padding: 22px 20px;
+  border-color: #e7ecdf;
+}
+.tablePrimaryText {
+  font-size: 13px;
+  font-weight: 500;
+}
+.tableSecondaryText {
+  font-size: 11px;
+}
+.matchScoreBadge {
+  font-size: 11px;
+  font-weight: 400;
+  background: #eef3e3;
+  border: 0;
+}
+.valuationCell {
+  font-weight: 500;
+}
+.inspectBtn {
+  border: 1px solid #d7dfcc;
+  background: transparent;
+  color: #385630;
+  padding: 7px 13px;
+  border-radius: 20px;
+}
+.viewAllBtn {
+  font-size: 12px;
+  font-weight: 400;
+}
+.pageTitle {
+  font-weight: 400;
+  font-size: 27px;
+}
+.pageSubtitle {
+  font-size: 14px;
+}
+@media (max-width: 700px) {
+  .kpiGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .kpiCard {
+    padding: 20px;
+    border-bottom: 1px solid #e2e7d9;
+  }
+  .kpiValue {
+    font-size: 28px;
+  }
+  .bannerCard {
+    padding: 25px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .bannerTitle {
+    font-size: 26px;
+  }
+  .bannerActions {
+    width: 100%;
+  }
+  .customTable td {
+    padding: 17px;
+  }
+  .cardHeaderBar {
+    padding: 20px;
+  }
+  .cardTitle {
+    font-size: 17px;
   }
 }

@@ -30,7 +30,7 @@
 }
 
 .opTitle {
-  font-family: var(--font-display, 'Manrope', sans-serif);
+  font-family: var(--font-display, "Manrope", sans-serif);
   font-size: 1.75rem;
   font-weight: 800;
   color: var(--text-primary);
@@ -44,11 +44,11 @@
   gap: 0.35rem;
   padding: 0.25rem 0.75rem;
   border-radius: var(--radius-full);
-  background-color: var(--brand-tint, #E8F6F0);
-  color: var(--brand-primary, #087F5B);
+  background-color: var(--brand-tint, #e8f6f0);
+  color: var(--brand-primary, #087f5b);
   font-size: 0.75rem;
   font-weight: 700;
-  border: 1px solid var(--brand-soft, #A3D9C4);
+  border: 1px solid var(--brand-soft, #a3d9c4);
 }
 
 .opSubtitle {
@@ -145,7 +145,7 @@
 }
 
 .metricValue {
-  font-family: var(--font-display, 'Manrope', sans-serif);
+  font-family: var(--font-display, "Manrope", sans-serif);
   font-size: 1.65rem;
   font-weight: 800;
   color: var(--text-primary);
@@ -202,9 +202,11 @@
 }
 
 .sectionCardActive {
-  background-color: #FFFFFF !important;
+  background-color: #ffffff !important;
   border-color: var(--brand-primary) !important;
-  box-shadow: 0 0 0 1px var(--brand-primary), var(--shadow-md) !important;
+  box-shadow:
+    0 0 0 1px var(--brand-primary),
+    var(--shadow-md) !important;
 }
 
 .sectionCardHeader {
@@ -228,7 +230,7 @@
 
 .sectionCardActive .sectionIconBadge {
   background-color: var(--brand-primary);
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 .activeSectionIndicator {
@@ -252,7 +254,7 @@
 }
 
 .sectionCardTitle {
-  font-family: var(--font-display, 'Manrope', sans-serif);
+  font-family: var(--font-display, "Manrope", sans-serif);
   font-size: 0.9375rem;
   font-weight: 700;
   color: var(--text-primary);
@@ -305,7 +307,7 @@
 }
 
 .modalCard {
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   border-radius: var(--radius-xl);
   border: 1px solid var(--border-subtle);
   box-shadow: var(--shadow-modal);
@@ -326,7 +328,7 @@
   padding: 1.25rem 1.75rem;
   border-bottom: 1px solid var(--border-subtle);
   flex-shrink: 0;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
 }
 
 .modalTitleRow {
@@ -336,7 +338,7 @@
 }
 
 .modalTitle {
-  font-family: var(--font-display, 'Manrope', sans-serif);
+  font-family: var(--font-display, "Manrope", sans-serif);
   font-size: 1.25rem;
   font-weight: 800;
   color: var(--text-primary);
@@ -506,10 +508,10 @@
 
 /* AI Valuation Card in Modal */
 .valuationPreviewCard {
-  background: linear-gradient(135deg, #0B1220, #131E30);
+  background: linear-gradient(135deg, #0b1220, #131e30);
   border-radius: var(--radius-lg);
   padding: 1.25rem 1.4rem;
-  color: #FFFFFF;
+  color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -525,7 +527,7 @@
 .valHeading {
   font-size: 0.6875rem;
   font-weight: 700;
-  color: var(--brand-secondary, #10B981);
+  color: var(--brand-secondary, #10b981);
   letter-spacing: 0.06em;
   font-family: var(--font-mono, monospace);
 }
@@ -543,10 +545,10 @@
 }
 
 .valAmount {
-  font-family: var(--font-display, 'Manrope', sans-serif);
+  font-family: var(--font-display, "Manrope", sans-serif);
   font-size: 1.5rem;
   font-weight: 800;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 .valRateSub {
@@ -562,7 +564,7 @@
   justify-content: flex-end;
   gap: 0.75rem;
   flex-shrink: 0;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
 }
 
 .cancelBtn {
@@ -584,7 +586,7 @@
   border-radius: var(--radius-md);
   border: none;
   background-color: var(--brand-primary);
-  color: #FFFFFF;
+  color: #ffffff;
   font-size: 0.875rem;
   font-weight: 700;
   cursor: pointer;
@@ -658,5 +660,50 @@
 
   .weightPresets {
     justify-content: space-between;
+  }
+}
+.opHeader {
+  border-bottom: 0;
+  padding-bottom: 10px;
+}
+.opTitle {
+  font-size: 34px;
+  font-weight: 400;
+  letter-spacing: -1.5px;
+}
+.opSubtitle {
+  font-size: 14px;
+  line-height: 1.8;
+}
+.opStatusPill {
+  font-size: 11px;
+  font-weight: 400;
+  border: 0;
+}
+.activeViewSurface {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.metricCard {
+  border-radius: 12px;
+  box-shadow: none;
+}
+.metricValue {
+  font-size: 30px;
+  font-weight: 400;
+}
+.metricLabel {
+  font-weight: 400;
+  font-size: 12px;
+}
+@media (max-width: 700px) {
+  .opTitle {
+    font-size: 28px;
+  }
+  .opHeader,
+  .opTitleRow {
+    flex-wrap: wrap;
   }
 }

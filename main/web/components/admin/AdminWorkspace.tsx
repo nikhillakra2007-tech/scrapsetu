@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
-import AppShell from '@/components/shell/AppShell';
+import React, { useState, useEffect } from "react";
+import Link from "next/link";
+import AppShell from "@/components/shell/AppShell";
 import {
   ShieldAlert,
   ArrowLeft,
@@ -18,8 +18,8 @@ import {
   Eye,
   Check,
   ShieldCheck,
-} from 'lucide-react';
-import styles from './AdminWorkspace.module.css';
+} from "lucide-react";
+import styles from "./AdminWorkspace.module.css";
 
 interface AuthorizedFacility {
   id: string;
@@ -27,46 +27,46 @@ interface AuthorizedFacility {
   region: string;
   dpccRegId: string;
   category: string;
-  status: 'verified' | 'pending';
+  status: "verified" | "pending";
   lastInspection: string;
 }
 
 const INITIAL_FACILITIES: AuthorizedFacility[] = [
   {
-    id: 'fac-1',
-    name: 'EcoRecycle Hub',
-    region: 'Okhla Phase III, South Delhi',
-    dpccRegId: 'DPCC/EW/2024/0981',
-    category: 'High-Grade Telecom & Circuit Boards',
-    status: 'verified',
-    lastInspection: '12 Aug 2026',
+    id: "fac-1",
+    name: "EcoRecycle Hub",
+    region: "Okhla Phase III, South Delhi",
+    dpccRegId: "DPCC/EW/2024/0981",
+    category: "High-Grade Telecom & Circuit Boards",
+    status: "verified",
+    lastInspection: "12 Aug 2026",
   },
   {
-    id: 'fac-2',
-    name: 'GreenE-Waste Technologies',
-    region: 'Mayapuri Industrial Area, West Delhi',
-    dpccRegId: 'DPCC/EW/2023/0442',
-    category: 'Li-ion Batteries & Portable Electronics',
-    status: 'verified',
-    lastInspection: '24 Jul 2026',
+    id: "fac-2",
+    name: "GreenE-Waste Technologies",
+    region: "Mayapuri Industrial Area, West Delhi",
+    dpccRegId: "DPCC/EW/2023/0442",
+    category: "Li-ion Batteries & Portable Electronics",
+    status: "verified",
+    lastInspection: "24 Jul 2026",
   },
   {
-    id: 'fac-3',
-    name: 'Apex Non-Ferrous Smelters',
-    region: 'Bawana Industrial Zone, North Delhi',
-    dpccRegId: 'DPCC/NF/2024/1105',
-    category: 'Electrolytic Copper & Cable Scrap',
-    status: 'verified',
-    lastInspection: '18 Aug 2026',
+    id: "fac-3",
+    name: "Apex Non-Ferrous Smelters",
+    region: "Bawana Industrial Zone, North Delhi",
+    dpccRegId: "DPCC/NF/2024/1105",
+    category: "Electrolytic Copper & Cable Scrap",
+    status: "verified",
+    lastInspection: "18 Aug 2026",
   },
   {
-    id: 'fac-4',
-    name: 'Capital EPR Aggregators',
-    region: 'Narela Industrial Cluster, North Delhi',
-    dpccRegId: 'DPCC/EW/2024/1390',
-    category: 'Enterprise Servers & Metal Casings',
-    status: 'pending',
-    lastInspection: 'Pending Inspection',
+    id: "fac-4",
+    name: "Capital EPR Aggregators",
+    region: "Narela Industrial Cluster, North Delhi",
+    dpccRegId: "DPCC/EW/2024/1390",
+    category: "Enterprise Servers & Metal Casings",
+    status: "pending",
+    lastInspection: "Pending Inspection",
   },
 ];
 
@@ -83,34 +83,34 @@ interface AuditManifest {
 
 const AUDIT_MANIFESTS: AuditManifest[] = [
   {
-    lotId: 'LOT-DEL-089',
-    collectorName: 'Ramesh Kumar',
-    facilityName: 'EcoRecycle Hub',
-    material: 'Telecom Circuit Boards',
-    weight: '45.0 kg',
-    qrHash: 'SETU-DEL-8942-OKHLA',
-    timestamp: '04 Sep, 11:20 AM',
-    compliance: 'EPR Form 2 Logged',
+    lotId: "LOT-DEL-089",
+    collectorName: "Ramesh Kumar",
+    facilityName: "EcoRecycle Hub",
+    material: "Telecom Circuit Boards",
+    weight: "45.0 kg",
+    qrHash: "SETU-DEL-8942-OKHLA",
+    timestamp: "04 Sep, 11:20 AM",
+    compliance: "EPR Form 2 Logged",
   },
   {
-    lotId: 'LOT-DEL-088',
-    collectorName: 'Mohd. Salim',
-    facilityName: 'GreenE-Waste Technologies',
-    material: 'Mixed Smartphones & Lithium Cells',
-    weight: '28.5 kg',
-    qrHash: 'SETU-DEL-4102-MAYA',
-    timestamp: '04 Sep, 09:45 AM',
-    compliance: 'EPR Form 2 Logged',
+    lotId: "LOT-DEL-088",
+    collectorName: "Mohd. Salim",
+    facilityName: "GreenE-Waste Technologies",
+    material: "Mixed Smartphones & Lithium Cells",
+    weight: "28.5 kg",
+    qrHash: "SETU-DEL-4102-MAYA",
+    timestamp: "04 Sep, 09:45 AM",
+    compliance: "EPR Form 2 Logged",
   },
   {
-    lotId: 'LOT-DEL-087',
-    collectorName: 'Sunil Paswan',
-    facilityName: 'Apex Non-Ferrous Smelters',
-    material: 'Grade 1 Stripped Copper',
-    weight: '62.0 kg',
-    qrHash: 'SETU-DEL-7731-BAW',
-    timestamp: '03 Sep, 04:15 PM',
-    compliance: 'EPR Form 2 Logged',
+    lotId: "LOT-DEL-087",
+    collectorName: "Sunil Paswan",
+    facilityName: "Apex Non-Ferrous Smelters",
+    material: "Grade 1 Stripped Copper",
+    weight: "62.0 kg",
+    qrHash: "SETU-DEL-7731-BAW",
+    timestamp: "03 Sep, 04:15 PM",
+    compliance: "EPR Form 2 Logged",
   },
 ];
 
@@ -121,25 +121,27 @@ export default function AdminWorkspace() {
     email?: string;
   } | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<string>('facilities');
-  const [facilities, setFacilities] = useState<AuthorizedFacility[]>(INITIAL_FACILITIES);
+  const [activeTab, setActiveTab] = useState<string>("facilities");
+  const [facilities, setFacilities] =
+    useState<AuthorizedFacility[]>(INITIAL_FACILITIES);
   const [actionNotice, setActionNotice] = useState<string | null>(null);
 
   useEffect(() => {
     try {
-      const stored = typeof window !== 'undefined'
-        ? localStorage.getItem('scrapsetu_auth_user')
-        : null;
+      const stored =
+        typeof window !== "undefined"
+          ? localStorage.getItem("scrapsetu_auth_user")
+          : null;
 
       if (!stored) {
-        window.location.href = '/auth';
+        window.location.href = "/auth";
         return;
       }
 
       const user = JSON.parse(stored);
       setCurrentUser(user);
     } catch (e) {
-      window.location.href = '/auth';
+      window.location.href = "/auth";
     } finally {
       setIsLoading(false);
     }
@@ -147,16 +149,26 @@ export default function AdminWorkspace() {
 
   const handleSignOut = () => {
     try {
-      localStorage.removeItem('scrapsetu_auth_user');
+      localStorage.removeItem("scrapsetu_auth_user");
     } catch (e) {}
-    window.location.href = '/';
+    window.location.href = "/";
   };
 
   const handleApproveFacility = (id: string, name: string) => {
     setFacilities((prev) =>
-      prev.map((f) => (f.id === id ? { ...f, status: 'verified', lastInspection: '05 Sep 2026 (Verified)' } : f))
+      prev.map((f) =>
+        f.id === id
+          ? {
+              ...f,
+              status: "verified",
+              lastInspection: "05 Sep 2026 (Verified)",
+            }
+          : f,
+      ),
     );
-    setActionNotice(`Facility "${name}" has been approved and issued DPCC verified operational status.`);
+    setActionNotice(
+      `Facility "${name}" has been approved and issued DPCC verified operational status.`,
+    );
     setTimeout(() => setActionNotice(null), 4000);
   };
 
@@ -164,28 +176,34 @@ export default function AdminWorkspace() {
     return (
       <div
         style={{
-          minHeight: '100vh',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          backgroundColor: 'var(--bg-app, #F6F8F5)',
+          minHeight: "100vh",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          backgroundColor: "var(--bg-app, #F6F8F5)",
           fontFamily: "var(--font-sans, sans-serif)",
-          color: 'var(--text-primary, #0B1220)',
+          color: "var(--text-primary, #0B1220)",
         }}
       >
         <div
           style={{
             width: 34,
             height: 34,
-            border: '3px solid var(--border-subtle, #DCE5E0)',
-            borderTopColor: 'var(--brand-primary, #087F5B)',
-            borderRadius: '50%',
-            animation: 'spin 0.8s linear infinite',
-            marginBottom: '1rem',
+            border: "3px solid var(--border-subtle, #DCE5E0)",
+            borderTopColor: "var(--brand-primary, #087F5B)",
+            borderRadius: "50%",
+            animation: "spin 0.8s linear infinite",
+            marginBottom: "1rem",
           }}
         />
-        <span style={{ fontSize: '0.9rem', color: 'var(--text-secondary, #52606D)', fontWeight: 600 }}>
+        <span
+          style={{
+            fontSize: "0.9rem",
+            color: "var(--text-secondary, #52606D)",
+            fontWeight: 600,
+          }}
+        >
           Verifying administrative credentials...
         </span>
       </div>
@@ -193,28 +211,28 @@ export default function AdminWorkspace() {
   }
 
   // Strict Role Boundary: If not admin, provide clean restricted banner with navigation back
-  if (currentUser?.role !== 'admin') {
+  if (currentUser?.role !== "admin") {
     return (
       <div
         style={{
-          minHeight: '100vh',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          backgroundColor: 'var(--bg-app, #F6F8F5)',
-          padding: '2rem',
+          minHeight: "100vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          backgroundColor: "var(--bg-app, #F6F8F5)",
+          padding: "2rem",
           fontFamily: "var(--font-sans, sans-serif)",
         }}
       >
         <div
           style={{
             maxWidth: 480,
-            backgroundColor: '#FFFFFF',
+            backgroundColor: "#FFFFFF",
             borderRadius: 20,
-            border: '1px solid var(--border-subtle, #DCE5E0)',
-            padding: '2.5rem',
-            textAlign: 'center',
-            boxShadow: 'var(--shadow-md)',
+            border: "1px solid var(--border-subtle, #DCE5E0)",
+            padding: "2.5rem",
+            textAlign: "center",
+            boxShadow: "var(--shadow-md)",
           }}
         >
           <div
@@ -222,38 +240,61 @@ export default function AdminWorkspace() {
               width: 56,
               height: 56,
               borderRadius: 14,
-              backgroundColor: 'var(--danger-bg, #FEF2F2)',
-              color: 'var(--danger-text, #991B1B)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              margin: '0 auto 1.5rem',
+              backgroundColor: "var(--danger-bg, #FEF2F2)",
+              color: "var(--danger-text, #991B1B)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              margin: "0 auto 1.5rem",
             }}
           >
             <ShieldAlert size={28} />
           </div>
 
-          <h1 style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '0.75rem' }}>
+          <h1
+            style={{
+              fontSize: "1.4rem",
+              fontWeight: 800,
+              color: "var(--text-primary)",
+              marginBottom: "0.75rem",
+            }}
+          >
             Access Restricted
           </h1>
 
-          <p style={{ fontSize: '0.925rem', color: 'var(--text-secondary)', lineHeight: 1.6, marginBottom: '2rem' }}>
-            Your account is authenticated as <strong>{currentUser?.role === 'collector' ? 'Field Collector' : 'Recycler Partner'}</strong>. The Administrative Oversight Console is restricted to DPCC/CPCB platform regulators.
+          <p
+            style={{
+              fontSize: "0.925rem",
+              color: "var(--text-secondary)",
+              lineHeight: 1.6,
+              marginBottom: "2rem",
+            }}
+          >
+            Your account is authenticated as{" "}
+            <strong>
+              {currentUser?.role === "collector"
+                ? "Field Collector"
+                : "Recycler Partner"}
+            </strong>
+            . The Administrative Oversight Console is restricted to DPCC/CPCB
+            platform regulators.
           </p>
 
           <Link
-            href={currentUser?.role === 'collector' ? '/collector' : '/recycler'}
+            href={
+              currentUser?.role === "collector" ? "/collector" : "/recycler"
+            }
             style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '0.5rem',
-              padding: '0.75rem 1.5rem',
-              backgroundColor: 'var(--brand-primary, #087F5B)',
-              color: '#FFFFFF',
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "0.5rem",
+              padding: "0.75rem 1.5rem",
+              backgroundColor: "var(--brand-primary, #087F5B)",
+              color: "#FFFFFF",
               borderRadius: 12,
               fontWeight: 700,
-              fontSize: '0.9rem',
-              textDecoration: 'none',
+              fontSize: "0.9rem",
+              textDecoration: "none",
             }}
           >
             <ArrowLeft size={16} />
@@ -264,14 +305,18 @@ export default function AdminWorkspace() {
     );
   }
 
-  const pendingCount = facilities.filter((f) => f.status === 'pending').length;
+  const pendingCount = facilities.filter((f) => f.status === "pending").length;
 
   return (
     <AppShell
       role="admin"
       activeTab={activeTab}
       onSelectTab={setActiveTab}
-      currentUser={currentUser ? { name: currentUser.name, email: currentUser.email, role: 'admin' } : null}
+      currentUser={
+        currentUser
+          ? { name: currentUser.name, email: currentUser.email, role: "admin" }
+          : null
+      }
       onSignOut={handleSignOut}
     >
       <div className={styles.adminContainer}>
@@ -286,7 +331,8 @@ export default function AdminWorkspace() {
               </span>
             </div>
             <p className={styles.adminSubtitle}>
-              Regulatory governance, authorized facility registry, and cryptographic chain of custody for Delhi NCR circular economy.
+              Regulatory governance, authorized facility registry, and
+              cryptographic chain of custody for Delhi NCR circular economy.
             </p>
           </div>
 
@@ -295,7 +341,9 @@ export default function AdminWorkspace() {
               type="button"
               className={styles.complianceReportBtn}
               onClick={() => {
-                setActionNotice('EPR Compliance Audit Report exported successfully (PDF/CSV).');
+                setActionNotice(
+                  "EPR Compliance Audit Report exported successfully (PDF/CSV).",
+                );
                 setTimeout(() => setActionNotice(null), 4000);
               }}
             >
@@ -309,17 +357,17 @@ export default function AdminWorkspace() {
         {actionNotice && (
           <div
             style={{
-              padding: '0.85rem 1.25rem',
-              borderRadius: 'var(--radius-md)',
-              backgroundColor: 'var(--brand-tint)',
-              border: '1px solid var(--brand-soft)',
-              color: 'var(--brand-primary)',
-              fontSize: '0.875rem',
+              padding: "0.85rem 1.25rem",
+              borderRadius: "var(--radius-md)",
+              backgroundColor: "var(--brand-tint)",
+              border: "1px solid var(--brand-soft)",
+              color: "var(--brand-primary)",
+              fontSize: "0.875rem",
               fontWeight: 700,
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.65rem',
-              boxShadow: 'var(--shadow-sm)',
+              display: "flex",
+              alignItems: "center",
+              gap: "0.65rem",
+              boxShadow: "var(--shadow-sm)",
             }}
           >
             <CheckCircle2 size={18} />
@@ -337,7 +385,9 @@ export default function AdminWorkspace() {
               </div>
             </div>
             <div className={styles.statValue}>12</div>
-            <span className={styles.statSubtext}>✓ 11 Verified · 1 In Review</span>
+            <span className={styles.statSubtext}>
+              ✓ 11 Verified · 1 In Review
+            </span>
           </div>
 
           <div className={styles.statCard}>
@@ -370,115 +420,22 @@ export default function AdminWorkspace() {
               </div>
             </div>
             <div className={styles.statValue}>1,840 kg</div>
-            <span className={styles.statSubtext}>100% Cryptographically Traced</span>
-          </div>
-        </div>
-
-        {/* Technical Terminal Network Infrastructure Panel */}
-        <div className={styles.terminalPanel}>
-          <div className={styles.terminalLeft}>
-            <div className={styles.terminalDotPulse} />
-            <div className={styles.terminalInfo}>
-              <div className={styles.terminalTitleRow}>
-                <span className={styles.terminalTitle}>SCRAPSETU NETWORK</span>
-                <span className={styles.terminalClusterTag}>ONLINE</span>
-              </div>
-              <span className={styles.terminalDesc}>
-                Active lots: 184 · Verified facilities: 27 · Handover integrity: 100% SHA-256
-              </span>
-            </div>
-          </div>
-
-          <div className={styles.terminalMetrics}>
-            <div className={styles.termMetric}>
-              <span className={styles.termLabel}>SYSTEM LATENCY</span>
-              <span className={styles.termVal}>38 MS</span>
-            </div>
-            <div className={styles.termMetric}>
-              <span className={styles.termLabel}>EPR LOGS</span>
-              <span className={styles.termVal}>92 TODAY</span>
-            </div>
-            <div className={styles.termMetric}>
-              <span className={styles.termLabel}>SECURITY LEVEL</span>
-              <span className={styles.termVal}>DPCC-L3</span>
-            </div>
-          </div>
-        </div>
-
-        {/* 3 Clean Centered Section Switcher Cards */}
-        <div className={styles.sectionSwitcherContainer}>
-          <span className={styles.sectionSwitcherLabel}>Select Governance Module</span>
-
-          <div className={styles.sectionCardsGrid}>
-            <button
-              type="button"
-              className={`${styles.sectionCard} ${activeTab === 'facilities' ? styles.sectionCardActive : ''}`}
-              onClick={() => setActiveTab('facilities')}
-            >
-              <div className={styles.sectionCardHeader}>
-                <div className={styles.sectionIconBadge}>
-                  <Building2 size={18} />
-                </div>
-                {activeTab === 'facilities' && <span className={styles.activeSectionIndicator} />}
-              </div>
-              <div className={styles.sectionCardContent}>
-                <span className={styles.sectionCardTitle}>Facility Registry</span>
-                <span className={styles.sectionCardDesc}>
-                  DPCC authorized recycling units, CTO licenses & inspection status.
-                </span>
-              </div>
-            </button>
-
-            <button
-              type="button"
-              className={`${styles.sectionCard} ${activeTab === 'manifests' ? styles.sectionCardActive : ''}`}
-              onClick={() => setActiveTab('manifests')}
-            >
-              <div className={styles.sectionCardHeader}>
-                <div className={styles.sectionIconBadge}>
-                  <FileCheck2 size={18} />
-                </div>
-                {activeTab === 'manifests' && <span className={styles.activeSectionIndicator} />}
-              </div>
-              <div className={styles.sectionCardContent}>
-                <span className={styles.sectionCardTitle}>Audit Manifests</span>
-                <span className={styles.sectionCardDesc}>
-                  Immutable dual-signature handover ledger with cryptographic SHA-256 hashes.
-                </span>
-              </div>
-            </button>
-
-            <button
-              type="button"
-              className={`${styles.sectionCard} ${activeTab === 'verification' ? styles.sectionCardActive : ''}`}
-              onClick={() => setActiveTab('verification')}
-            >
-              <div className={styles.sectionCardHeader}>
-                <div className={styles.sectionIconBadge}>
-                  <Clock size={18} />
-                </div>
-                {activeTab === 'verification' ? (
-                  <span className={styles.activeSectionIndicator} />
-                ) : (
-                  <span className={styles.sectionCardTag}>{pendingCount} PENDING</span>
-                )}
-              </div>
-              <div className={styles.sectionCardContent}>
-                <span className={styles.sectionCardTitle}>Verification Queue</span>
-                <span className={styles.sectionCardDesc}>
-                  Pending facility intake applications & priority compliance inspections.
-                </span>
-              </div>
-            </button>
+            <span className={styles.statSubtext}>
+              100% Cryptographically Traced
+            </span>
           </div>
         </div>
 
         {/* Tab 1: Authorized Facilities Registry */}
-        {activeTab === 'facilities' && (
+        {activeTab === "facilities" && (
           <div className={styles.tableCard}>
             <div className={styles.tableHeaderBar}>
-              <h2 className={styles.tableCardTitle}>DPCC Registered Recycling Units</h2>
-              <span className={styles.tableCardCount}>{facilities.length} Facilities Listed</span>
+              <h2 className={styles.tableCardTitle}>
+                DPCC Registered Recycling Units
+              </h2>
+              <span className={styles.tableCardCount}>
+                {facilities.length} Facilities Listed
+              </span>
             </div>
 
             <div className={styles.tableWrapper}>
@@ -504,7 +461,7 @@ export default function AdminWorkspace() {
                       </td>
                       <td>{fac.category}</td>
                       <td>
-                        {fac.status === 'verified' ? (
+                        {fac.status === "verified" ? (
                           <span className={styles.statusVerified}>
                             <CheckCircle2 size={12} />
                             <span>Verified</span>
@@ -518,11 +475,13 @@ export default function AdminWorkspace() {
                       </td>
                       <td>{fac.lastInspection}</td>
                       <td>
-                        {fac.status === 'pending' ? (
+                        {fac.status === "pending" ? (
                           <button
                             type="button"
                             className={styles.approveBtn}
-                            onClick={() => handleApproveFacility(fac.id, fac.name)}
+                            onClick={() =>
+                              handleApproveFacility(fac.id, fac.name)
+                            }
                           >
                             <Check size={13} />
                             <span>Approve</span>
@@ -532,7 +491,9 @@ export default function AdminWorkspace() {
                             type="button"
                             className={styles.inspectBtn}
                             onClick={() => {
-                              setActionNotice(`Audit logs for ${fac.name} loaded.`);
+                              setActionNotice(
+                                `Audit logs for ${fac.name} loaded.`,
+                              );
                               setTimeout(() => setActionNotice(null), 3000);
                             }}
                           >
@@ -550,11 +511,15 @@ export default function AdminWorkspace() {
         )}
 
         {/* Tab 2: Audit Manifests */}
-        {activeTab === 'manifests' && (
+        {activeTab === "manifests" && (
           <div className={styles.tableCard}>
             <div className={styles.tableHeaderBar}>
-              <h2 className={styles.tableCardTitle}>Immutable Chain of Custody Manifests</h2>
-              <span className={styles.tableCardCount}>SHA-256 Telemetry Logged</span>
+              <h2 className={styles.tableCardTitle}>
+                Immutable Chain of Custody Manifests
+              </h2>
+              <span className={styles.tableCardCount}>
+                SHA-256 Telemetry Logged
+              </span>
             </div>
 
             <div className={styles.tableWrapper}>
@@ -579,12 +544,19 @@ export default function AdminWorkspace() {
                       <td>{manifest.facilityName}</td>
                       <td>{manifest.material}</td>
                       <td>
-                        <span style={{ fontWeight: 700, color: 'var(--text-primary)' }}>
+                        <span
+                          style={{
+                            fontWeight: 700,
+                            color: "var(--text-primary)",
+                          }}
+                        >
                           {manifest.weight}
                         </span>
                       </td>
                       <td>
-                        <span className={styles.monoCode}>{manifest.qrHash}</span>
+                        <span className={styles.monoCode}>
+                          {manifest.qrHash}
+                        </span>
                       </td>
                       <td>{manifest.timestamp}</td>
                       <td>
@@ -602,11 +574,15 @@ export default function AdminWorkspace() {
         )}
 
         {/* Tab 3: Verification Queue */}
-        {activeTab === 'verification' && (
+        {activeTab === "verification" && (
           <div className={styles.tableCard}>
             <div className={styles.tableHeaderBar}>
-              <h2 className={styles.tableCardTitle}>Pending Facility Verification Queue</h2>
-              <span className={styles.tableCardCount}>{pendingCount} Units Pending</span>
+              <h2 className={styles.tableCardTitle}>
+                Pending Facility Verification Queue
+              </h2>
+              <span className={styles.tableCardCount}>
+                {pendingCount} Units Pending
+              </span>
             </div>
 
             <div className={styles.tableWrapper}>
@@ -622,37 +598,58 @@ export default function AdminWorkspace() {
                   </tr>
                 </thead>
                 <tbody>
-                  {facilities.filter((f) => f.status === 'pending').map((fac) => (
-                    <tr key={fac.id}>
-                      <td className={styles.primaryCell}>{fac.name}</td>
-                      <td>{fac.region}</td>
-                      <td>
-                        <span className={styles.monoCode}>{fac.dpccRegId}</span>
-                      </td>
-                      <td>{fac.category}</td>
-                      <td>
-                        <span className={styles.statusPending}>
-                          <AlertCircle size={12} />
-                          <span>HIGH PRIORITY</span>
-                        </span>
-                      </td>
-                      <td>
-                        <button
-                          type="button"
-                          className={styles.approveBtn}
-                          onClick={() => handleApproveFacility(fac.id, fac.name)}
-                        >
-                          <Check size={13} />
-                          <span>Issue DPCC License</span>
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                  {facilities.filter((f) => f.status === 'pending').length === 0 && (
+                  {facilities
+                    .filter((f) => f.status === "pending")
+                    .map((fac) => (
+                      <tr key={fac.id}>
+                        <td className={styles.primaryCell}>{fac.name}</td>
+                        <td>{fac.region}</td>
+                        <td>
+                          <span className={styles.monoCode}>
+                            {fac.dpccRegId}
+                          </span>
+                        </td>
+                        <td>{fac.category}</td>
+                        <td>
+                          <span className={styles.statusPending}>
+                            <AlertCircle size={12} />
+                            <span>HIGH PRIORITY</span>
+                          </span>
+                        </td>
+                        <td>
+                          <button
+                            type="button"
+                            className={styles.approveBtn}
+                            onClick={() =>
+                              handleApproveFacility(fac.id, fac.name)
+                            }
+                          >
+                            <Check size={13} />
+                            <span>Issue DPCC License</span>
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  {facilities.filter((f) => f.status === "pending").length ===
+                    0 && (
                     <tr>
-                      <td colSpan={6} style={{ textAlign: 'center', padding: '3rem 1rem', color: 'var(--text-muted)' }}>
-                        <CheckCircle2 size={28} color="var(--brand-primary)" style={{ margin: '0 auto 0.5rem', display: 'block' }} />
-                        <span style={{ fontWeight: 600 }}>All facility verification queues are cleared and compliant!</span>
+                      <td
+                        colSpan={6}
+                        style={{
+                          textAlign: "center",
+                          padding: "3rem 1rem",
+                          color: "var(--text-muted)",
+                        }}
+                      >
+                        <CheckCircle2
+                          size={28}
+                          color="var(--brand-primary)"
+                          style={{ margin: "0 auto 0.5rem", display: "block" }}
+                        />
+                        <span style={{ fontWeight: 600 }}>
+                          All facility verification queues are cleared and
+                          compliant!
+                        </span>
                       </td>
                     </tr>
                   )}

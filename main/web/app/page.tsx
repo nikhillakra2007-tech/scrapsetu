@@ -1,12 +1,10 @@
-import type { Metadata } from 'next';
-import LandingPage from '@/components/landing/LandingPage';
-
+import type { Metadata } from "next";
+import LandingPage from "@/components/landing/LandingPage";
 export const metadata: Metadata = {
-  title: 'ScrapSetu — Bridging Informal Collectors & Authorized Recyclers',
+  title: "ScrapSetu — Nothing wasted. Everything worth more.",
   description:
-    'Transparent price discovery, AI-assisted scrap classification, and traceable digital handovers connecting grassroots collectors with CPCB/DPCC authorized recyclers.',
+    "Connecting local scrap collectors with responsible recyclers. Clearer prices, safer handling, and traceable material handovers.",
 };
-
 export default function Page() {
   return <LandingPage />;
 }

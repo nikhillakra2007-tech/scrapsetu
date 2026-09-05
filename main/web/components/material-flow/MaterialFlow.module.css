@@ -1,0 +1,253 @@
+.diagram {
+  width: 100%;
+  color: #a0b890;
+  font-family: var(--font-sans);
+}
+.topline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 9px;
+  letter-spacing: 1.8px;
+  border-bottom: 1px solid #a0b89030;
+  padding-bottom: 17px;
+}
+.topline > span:last-child {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #7f9972;
+}
+.cycle {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  max-width: 520px;
+  margin: 12px auto;
+}
+.track {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  color: #8da47840;
+}
+.movingLine {
+  animation: circulate 24s linear infinite;
+}
+.center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  gap: 15px;
+}
+.center > span {
+  font-size: clamp(25px, 3vw, 43px);
+  line-height: 1.12;
+  letter-spacing: -1.8px;
+  color: #f1f4e7;
+  text-align: center;
+  font-weight: 400;
+}
+.center em {
+  font-family: Georgia, serif;
+  font-weight: 400;
+  color: #d7ef88;
+}
+.center > small {
+  font-size: 8px;
+  letter-spacing: 2px;
+  margin-top: 3px;
+  color: #8da478;
+}
+.node {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 18px;
+  border: 1px solid #557343;
+  border-radius: 8px;
+  background: #153a2a;
+  color: #c6d5b7;
+  font-size: 13px;
+  cursor: pointer;
+  transition:
+    background 0.3s,
+    border-color 0.3s,
+    box-shadow 0.3s;
+  z-index: 1;
+  min-width: 143px;
+}
+.number {
+  font-size: 9px;
+  color: #8eaa75;
+  align-self: flex-start;
+  margin-right: 1px;
+}
+.node0 {
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.node1 {
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+}
+.node2 {
+  bottom: 10%;
+  left: 50%;
+  transform: translate(-50%, 50%);
+}
+.node3 {
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+.node.selected,
+.node:hover {
+  background: #d7ef88;
+  color: #193b24;
+  border-color: #d7ef88;
+  box-shadow: 0 0 35px #d7ef8810;
+}
+.selected .number {
+  color: #5b753a;
+}
+.node:focus-visible {
+  outline: 3px solid #e7f5c6;
+  outline-offset: 5px;
+}
+.description {
+  border-top: 1px solid #a0b89030;
+  padding-top: 20px;
+  display: flex;
+  gap: 19px;
+  min-height: 91px;
+}
+.descriptionNumber {
+  font-size: 35px;
+  font-family: Georgia, serif;
+  color: #738f60;
+  line-height: 1;
+}
+.description strong {
+  font-size: 14px;
+  font-weight: 400;
+  color: #e1e9d6;
+}
+.description p {
+  font-size: 12px;
+  line-height: 1.7;
+  margin-top: 5px;
+  color: #9caf8e;
+  max-width: 335px;
+}
+.compact .topline {
+  display: none;
+}
+.compact .description {
+  display: none;
+}
+.compact .cycle {
+  max-width: 400px;
+}
+.compact .node {
+  min-width: 112px;
+  padding: 11px;
+  font-size: 11px;
+}
+.compact .node svg {
+  width: 18px;
+}
+.compact .center > span {
+  font-size: 31px;
+}
+.compact .number {
+  display: none;
+}
+.compact .center > small {
+  font-size: 7px;
+}
+.compact .center {
+  gap: 10px;
+}
+@keyframes circulate {
+  to {
+    stroke-dashoffset: -580;
+  }
+}
+@media (max-width: 700px) {
+  .node {
+    min-width: 114px;
+    padding: 12px 10px;
+    font-size: 11px;
+    gap: 7px;
+  }
+  .node svg {
+    width: 18px;
+  }
+  .number {
+    font-size: 8px;
+  }
+  .center > span {
+    font-size: 32px;
+  }
+  .center > small {
+    font-size: 7px;
+    letter-spacing: 1.5px;
+  }
+  .center {
+    gap: 10px;
+  }
+  .cycle {
+    max-width: 430px;
+  }
+  .topline {
+    font-size: 8px;
+    letter-spacing: 1.3px;
+  }
+  .description p {
+    font-size: 11px;
+  }
+  .description {
+    min-height: 95px;
+  }
+  .node1 {
+    right: -2%;
+  }
+  .node3 {
+    left: -2%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .movingLine {
+    animation: none;
+  }
+  .node {
+    transition: none;
+  }
+}
+@media (max-width: 700px) {
+  .node {
+    min-width: 92px;
+    padding: 11px 9px;
+    font-size: 10px;
+    gap: 6px;
+  }
+  .node svg {
+    width: 16px;
+  }
+  .number {
+    display: none;
+  }
+  .center > span {
+    font-size: 28px;
+  }
+}

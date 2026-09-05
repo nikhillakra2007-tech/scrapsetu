@@ -707,3 +707,7 @@
     flex-wrap: wrap;
   }
 }
+.collectorContainer :global([class*="drop-segment-"]) { animation: none; }
+.metricValueRow { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
+.metricValue { white-space: nowrap; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.metricSubtext { margin: 0; }

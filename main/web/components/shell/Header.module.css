@@ -665,3 +665,23 @@
     display: none;
   }
 }
+/* Stable header alignment shared with the public homepage. */
+.navInner { max-width: none; padding-left: 5%; padding-right: 5%; display: grid; grid-template-columns: 1fr auto 1fr; }
+.topNav { height: 88px; }
+.rightActions { justify-self: end; }
+.roleSubtextPill { display: none; }
+.navTabs { overflow: visible; }
+.tabBtn { font-weight: 500; min-width: 115px; transition: background-color .2s, color .2s; }
+.tabBtnActive { font-weight: 500; }
+.tabIcon { display: none; }
+.brandName { font-size: 25px; font-weight: 600; }
+@media(max-width:1150px) {
+ .topNav { height: auto; min-height: 116px; }
+ .navInner { grid-template-columns: 1fr auto; }
+ .navTabs { grid-column: 1 / -1; width: 100%; display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); }
+ .tabBtn { min-width: 0; padding: 11px 4px; font-size: 11px; }
+ .countBadge { display: none; }
+}
+.brandDot { font-size: 12px; align-self: flex-start; margin-left: 8px; letter-spacing: 0; }
+.navBrand { gap: 9px; }
+.brandIconWrap { width: 27px; }

@@ -144,32 +144,18 @@ export default function ImageUploader({
         </div>
       )}
 
-      {/* Preset Quick Selectors */}
-      <div className={styles.presetGrid}>
-        {SAMPLE_PRESETS.map((p) => {
-          const Icon = p.icon;
-          const isSelected = activePreset === p.id && !selectedImageFile;
-          return (
-            <button
-              key={p.id}
-              type="button"
-              className={`${styles.presetBtn} ${isSelected ? styles.presetBtnActive : ''}`}
-              onClick={() => onSelectPreset(p)}
-            >
-              <Icon size={18} className={styles.presetIcon} />
-              <span className={styles.presetLabel}>{p.label}</span>
-              <span className={styles.presetHint}>{p.rateHint}</span>
-            </button>
-          );
-        })}
-      </div>
-
       {/* Interactive Dropzone */}
       <div
         className={`${styles.dropzone} ${isDragging ? styles.dropzoneDragging : ''} ${
           selectedImageBase64 ? styles.dropzoneHasImage : ''
         }`}
         onClick={() => fileInputRef.current?.click()}
+        onKeyDown={(event) => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            fileInputRef.current?.click();
+          }
+        }}
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
@@ -216,19 +202,10 @@ export default function ImageUploader({
             </div>
             <div>
               <span className={styles.dropzonePrimaryText}>
-                {isDragging ? 'Drop photo here to inspect' : 'Click to browse or press Ctrl+V / ⌘+V to paste'}
+                {isDragging ? 'Drop your photo here' : 'Add a scrap photo'}
               </span>
               <span className={styles.dropzoneSubText}>
-                Supports phone camera photos, screenshots, JPEG, PNG, WEBP
-              </span>
-            </div>
-            <div className={styles.badgeRow}>
-              <span className={styles.featureBadge}>
-                <Clipboard size={12} />
-                <span>Clipboard Paste</span>
-              </span>
-              <span className={styles.featureBadge}>
-                <span>Drag & Drop</span>
+                Browse, drag a file, or paste · JPG, PNG, WebP
               </span>
             </div>
           </div>

@@ -79,12 +79,10 @@ export default function AiInspectionCard({
   if (!aiResult && !isAnalyzing) {
     return (
       <div className={styles.emptyCardState}>
-        <div className={styles.emptyIconCircle}>
-          <Cpu size={28} className={styles.emptyIcon} />
-        </div>
-        <h4 className={styles.emptyTitle}>Awaiting Scrap Inspection</h4>
+        <span className={styles.estimatePlaceholder} aria-hidden="true">₹ —</span>
+        <h4 className={styles.emptyTitle}>Your estimate will appear here</h4>
         <p className={styles.emptyDescription}>
-          Click &ldquo;Inspect Scrap with Gemini Vision AI&rdquo; or paste an image to view CPCB category classification, hazard flags, and fair Delhi market valuation.
+          Add your material details, then choose Inspect material.
         </p>
       </div>
     );
@@ -95,9 +93,9 @@ export default function AiInspectionCard({
     return (
       <div className={styles.analyzingCardState}>
         <div className={styles.analyzingSpinner} />
-        <h4 className={styles.analyzingTitle}>Gemini 2.5 Flash Vision Pipeline Running</h4>
+        <h4 className={styles.analyzingTitle}>Inspecting your material…</h4>
         <p className={styles.analyzingDescription}>
-          Analyzing visual condition, identifying electronic IC components, and checking Delhi DPCC benchmark rates...
+          Checking your material details and estimate.
         </p>
       </div>
     );
@@ -106,7 +104,12 @@ export default function AiInspectionCard({
   if (!aiResult) return null;
 
   return (
-    <div className={styles.resultContainer}>
+    <div className={styles.resultContainer} aria-live="polite">
+      <div className={styles.estimateLead}>
+        <span>Estimated value</span>
+        <strong>₹{aiResult.estimated_value.toLocaleString('en-IN')}</strong>
+        <span>{weightKg} kg × ₹{aiResult.suggested_rate_per_kg}/kg</span>
+      </div>
       {/* Category Header with Hindi Audio Action */}
       <div className={styles.resultHeader}>
         <div>
@@ -151,6 +154,7 @@ export default function AiInspectionCard({
         </div>
       )}
 
+      <details className={styles.inspectionDetails}><summary>Inspection details</summary>
       {/* Visual Diagnostic Notes */}
       <div className={styles.notesBox}>
         <strong className={styles.notesHeading}>Visual Diagnostic: </strong>
@@ -171,30 +175,13 @@ export default function AiInspectionCard({
         </div>
       )}
 
-      {/* Fair Valuation Metrics Grid */}
-      <div className={styles.valuationGrid}>
-        <div className={styles.metricColumn}>
-          <span className={styles.metricLabel}>Benchmark Rate</span>
-          <div className={styles.metricValue}>₹{aiResult.suggested_rate_per_kg}/kg</div>
-        </div>
-        <div className={styles.metricColumn}>
-          <span className={styles.metricLabel}>Declared Weight</span>
-          <div className={styles.metricValue}>{weightKg} kg</div>
-        </div>
-        <div className={`${styles.metricColumn} ${styles.totalColumn}`}>
-          <span className={styles.totalLabel}>Total Valuation</span>
-          <div className={styles.totalValue}>
-            ₹{aiResult.estimated_value?.toLocaleString('en-IN') || (weightKg * aiResult.suggested_rate_per_kg).toLocaleString('en-IN')}
-          </div>
-        </div>
-      </div>
-
       {/* Regulatory & Model Footer */}
       <div className={styles.regulatoryMeta}>
         <span>CPCB EPR: {aiResult.epr_schedule1_hint || 'Schedule I'}</span>
         <span>Vision Engine: {aiResult.ai_model_used}</span>
       </div>
 
+      </details>
       {/* Confirmation & Post Action */}
       {!submittedLotCode ? (
         <button
@@ -203,7 +190,7 @@ export default function AiInspectionCard({
           className={styles.submitLotBtn}
         >
           <CheckCircle2 size={18} />
-          <span>Confirm & Post Lot to Recycler Match Queue</span>
+          <span>Confirm & find recycler</span>
         </button>
       ) : (
         <div className={styles.successBox}>

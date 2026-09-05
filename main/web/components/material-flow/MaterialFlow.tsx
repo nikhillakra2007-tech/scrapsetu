@@ -39,12 +39,6 @@ export default function MaterialFlow({
       className={`${styles.diagram} ${compact ? styles.compact : ""}`}
       aria-label="Explore the four stages of the material cycle"
     >
-      <div className={styles.topline}>
-        <span>THE MATERIAL CYCLE</span>
-        <span>
-          DESIGNED TO GO ON <ArrowUpRight size={12} />
-        </span>
-      </div>
       <div className={styles.cycle}>
         <svg
           className={styles.track}

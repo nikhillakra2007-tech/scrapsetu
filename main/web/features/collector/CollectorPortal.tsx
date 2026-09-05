@@ -407,6 +407,10 @@ export default function CollectorPortal({
 
   // Run Gemini Multimodal Vision AI Inspection (Dynamic Multi-Scrap Classification)
   const handleRunAiInspection = async () => {
+    if (!Number.isFinite(weightKg) || weightKg <= 0) {
+      setApiNotice('Enter a weight greater than zero.');
+      return;
+    }
     setIsAnalyzing(true);
     setApiNotice(null);
     setAiResult(null);
@@ -456,13 +460,14 @@ export default function CollectorPortal({
               estimated_value: (parsed.suggested_rate_per_kg || 300) * weightKg,
               ai_model_used: 'Gemini 2.5 Flash (Live Google API)',
             });
-            setApiNotice('✨ Live Gemini 2.5 Flash Vision classification successful!');
+            setApiNotice('Photo inspection complete.');
             setIsAnalyzing(false);
             return;
           }
         }
+        throw new Error('Inspection unavailable');
       } catch (geminiErr) {
-        console.warn('Live Gemini API error, using dynamic grounded engine:', geminiErr);
+        setApiNotice('Photo inspection could not complete. Showing a catalogue estimate instead.');
       }
     }
 
@@ -551,14 +556,14 @@ export default function CollectorPortal({
       {/* Page Header Bar */}
       <div className={`${styles.pageHeader} drop-segment-1`}>
         <div>
-          <h2 className={styles.pageTitle}>Collector AI Scrap Scanner</h2>
+          <h2 className={styles.pageTitle}>Scan your scrap</h2>
           <p className={styles.pageSubtitle}>
-            Multimodal visual inspection & real-time Delhi scrap valuation for informal collectors.
+            Add a photo. Check the value. Find a recycler.
           </p>
         </div>
 
         {/* Action Controls & Voice Assistant Trigger */}
-        <div className={styles.headerControls}>
+        <details className={styles.scannerOptions}><summary>Scanner options</summary><div className={styles.headerControls}>
           {/* Interactive Voice Assistant Button */}
           <button
             type="button"
@@ -567,7 +572,7 @@ export default function CollectorPortal({
             title="Speak your scrap details in Hindi or English"
           >
             {isListening ? <MicOff size={16} /> : <Mic size={16} />}
-            <span>{isListening ? 'Listening...' : 'बोलकर बताएं 🎙️'}</span>
+            <span>{isListening ? 'Listening...' : 'बोलकर बताएं'}</span>
           </button>
 
           {/* Optional Gemini Live API Key button */}
@@ -577,8 +582,7 @@ export default function CollectorPortal({
             className={styles.apiKeyToggleBtn}
             title="Configure optional Google Gemini API Key"
           >
-            <Key size={14} />
-            <span>{geminiApiKey ? 'Live API Key Connected' : 'Connect Gemini API'}</span>
+            <span>{geminiApiKey ? 'AI connected' : 'AI settings'}</span>
           </button>
 
           {/* Offline Outbox Simulation Button */}
@@ -596,7 +600,7 @@ export default function CollectorPortal({
               {offlineOutboxCount} Queued
             </span>
           )}
-        </div>
+        </div></details>
       </div>
 
       {/* Voice Assistant Live Transcript Banner */}
@@ -631,45 +635,37 @@ export default function CollectorPortal({
             </button>
           </div>
           <span className={styles.apiKeyHint}>
-            Optional: Calls Google Gemini 2.5 Flash live. Without a key, our grounded Delhi pilot engine classifies materials dynamically.
+            Connect a key for photo analysis. Without a key, estimates use the selected material and pilot rates.
           </span>
         </div>
       )}
-
-      {/* Category Quick Override Pills (Ensures instant inspection of any material!) */}
-      <div className={`${styles.categoryPillsSection} drop-segment-2`}>
-        <span className={styles.pillsHeading}>Classify Material:</span>
-        <div className={styles.pillsScrollRow}>
-          {Object.entries(CATEGORY_PROFILES).map(([key, prof]) => (
-            <button
-              key={key}
-              type="button"
-              className={`${styles.categoryPill} ${detectedCategoryKey === key ? styles.categoryPillActive : ''}`}
-              onClick={() => {
-                setDetectedCategoryKey(key);
-                setActivePreset(key);
-                setAiResult(null);
-                setSubmittedLotCode(null);
-              }}
-            >
-              <span className={styles.pillCode}>{prof.parent_code}</span>
-              <span className={styles.pillName}>{prof.sub_name.split('/')[0]}</span>
-              <span className={styles.pillRate}>₹{prof.defaultRate}/kg</span>
-            </button>
-          ))}
-        </div>
-      </div>
 
       {/* 2-Column Work Grid */}
       <div className={styles.workGrid}>
         {/* Left Column: Photograph Capture & Inputs */}
         <div className={`${styles.card} drop-segment-3`}>
           <div className={styles.cardHeader}>
-            <h3 className={styles.cardTitle}>1. Scrap Photograph & Weight</h3>
+            <h3 className={styles.cardTitle}>01 — Your material</h3>
             <p className={styles.cardSubtitle}>
-              Paste a screenshot, pick a sample, or upload an image from your scale.
+              Upload a photo or add your material details.
             </p>
           </div>
+
+      <div className={`${styles.categoryPillsSection} drop-segment-2`}>
+        <label className={styles.pillsHeading} htmlFor="material-category">Material</label>
+        <select id="material-category" className={styles.materialSelect} value={detectedCategoryKey} disabled={isAnalyzing}
+          onChange={(event) => {
+            const key = event.target.value;
+            setDetectedCategoryKey(key);
+            setActivePreset(key);
+            setAiResult(null);
+            setSubmittedLotCode(null);
+          }}>
+          {Object.entries(CATEGORY_PROFILES).map(([key, prof]) => (
+            <option key={key} value={key}>{prof.parent_name} · ₹{prof.defaultRate}/kg</option>
+          ))}
+        </select>
+      </div>
 
           <ImageUploader
             selectedImageBase64={selectedImageBase64}
@@ -683,7 +679,7 @@ export default function CollectorPortal({
           <div className={styles.formRow}>
             <WeightInput
               value={weightKg}
-              onChange={setWeightKg}
+              onChange={(value) => { setWeightKg(value); setAiResult(null); setSubmittedLotCode(null); }}
               disabled={isAnalyzing}
             />
             <LocationSelector
@@ -696,24 +692,23 @@ export default function CollectorPortal({
           <button
             type="button"
             onClick={handleRunAiInspection}
-            disabled={isAnalyzing}
+            disabled={isAnalyzing || !Number.isFinite(weightKg) || weightKg <= 0}
             className={styles.inspectBtn}
           >
             {isAnalyzing ? (
               <>
                 <RefreshCw size={18} className="spin-animation" />
-                <span>Gemini 2.5 Flash Inspecting Scrap...</span>
+                <span>Inspecting material…</span>
               </>
             ) : (
               <>
-                <Sparkles size={18} />
-                <span>Inspect Scrap with Gemini Vision AI</span>
+                <span>Inspect material</span>
               </>
             )}
           </button>
 
           {apiNotice && (
-            <div className={styles.apiNotice}>
+            <div className={styles.apiNotice} role="status">
               {apiNotice}
             </div>
           )}
@@ -722,9 +717,9 @@ export default function CollectorPortal({
         {/* Right Column: AI Diagnostic & Valuation Result */}
         <div className={`${styles.card} drop-segment-4`}>
           <div className={styles.cardHeader}>
-            <h3 className={styles.cardTitle}>2. Diagnostic & Valuation Result</h3>
+            <h3 className={styles.cardTitle}>02 — Your estimate</h3>
             <p className={styles.cardSubtitle}>
-              CPCB classification, hazard advisory, and instant fair-price calculation.
+              Material value and safe handling, together.
             </p>
           </div>
 

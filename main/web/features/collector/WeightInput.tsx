@@ -19,7 +19,7 @@ export default function WeightInput({ value, onChange, disabled }: WeightInputPr
         <input
           id="collector-weight"
           type="number"
-          step="0.5"
+          step="any"
           min="0.1"
           value={value || ''}
           onChange={(e) => onChange(parseFloat(e.target.value) || 0)}
@@ -31,7 +31,7 @@ export default function WeightInput({ value, onChange, disabled }: WeightInputPr
         <span className={styles.weightUnit}>KG</span>
       </div>
       <span className={styles.fieldHint}>
-        Physical scale weight measured by you at collection point
+        Physical scale weight
       </span>
     </div>
   );

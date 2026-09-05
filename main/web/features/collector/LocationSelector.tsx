@@ -37,7 +37,7 @@ export default function LocationSelector({ value, onChange, disabled }: Location
         ))}
       </select>
       <span className={styles.fieldHint}>
-        Matched against authorized recyclers within DPCC proximity
+        Recycler matching location
       </span>
     </div>
   );

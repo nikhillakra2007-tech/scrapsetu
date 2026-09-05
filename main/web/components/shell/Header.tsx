@@ -170,10 +170,10 @@ export default function Header({
         <div className={styles.brandGroup}>
           <Link href="/" className={styles.navBrand} title="Return to Public Homepage">
             <div className={styles.brandIconWrap}>
-              <Recycle size={18} strokeWidth={2.4} />
+              <Recycle size={27} strokeWidth={1.7} />
             </div>
             <span className={styles.brandName}>
-              ScrapSetu<span className={styles.brandDot}>.</span>
+              ScrapSetu<span className={styles.brandDot}>®</span>
             </span>
           </Link>
 

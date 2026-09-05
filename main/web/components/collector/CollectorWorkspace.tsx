@@ -257,9 +257,7 @@ export default function CollectorWorkspace() {
               </span>
             </div>
             <p className={styles.opSubtitle}>
-              Scan scrap materials with multimodal AI vision, check transparent
-              benchmark prices, and dispatch verified lots directly to licensed
-              facilities.
+              Manage your materials, estimates, and recycler handovers.
             </p>
           </div>
 
@@ -270,7 +268,7 @@ export default function CollectorWorkspace() {
               onClick={() => setIsCreateModalOpen(true)}
             >
               <Plus size={16} />
-              <span>+ Create New Lot</span>
+              <span>Create New Lot</span>
             </button>
           </div>
         </div>
@@ -323,10 +321,9 @@ export default function CollectorWorkspace() {
             </div>
             <div className={styles.metricValueRow}>
               <span className={styles.metricValue}>
-                {matchedLots.filter((m) => m.status === "accepted").length || 2}{" "}
-                Ready
+                {matchedLots.filter((m) => m.status === "accepted").length}
               </span>
-              <span className={styles.metricSubtext}>QR manifest prepared</span>
+              <span className={styles.metricSubtext}>Lots ready</span>
             </div>
           </div>
 

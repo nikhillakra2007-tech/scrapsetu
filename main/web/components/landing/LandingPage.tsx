@@ -125,9 +125,6 @@ export default function LandingPage() {
           <section className={styles.hero}>
 
             <div className={styles.heroCopy}>
-              <div className={styles.eyebrow}>
-                <span className={styles.dot} /> A BETTER WAY TO BEGIN AGAIN
-              </div>
               <h1>
                 Nothing wasted.
                 <br />
@@ -207,7 +204,6 @@ export default function LandingPage() {
           </section>
           <section id="materials" className={styles.materialSection}>
             <div className={styles.materialIntro} data-reveal>
-              <span className={styles.label}>02 / VALUE, OUT IN THE OPEN</span>
               <h2>
                 Old materials.
                 <br />
@@ -279,28 +275,28 @@ export default function LandingPage() {
             </div>
           </section>
           <section id="our-purpose" className={styles.purpose}>
-            <div className={styles.manifesto} data-reveal>
-              <span>A CHANGE OF PERSPECTIVE</span>
-              <p>
-                Waste is a<br />
-                material
-                <br />
-                in the{" "}
-                <em>
-                  wrong
-                  <br />
-                  place.
-                </em>
-              </p>
-              <div>
-                <ArrowUpRight size={43} strokeWidth={1} />
-                <span>LET’S FIND IT A BETTER ONE.</span>
-              </div>
-            </div>
+            <figure className={styles.recoveryVisual} data-reveal aria-label="Discarded circuit boards become recovered copper, then useful materials again">
+              <svg viewBox="0 0 480 480" role="img" aria-label="Circuit board to copper to a new material">
+                <defs><pattern id="board-grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M0 12H24M12 0V24" fill="none" stroke="#b3c59d" strokeWidth="0.5" /></pattern></defs>
+                <circle cx="240" cy="240" r="176" fill="none" stroke="#adbc98" strokeDasharray="3 9" />
+                <g transform="translate(88 70) rotate(-12 100 80)">
+                  <rect width="190" height="140" rx="12" fill="#214d38" />
+                  <rect x="10" y="10" width="170" height="120" rx="6" fill="url(#board-grid)" />
+                  <rect x="62" y="37" width="68" height="66" rx="5" fill="#dce8c9" />
+                  <path d="M72 47H120V93H72Z" fill="#315b42" />
+                  <path d="M20 118H170" stroke="#d8c17a" strokeWidth="8" strokeDasharray="4 4" />
+                </g>
+                <path d="M319 145Q392 180 350 263" fill="none" stroke="#50784f" strokeWidth="2" />
+                <path d="M338 250L348 270L367 257" fill="none" stroke="#50784f" strokeWidth="2" />
+                <g transform="translate(265 282) rotate(-16)">{[0, 1, 2, 3, 4].map(i => <rect key={i} x={i * 17} width="12" height="96" rx="6" fill={i % 2 ? '#b78355' : '#ce9e6f'} />)}</g>
+                <path d="M248 370Q126 385 112 259" fill="none" stroke="#50784f" strokeWidth="2" />
+                <path d="M100 275L111 254L127 270" fill="none" stroke="#50784f" strokeWidth="2" />
+                <circle cx="134" cy="305" r="31" fill="#d2dfb9" />
+                <path d="M124 318Q119 292 147 289Q150 314 124 318ZM125 317L142 296" fill="none" stroke="#4c7247" strokeWidth="2" />
+              </svg>
+              <figcaption>Recovered. Ready for what’s next.</figcaption>
+            </figure>
             <div className={styles.purposeCopy} data-reveal>
-              <span className={styles.label}>
-                03 / PROGRESS IS A COLLECTIVE EFFORT
-              </span>
               <h2>
                 A small bridge.
                 <br />A lasting <em>difference.</em>

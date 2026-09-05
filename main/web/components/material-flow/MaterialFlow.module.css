@@ -251,3 +251,17 @@
     font-size: 28px;
   }
 }
+/* Keep the interactive cycle compact enough for the opening screen. */
+@media (max-width:700px) {
+ .description { display: none; }
+ .center > span { font-size: 23px; }
+ .center > svg, .center > small { display: none; }
+ .node { min-width: 75px; padding: 9px 7px; }
+ .node svg { display: none; }
+}
+.diagram { container-type: inline-size; }
+.node { min-width: 0; width: 27%; padding: 12px 6px; gap: 5px; font-size: clamp(10px, 2.6cqw, 13px); }
+.node svg { width: 17px; }
+.center > span { font-size: clamp(22px, 7cqw, 38px); letter-spacing: -1px; }
+.center em { letter-spacing: -1px; }
+@media (min-width:701px) and (max-height:760px) { .center > small { display: none; } .description { min-height: 65px; padding-top: 12px; } }

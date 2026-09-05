@@ -1061,3 +1061,40 @@
     align-items: flex-start;
   }
 }
+/* Quiet, immediately usable scanner surface. */
+.container { gap: 24px; }
+.container :global([class*="drop-segment-"]) { animation: none; }
+.pageTitle { font-size: 26px; font-weight: 500; letter-spacing: -.8px; }
+.pageSubtitle { margin-top: 8px; font-size: 13px; }
+.headerControls { gap: 8px; }
+.voiceAssistantBtn, .apiKeyToggleBtn, .offlineBtn { font-weight: 500; box-shadow: none; border-radius: 8px; }
+.categoryPillsSection { display: grid; grid-template-columns: auto minmax(0, 420px); align-items: center; justify-content: start; gap: 20px; padding: 0; background: transparent; border: 0; }
+.materialSelect { width: 100%; min-width: 0; padding: 13px 16px; border: 1px solid #cbd7bd; border-radius: 8px; background: #f9fbf4; color: #254631; font: inherit; font-size: 14px; }
+.pillsHeading { font-size: 13px; text-transform: none; letter-spacing: 0; }
+.workGrid { grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 24px; align-items: stretch; }
+.card { min-width: 0; padding: 28px; border: 1px solid #dde5d3; border-radius: 14px; box-shadow: none; background: #fcfdf9; }
+.cardTitle { font-size: 17px; font-weight: 500; }
+.cardSubtitle { font-size: 12px; margin-top: 7px; }
+.presetBtn { padding: 12px 8px; border-radius: 7px; box-shadow: none; }
+.presetLabel { font-weight: 500; font-size: 12px; }
+.dropzone { min-height: 175px; background: #f1f5e9; border-color: #c7d4b6; border-radius: 10px; }
+.uploadIconCircle { background: transparent; border: 0; box-shadow: none; width: 30px; height: 30px; }
+.dropzonePrimaryText { font-size: 16px; font-weight: 500; }
+.dropzoneSubText { font-size: 11px; }
+.inspectBtn { font-weight: 500; border-radius: 9px; box-shadow: none; padding: 15px; }
+.emptyCardState { border: 0; background: #f2f5eb; border-radius: 10px; min-height: 320px; }
+.estimatePlaceholder { font-size: 64px; font-weight: 400; color: #a1b38b; letter-spacing: -4px; margin-bottom: 20px; }
+.emptyTitle { font-size: 16px; font-weight: 500; }
+.emptyDescription { max-width: 260px; font-size: 12px; }
+@media(max-width:800px) { .workGrid { grid-template-columns: 1fr; } .card { padding: 20px; } .categoryPillsSection { grid-template-columns: 1fr; gap: 9px; } }
+.categoryPillsSection { grid-template-columns: 1fr; gap: 8px; margin: 0 0 20px; }
+.scannerOptions { position: relative; align-self: center; font-size: 12px; color: var(--text-secondary); }
+.scannerOptions > summary, .inspectionDetails > summary { cursor: pointer; padding: 10px 0; }
+.scannerOptions[open] .headerControls { position: absolute; top: 100%; right: 0; z-index: 5; padding: 16px; width: 280px; background: #fcfdf9; border: 1px solid #dce5d0; border-radius: 10px; box-shadow: 0 8px 24px #173b2010; }
+.estimateLead { display: flex; flex-direction: column; gap: 8px; padding-bottom: 22px; border-bottom: 1px solid #dce5d0; color: var(--text-secondary); font-size: 13px; }
+.estimateLead strong { font-size: clamp(36px, 4vw, 52px); font-weight: 400; color: var(--text-primary); letter-spacing: -2px; }
+.inspectionDetails { font-size: 12px; color: var(--text-secondary); }
+.inspectionDetails > summary { margin-bottom: 10px; }
+.confidenceScore, .confidenceLabel { display: none; }
+.inspectBtn:disabled { opacity: .55; cursor: not-allowed; transform: none; }
+.materialSelect:focus-visible, .scannerOptions > summary:focus-visible, .inspectionDetails > summary:focus-visible, .dropzone:focus-visible { outline: 2px solid #527747; outline-offset: 4px; }

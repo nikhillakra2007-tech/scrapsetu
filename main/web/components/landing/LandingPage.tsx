@@ -113,9 +113,12 @@ export default function LandingPage() {
               Our purpose
             </T></a>
           </nav>
-          <LanguageSwitcher/><Link href="/auth" className={styles.navCta}><T>
-            Get started </T><ArrowUpRight size={17} />
-          </Link>
+          <div className={styles.navActions}>
+            <LanguageSwitcher/>
+            <Link href="/auth" className={styles.navCta}><T>
+              Get started </T><ArrowUpRight size={17} />
+            </Link>
+          </div>
           <button
             className={styles.menuToggle}
             aria-label={menu ? "Close navigation" : "Open navigation"}

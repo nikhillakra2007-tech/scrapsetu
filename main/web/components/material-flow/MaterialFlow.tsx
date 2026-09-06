@@ -1,4 +1,5 @@
 "use client";
+import { T, useLocale } from '@/components/language/Language';
 import { useState } from "react";
 import { Truck, ScanLine, Scale, Recycle, ArrowUpRight } from "lucide-react";
 import styles from "./MaterialFlow.module.css";
@@ -33,11 +34,13 @@ export default function MaterialFlow({
 }: {
   compact?: boolean;
 }) {
+ const {t:translate}=useLocale();
+
   const [active, setActive] = useState(0);
   return (
     <div
       className={`${styles.diagram} ${compact ? styles.compact : ""}`}
-      aria-label="Explore the four stages of the material cycle"
+      aria-label={translate("Explore the four stages of the material cycle")}
     >
       <div className={styles.cycle}>
         <svg
@@ -76,14 +79,14 @@ export default function MaterialFlow({
         </svg>
         <div className={styles.center}>
           <Recycle size={35} strokeWidth={1} />
-          <span>
+          <span><T>
             Materials
-            <br />
-            <em>in motion.</em>
+            </T><br />
+            <em><T>in motion.</T></em>
           </span>
-          <small>NOTHING ENDS HERE.</small>
+          <small><T>NOTHING ENDS HERE.</T></small>
         </div>
-        {stages.map((stage, i) => (
+        <T>{stages.map((stage, i) => (
           <button
             type="button"
             key={stage.name}
@@ -91,17 +94,17 @@ export default function MaterialFlow({
             aria-pressed={active === i}
             onClick={() => setActive(i)}
           >
-            <span className={styles.number}>0{i + 1}</span>
+            <span className={styles.number}><T>0</T><T>{i + 1}</T></span>
             <stage.icon size={23} strokeWidth={1.3} />
-            <span>{stage.name}</span>
+            <span><T>{stage.name}</T></span>
           </button>
-        ))}
+        ))}</T>
       </div>
       <div className={styles.description} aria-live="polite">
-        <span className={styles.descriptionNumber}>0{active + 1}</span>
+        <span className={styles.descriptionNumber}><T>0</T><T>{active + 1}</T></span>
         <div>
-          <strong>{stages[active].title}</strong>
-          <p>{stages[active].text}</p>
+          <strong><T>{stages[active].title}</T></strong>
+          <p><T>{stages[active].text}</T></p>
         </div>
       </div>
     </div>

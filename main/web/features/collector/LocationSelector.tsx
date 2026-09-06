@@ -1,4 +1,5 @@
 'use client';
+import { T } from '@/components/language/Language';
 
 import React from 'react';
 import styles from './Collector.module.css';
@@ -20,9 +21,9 @@ const DELHI_PILOT_WARDS = [
 export default function LocationSelector({ value, onChange, disabled }: LocationSelectorProps) {
   return (
     <div className={styles.inputGroup}>
-      <label htmlFor="delhi-ward-select" className={styles.inputLabel}>
+      <label htmlFor="delhi-ward-select" className={styles.inputLabel}><T>
         Pilot Ward / Industrial Cluster
-      </label>
+      </T></label>
       <select
         id="delhi-ward-select"
         value={value}
@@ -30,15 +31,15 @@ export default function LocationSelector({ value, onChange, disabled }: Location
         disabled={disabled}
         className={styles.selectInput}
       >
-        {DELHI_PILOT_WARDS.map((w) => (
+        <T>{DELHI_PILOT_WARDS.map((w) => (
           <option key={w.id} value={w.name}>
-            {w.name}
+            <T>{w.name}</T>
           </option>
-        ))}
+        ))}</T>
       </select>
-      <span className={styles.fieldHint}>
+      <span className={styles.fieldHint}><T>
         Recycler matching location
-      </span>
+      </T></span>
     </div>
   );
 }

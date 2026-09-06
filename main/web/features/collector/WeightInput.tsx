@@ -1,4 +1,5 @@
 'use client';
+import { T, useLocale } from '@/components/language/Language';
 
 import React from 'react';
 import styles from './Collector.module.css';
@@ -10,11 +11,13 @@ interface WeightInputProps {
 }
 
 export default function WeightInput({ value, onChange, disabled }: WeightInputProps) {
+ const {t:translate}=useLocale();
+
   return (
     <div className={styles.inputGroup}>
-      <label htmlFor="collector-weight" className={styles.inputLabel}>
+      <label htmlFor="collector-weight" className={styles.inputLabel}><T>
         Collector Scale Weight (kg)
-      </label>
+      </T></label>
       <div className={styles.weightInputWrapper}>
         <input
           id="collector-weight"
@@ -25,14 +28,14 @@ export default function WeightInput({ value, onChange, disabled }: WeightInputPr
           onChange={(e) => onChange(parseFloat(e.target.value) || 0)}
           disabled={disabled}
           className={styles.textInput}
-          placeholder="e.g. 14.5"
+          placeholder={translate("e.g. 14.5")}
           required
         />
-        <span className={styles.weightUnit}>KG</span>
+        <span className={styles.weightUnit}><T>KG</T></span>
       </div>
-      <span className={styles.fieldHint}>
+      <span className={styles.fieldHint}><T>
         Physical scale weight
-      </span>
+      </T></span>
     </div>
   );
 }

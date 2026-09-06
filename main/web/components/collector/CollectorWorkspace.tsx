@@ -1,11 +1,12 @@
 "use client";
+import { T, useLocale } from '@/components/language/Language';
 
 import React, { useState, useEffect } from "react";
 import AppShell from "@/components/shell/AppShell";
 import CollectorPortal from "@/features/collector/CollectorPortal";
 import LivePriceBoard from "@/features/price-board/LivePriceBoard";
 import SafetyGuidanceView from "@/features/safety/SafetyGuidanceView";
-import CustomerPickupPortal from "@/features/customer-pickup/CustomerPickupPortal";
+import Pickups from "@/features/pickups/Pickups";
 import {
   MOCK_MATCHED_LOTS,
   MOCK_PICKUP_REQUESTS,
@@ -76,6 +77,8 @@ const MATERIAL_OPTIONS: MaterialOption[] = [
 ];
 
 export default function CollectorWorkspace() {
+ const {t:translate}=useLocale();
+
   const [currentUser, setCurrentUser] = useState<{
     name: string;
     email?: string;
@@ -226,9 +229,9 @@ export default function CollectorWorkspace() {
             color: "var(--text-secondary, #52606D)",
             fontWeight: 600,
           }}
-        >
+        ><T>
           Verifying Collector credentials...
-        </span>
+        </T></span>
       </div>
     );
   }
@@ -250,15 +253,15 @@ export default function CollectorWorkspace() {
         <div className={styles.opHeader}>
           <div className={styles.opHeaderMain}>
             <div className={styles.opTitleRow}>
-              <h1 className={styles.opTitle}>Collector Operations</h1>
+              <h1 className={styles.opTitle}><T>Collector Operations</T></h1>
               <span className={styles.opStatusPill}>
                 <CheckCircle2 size={13} />
-                <span>Field Active</span>
+                <span><T>Field Active</T></span>
               </span>
             </div>
-            <p className={styles.opSubtitle}>
+            <p className={styles.opSubtitle}><T>
               Manage your materials, estimates, and recycler handovers.
-            </p>
+            </T></p>
           </div>
 
           <div className={styles.headerActions}>
@@ -268,13 +271,13 @@ export default function CollectorWorkspace() {
               onClick={() => setIsCreateModalOpen(true)}
             >
               <Plus size={16} />
-              <span>Create New Lot</span>
+              <span><T>Create New Lot</T></span>
             </button>
           </div>
         </div>
 
         {/* Success Alert Toast */}
-        {creationSuccessNotice && (
+        <T>{creationSuccessNotice && (
           <div
             style={{
               padding: "0.85rem 1.25rem",
@@ -291,87 +294,87 @@ export default function CollectorWorkspace() {
             }}
           >
             <CheckCircle2 size={18} />
-            <span>{creationSuccessNotice}</span>
+            <span><T>{creationSuccessNotice}</T></span>
           </div>
-        )}
+        )}</T>
 
         {/* 4 Concise Operational Metrics */}
         <div className={styles.metricsGrid}>
           <div className={styles.metricCard}>
             <div className={styles.metricHeader}>
-              <span className={styles.metricTitle}>Active Lots</span>
+              <span className={styles.metricTitle}><T>Active Lots</T></span>
               <div className={styles.metricIconWrap}>
                 <Package size={16} />
               </div>
             </div>
             <div className={styles.metricValueRow}>
               <span className={styles.metricValue}>
-                {matchedLots.length} Lots
-              </span>
-              <span className={styles.metricSubtext}>in current queue</span>
+                <T>{matchedLots.length}</T><T> Lots
+              </T></span>
+              <span className={styles.metricSubtext}><T>in current queue</T></span>
             </div>
           </div>
 
           <div className={styles.metricCard}>
             <div className={styles.metricHeader}>
-              <span className={styles.metricTitle}>Ready for Handover</span>
+              <span className={styles.metricTitle}><T>Ready for Handover</T></span>
               <div className={styles.metricIconWrap}>
                 <ShieldCheck size={16} />
               </div>
             </div>
             <div className={styles.metricValueRow}>
               <span className={styles.metricValue}>
-                {matchedLots.filter((m) => m.status === "accepted").length}
+                <T>{matchedLots.filter((m) => m.status === "accepted").length}</T>
               </span>
-              <span className={styles.metricSubtext}>Lots ready</span>
+              <span className={styles.metricSubtext}><T>Lots ready</T></span>
             </div>
           </div>
 
           <div className={styles.metricCard}>
             <div className={styles.metricHeader}>
-              <span className={styles.metricTitle}>
+              <span className={styles.metricTitle}><T>
                 Month&apos;s Settlement
-              </span>
+              </T></span>
               <div className={styles.metricIconWrap}>
                 <IndianRupee size={16} />
               </div>
             </div>
             <div className={styles.metricValueRow}>
-              <span className={styles.metricValue}>₹24,850</span>
-              <span className={styles.metricSubtext}>100% verified</span>
+              <span className={styles.metricValue}><T>₹24,850</T></span>
+              <span className={styles.metricSubtext}><T>100% verified</T></span>
             </div>
           </div>
 
           <div className={styles.metricCard}>
             <div className={styles.metricHeader}>
-              <span className={styles.metricTitle}>Verified Lots</span>
+              <span className={styles.metricTitle}><T>Verified Lots</T></span>
               <div className={styles.metricIconWrap}>
                 <CheckCircle2 size={16} />
               </div>
             </div>
             <div className={styles.metricValueRow}>
-              <span className={styles.metricValue}>18 Lots</span>
-              <span className={styles.metricSubtext}>lifetime audited</span>
+              <span className={styles.metricValue}><T>18 Lots</T></span>
+              <span className={styles.metricSubtext}><T>lifetime audited</T></span>
             </div>
           </div>
         </div>
 
         {/* Clean Active Feature Subview Surface */}
         <div className={styles.activeViewSurface} key={activeTab}>
-          {activeTab === "collector-scan" && (
+          <T>{activeTab === "collector-scan" && (
             <CollectorPortal
               onLotCreated={handleLotCreated}
               onNavigateToRecyclerQueue={() => {}}
             />
-          )}
-          {activeTab === "price-board" && <LivePriceBoard />}
-          {activeTab === "safety-guidance" && <SafetyGuidanceView />}
-          {activeTab === "customer-pickup" && <CustomerPickupPortal />}
+          )}</T>
+          <T>{activeTab === "price-board" && <LivePriceBoard />}</T>
+          <T>{activeTab === "safety-guidance" && <SafetyGuidanceView />}</T>
+          <T>{activeTab === "customer-pickup" && <Pickups collector />}</T>
         </div>
       </div>
 
       {/* Workable Create Lot Interactive Modal */}
-      {isCreateModalOpen && (
+      <T>{isCreateModalOpen && (
         <div
           className={styles.modalOverlay}
           role="dialog"
@@ -387,17 +390,17 @@ export default function CollectorWorkspace() {
           >
             <div className={styles.modalHeader}>
               <div className={styles.modalTitleRow}>
-                <h2 className={styles.modalTitle}>Create New Scrap Lot</h2>
-                <p className={styles.modalSubtitle}>
+                <h2 className={styles.modalTitle}><T>Create New Scrap Lot</T></h2>
+                <p className={styles.modalSubtitle}><T>
                   Intake verified material and generate immediate facility match
                   manifest
-                </p>
+                </T></p>
               </div>
               <button
                 type="button"
                 className={styles.closeModalBtn}
                 onClick={() => setIsCreateModalOpen(false)}
-                aria-label="Close modal"
+                aria-label={translate("Close modal")}
               >
                 <X size={18} />
               </button>
@@ -414,11 +417,11 @@ export default function CollectorWorkspace() {
               >
                 {/* Material Selection */}
                 <div className={styles.formGroup}>
-                  <label className={styles.formLabel}>
+                  <label className={styles.formLabel}><T>
                     Select Scrap Material Category
-                  </label>
+                  </T></label>
                   <div className={styles.materialPillsGrid}>
-                    {MATERIAL_OPTIONS.map((mat) => {
+                    <T>{MATERIAL_OPTIONS.map((mat) => {
                       const isSelected = selectedMaterial.id === mat.id;
                       return (
                         <button
@@ -428,17 +431,17 @@ export default function CollectorWorkspace() {
                           onClick={() => setSelectedMaterial(mat)}
                         >
                           <div className={styles.matBtnText}>
-                            <span className={styles.matName}>{mat.name}</span>
-                            <span className={styles.matRate}>
-                              Benchmark: ₹{mat.ratePerKg}/kg
-                            </span>
+                            <span className={styles.matName}><T>{mat.name}</T></span>
+                            <span className={styles.matRate}><T>
+                              Benchmark: ₹</T><T>{mat.ratePerKg}</T><T>/kg
+                            </T></span>
                           </div>
-                          {isSelected && (
+                          <T>{isSelected && (
                             <Check size={16} color="var(--brand-primary)" />
-                          )}
+                          )}</T>
                         </button>
                       );
-                    })}
+                    })}</T>
                   </div>
                 </div>
 
@@ -447,9 +450,9 @@ export default function CollectorWorkspace() {
                   <label
                     htmlFor="lot-weight-input"
                     className={styles.formLabel}
-                  >
+                  ><T>
                     Net Weight (Certified Tare)
-                  </label>
+                  </T></label>
                   <div className={styles.weightInputRow}>
                     <div className={styles.weightInputWrap}>
                       <input
@@ -465,20 +468,20 @@ export default function CollectorWorkspace() {
                         }
                         required
                       />
-                      <span className={styles.weightUnit}>KG</span>
+                      <span className={styles.weightUnit}><T>KG</T></span>
                     </div>
 
                     <div className={styles.weightPresets}>
-                      {[10, 25, 45, 100].map((preset) => (
+                      <T>{[10, 25, 45, 100].map((preset) => (
                         <button
                           key={preset}
                           type="button"
                           className={styles.presetBtn}
                           onClick={() => setLotWeight(preset)}
                         >
-                          {preset}kg
-                        </button>
-                      ))}
+                          <T>{preset}</T><T>kg
+                        </T></button>
+                      ))}</T>
                     </div>
                   </div>
                 </div>
@@ -488,47 +491,47 @@ export default function CollectorWorkspace() {
                   <label
                     htmlFor="lot-cluster-select"
                     className={styles.formLabel}
-                  >
+                  ><T>
                     Industrial Intake Cluster
-                  </label>
+                  </T></label>
                   <select
                     id="lot-cluster-select"
                     className={styles.weightInput}
                     value={lotCluster}
                     onChange={(e) => setLotCluster(e.target.value)}
                   >
-                    <option value="Okhla Industrial Area">
+                    <option value="Okhla Industrial Area"><T>
                       Okhla Industrial Area, Phase III (South Delhi)
-                    </option>
-                    <option value="Mayapuri Scrap Market">
+                    </T></option>
+                    <option value="Mayapuri Scrap Market"><T>
                       Mayapuri Metal Cluster (West Delhi)
-                    </option>
-                    <option value="Bawana Industrial Zone">
+                    </T></option>
+                    <option value="Bawana Industrial Zone"><T>
                       Bawana Non-Ferrous Zone (North Delhi)
-                    </option>
-                    <option value="Narela Industrial Estate">
+                    </T></option>
+                    <option value="Narela Industrial Estate"><T>
                       Narela Aggregation Hub (North Delhi)
-                    </option>
+                    </T></option>
                   </select>
                 </div>
 
                 {/* AI Valuation Live Preview */}
                 <div className={styles.valuationPreviewCard}>
                   <div className={styles.valLeft}>
-                    <span className={styles.valHeading}>
+                    <span className={styles.valHeading}><T>
                       AI ESTIMATED GATE PAYOUT
-                    </span>
-                    <span className={styles.valFacility}>
+                    </T></span>
+                    <span className={styles.valFacility}><T>
                       EcoRecycle Scientific Hub · 3.4 km
-                    </span>
+                    </T></span>
                   </div>
                   <div className={styles.valRight}>
-                    <span className={styles.valAmount}>
-                      ₹{calculatedPayout.toLocaleString()}
+                    <span className={styles.valAmount}><T>
+                      ₹</T><T>{calculatedPayout.toLocaleString()}</T>
                     </span>
                     <span className={styles.valRateSub}>
-                      {lotWeight} kg × ₹{selectedMaterial.ratePerKg}/kg
-                    </span>
+                      <T>{lotWeight}</T><T> kg × ₹</T><T>{selectedMaterial.ratePerKg}</T><T>/kg
+                    </T></span>
                   </div>
                 </div>
               </div>
@@ -538,18 +541,18 @@ export default function CollectorWorkspace() {
                   type="button"
                   className={styles.cancelBtn}
                   onClick={() => setIsCreateModalOpen(false)}
-                >
+                ><T>
                   Cancel
-                </button>
+                </T></button>
                 <button type="submit" className={styles.submitLotBtn}>
-                  <span>Submit Lot & Generate Manifest</span>
+                  <span><T>Submit Lot & Generate Manifest</T></span>
                   <ArrowRight size={16} />
                 </button>
               </div>
             </form>
           </div>
         </div>
-      )}
+      )}</T>
     </AppShell>
   );
 }

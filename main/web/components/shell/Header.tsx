@@ -1,7 +1,9 @@
 'use client';
+import { T, useLocale } from '@/components/language/Language';
 
 import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
+import { LanguageSwitcher } from '@/components/language/Language';
 import {
   Recycle,
   Bell,
@@ -68,13 +70,13 @@ const INITIAL_NOTIFICATIONS: NotificationItem[] = [
 ];
 
 interface HeaderProps {
-  role: 'collector' | 'recycler' | 'admin';
+  role: 'collector' | 'recycler' | 'admin' | 'citizen';
   currentTab: string;
   onSelectTab: (tab: string) => void;
   currentUser?: {
     name: string;
     email?: string;
-    role?: 'collector' | 'recycler' | 'admin';
+    role?: 'collector' | 'recycler' | 'admin' | 'citizen';
   } | null;
   onSignOut?: () => void;
   matchedCount?: number;
@@ -90,6 +92,8 @@ export default function Header({
   matchedCount = 0,
   pickupCount = 0,
 }: HeaderProps) {
+ const {t:translate}=useLocale();
+
   const [notifications, setNotifications] = useState<NotificationItem[]>(INITIAL_NOTIFICATIONS);
   const [isNotifOpen, setIsNotifOpen] = useState(false);
   const notifRef = useRef<HTMLDivElement>(null);
@@ -150,14 +154,15 @@ export default function Header({
     { id: 'verification', label: 'Verification Queue', icon: ShieldCheck, count: 1 },
   ];
 
-  const currentTabs =
-    role === 'collector'
+  const currentTabs: NavTabItem[] =
+    role === 'citizen' ? [{ id: 'estimate', label: 'Price estimator', icon: TrendingUp }, { id: 'pickup', label: 'Book pickup', icon: Truck }] : role === 'collector'
       ? collectorTabs
       : role === 'recycler'
       ? recyclerTabs
       : adminTabs;
 
   const roleLabels = {
+    citizen: 'Citizen workspace',
     collector: 'Field Collector Portal',
     recycler: 'Recycler Facility Hub',
     admin: 'Platform Administration',
@@ -168,23 +173,23 @@ export default function Header({
       <div className={styles.navInner}>
         {/* Left: Brand Logo matching Landing Page */}
         <div className={styles.brandGroup}>
-          <Link href="/" className={styles.navBrand} title="Return to Public Homepage">
+          <Link href="/" className={styles.navBrand} title={translate("Return to Public Homepage")}>
             <div className={styles.brandIconWrap}>
               <Recycle size={27} strokeWidth={1.7} />
             </div>
-            <span className={styles.brandName}>
-              ScrapSetu<span className={styles.brandDot}>®</span>
+            <span className={styles.brandName}><T>
+              ScrapSetu</T><span className={styles.brandDot}><T>®</T></span>
             </span>
           </Link>
 
           <span className={styles.roleSubtextPill}>
-            {roleLabels[role]}
+            <T>{roleLabels[role]}</T>
           </span>
         </div>
 
         {/* Center: Clean Horizontal Navigation */}
-        <nav className={styles.navTabs} aria-label="Role Navigation">
-          {currentTabs.map((item) => {
+        <nav className={styles.navTabs} aria-label={translate("Role Navigation")}>
+          <T>{currentTabs.map((item) => {
             const isActive = currentTab === item.id;
             const Icon = item.icon;
 
@@ -196,22 +201,22 @@ export default function Header({
                 onClick={() => onSelectTab(item.id)}
               >
                 <Icon size={16} className={styles.tabIcon} />
-                <span>{item.label}</span>
-                {item.isAi && <span className={styles.aiPill}>AI</span>}
-                {Boolean(item.count && item.count > 0) && (
-                  <span className={styles.countBadge}>{item.count}</span>
-                )}
+                <span><T>{item.label}</T></span>
+                <T>{item.isAi && <span className={styles.aiPill}><T>AI</T></span>}</T>
+                <T>{Boolean(item.count && item.count > 0) && (
+                  <span className={styles.countBadge}><T>{item.count}</T></span>
+                )}</T>
               </button>
             );
-          })}
+          })}</T>
         </nav>
 
         {/* Right Actions */}
-        <div className={styles.rightActions}>
+        <div className={styles.rightActions}><LanguageSwitcher/>
           {/* Live Network Status */}
           <div className={styles.networkBadge}>
             <span className={styles.pulseDot} />
-            <span className={styles.networkLabel}>DELHI NCR ONLINE</span>
+            <span className={styles.networkLabel}><T>DELHI NCR ONLINE</T></span>
           </div>
 
           {/* Alert Notification Button with Functional Popover */}
@@ -220,104 +225,104 @@ export default function Header({
               type="button"
               className={`${styles.notifBtn} ${isNotifOpen ? styles.notifBtnActive : ''}`}
               onClick={() => setIsNotifOpen(!isNotifOpen)}
-              title="System Alerts & Notifications"
-              aria-label="System Alerts"
+              title={translate("System Alerts & Notifications")}
+              aria-label={translate("System Alerts")}
             >
               <Bell size={18} />
-              {unreadCount > 0 && (
+              <T>{unreadCount > 0 && (
                 <span className={styles.unreadDot} title={`${unreadCount} unread alerts`} />
-              )}
+              )}</T>
             </button>
 
             {/* Notification Popover Dropdown */}
-            {isNotifOpen && (
+            <T>{isNotifOpen && (
               <div className={styles.notifDropdown}>
                 <div className={styles.notifHeader}>
                   <div className={styles.notifTitleRow}>
-                    <span className={styles.notifTitle}>System Notifications</span>
-                    {unreadCount > 0 && (
-                      <span className={styles.unreadCountTag}>{unreadCount} new</span>
-                    )}
+                    <span className={styles.notifTitle}><T>System Notifications</T></span>
+                    <T>{unreadCount > 0 && (
+                      <span className={styles.unreadCountTag}><T>{unreadCount}</T><T> new</T></span>
+                    )}</T>
                   </div>
-                  {unreadCount > 0 && (
+                  <T>{unreadCount > 0 && (
                     <button
                       type="button"
                       className={styles.markAllBtn}
                       onClick={markAllAsRead}
-                    >
+                    ><T>
                       Mark all read
-                    </button>
-                  )}
+                    </T></button>
+                  )}</T>
                 </div>
 
                 <div className={styles.notifList}>
-                  {notifications.map((notif) => (
+                  <T>{notifications.map((notif) => (
                     <div
                       key={notif.id}
                       className={`${styles.notifItem} ${!notif.isRead ? styles.notifUnread : ''}`}
                       onClick={() => markSingleRead(notif.id)}
                     >
                       <div className={styles.notifIconWrap}>
-                        {notif.type === 'verification' && <CheckCircle2 size={16} color="var(--brand-primary)" />}
-                        {notif.type === 'price' && <TrendingUp size={16} color="var(--accent-amber, #D97706)" />}
-                        {notif.type === 'pickup' && <Truck size={16} color="var(--accent-tech, #0F9F9A)" />}
-                        {notif.type === 'manifest' && <FileCheck2 size={16} color="#4F46E5" />}
+                        <T>{notif.type === 'verification' && <CheckCircle2 size={16} color="var(--brand-primary)" />}</T>
+                        <T>{notif.type === 'price' && <TrendingUp size={16} color="var(--accent-amber, #D97706)" />}</T>
+                        <T>{notif.type === 'pickup' && <Truck size={16} color="var(--accent-tech, #0F9F9A)" />}</T>
+                        <T>{notif.type === 'manifest' && <FileCheck2 size={16} color="#4F46E5" />}</T>
                       </div>
 
                       <div className={styles.notifContent}>
                         <div className={styles.notifItemTitleRow}>
-                          <span className={styles.notifItemTitle}>{notif.title}</span>
-                          <span className={styles.notifTime}>{notif.time}</span>
+                          <span className={styles.notifItemTitle}><T>{notif.title}</T></span>
+                          <span className={styles.notifTime}><T>{notif.time}</T></span>
                         </div>
-                        <p className={styles.notifMessage}>{notif.message}</p>
+                        <p className={styles.notifMessage}><T>{notif.message}</T></p>
                       </div>
 
-                      {!notif.isRead && <span className={styles.itemUnreadPip} />}
+                      <T>{!notif.isRead && <span className={styles.itemUnreadPip} />}</T>
                     </div>
-                  ))}
+                  ))}</T>
                 </div>
 
                 <div className={styles.notifFooter}>
-                  <span className={styles.notifFooterText}>CPCB & DPCC Telemetry Stream</span>
+                  <span className={styles.notifFooterText}><T>CPCB & DPCC Telemetry Stream</T></span>
                   <button
                     type="button"
                     className={styles.closeNotifBtn}
                     onClick={() => setIsNotifOpen(false)}
-                  >
+                  ><T>
                     Close
-                  </button>
+                  </T></button>
                 </div>
               </div>
-            )}
+            )}</T>
           </div>
 
           {/* User Profile Pill */}
-          {currentUser && (
+          <T>{currentUser && (
             <div
               className={styles.userProfilePill}
               title={`Logged in as ${currentUser.name}`}
             >
               <div className={styles.userAvatar}>
-                {currentUser.name.charAt(0).toUpperCase()}
+                <T>{currentUser.name.charAt(0).toUpperCase()}</T>
               </div>
               <span className={styles.userNameText}>
-                {currentUser.name.split(' ')[0]}
+                <T>{currentUser.name.split(' ')[0]}</T>
               </span>
             </div>
-          )}
+          )}</T>
 
           {/* Sign Out Button */}
-          {onSignOut && (
+          <T>{onSignOut && (
             <button
               type="button"
               className={styles.signOutBtn}
               onClick={onSignOut}
-              title="Sign out of session"
-              aria-label="Sign Out"
+              title={translate("Sign out of session")}
+              aria-label={translate("Sign Out")}
             >
               <LogOut size={16} />
             </button>
-          )}
+          )}</T>
         </div>
       </div>
     </header>

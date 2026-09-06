@@ -617,3 +617,15 @@
     font-size: 28px;
   }
 }
+
+
+.dataTable { table-layout: fixed; }
+.dataTable th, .dataTable td { white-space: normal; overflow-wrap: anywhere; padding: 1rem .75rem; }
+.dataTable td > *, .monoCode { max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
+@media(max-width:1000px){
+ .dataTable, .dataTable tbody { display:block; }
+ .dataTable thead { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); }
+ .dataTable tr { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); padding:1rem; border-bottom:1px solid var(--border-subtle); }
+ .dataTable td { display:flex; flex-direction:column; gap:.4rem; border:0; }
+ .dataTable td::before { content:attr(data-label); font-size:.7rem; color:var(--text-muted); }
+}

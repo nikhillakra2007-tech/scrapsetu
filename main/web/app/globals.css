@@ -404,3 +404,9 @@ h3 {
     transition-duration: 0.01ms !important;
   }
 }
+/* Devanagari needs natural spacing and a native sans-serif font. */
+html[lang="hi"] body, html[lang="mr"] body { --font-sans: "Nirmala UI", "Mangal", system-ui, sans-serif; }
+html[lang="hi"] h1, html[lang="mr"] h1,
+html[lang="hi"] h2, html[lang="mr"] h2,
+html[lang="hi"] em, html[lang="mr"] em { font-family: "Nirmala UI", "Mangal", system-ui, sans-serif !important; letter-spacing: normal !important; font-style:normal; line-height:1.25; }
+html[lang="hi"] button, html[lang="mr"] button { letter-spacing:normal; }

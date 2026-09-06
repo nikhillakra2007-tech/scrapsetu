@@ -1,6 +1,7 @@
 'use client';
+import { T, useLocale } from '@/components/language/Language';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Sparkles,
   Volume2,
@@ -32,6 +33,7 @@ export interface AIClassificationResult {
 }
 
 interface AiInspectionCardProps {
+  actionLabel?: string;
   aiResult: AIClassificationResult | null;
   isAnalyzing: boolean;
   weightKg: number;
@@ -41,6 +43,7 @@ interface AiInspectionCardProps {
 }
 
 export default function AiInspectionCard({
+  actionLabel = "Confirm & find recycler",
   aiResult,
   isAnalyzing,
   weightKg,
@@ -50,40 +53,36 @@ export default function AiInspectionCard({
 }: AiInspectionCardProps) {
   const [isSpeaking, setIsSpeaking] = useState(false);
 
-  // Hindi TTS Read-Aloud for low-literacy operators
-  const handleSpeakHindi = () => {
-    if (!aiResult || typeof window === 'undefined' || !window.speechSynthesis) return;
 
-    if (isSpeaking) {
-      window.speechSynthesis.cancel();
-      setIsSpeaking(false);
-      return;
-    }
-
-    const text = `सामग्री प्रकार: ${aiResult.parent_name}। वजन: ${weightKg} किलोग्राम। अनुमानित सरकारी दर: ₹${aiResult.suggested_rate_per_kg} प्रति किलो। कुल अनुमानित मूल्य: ₹${aiResult.estimated_value}। ${
-      aiResult.is_hazardous ? 'चेतावनी: यह खतरनाक ई-कचरा है। सीधे अधिकृत रीसाइक्लर को ही सौंपें।' : ''
-    }`;
-
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = 'hi-IN';
-    utterance.rate = 0.95;
-
-    utterance.onstart = () => setIsSpeaking(true);
-    utterance.onend = () => setIsSpeaking(false);
-    utterance.onerror = () => setIsSpeaking(false);
-
-    window.speechSynthesis.speak(utterance);
+  const {locale,t}=useLocale();
+  const [audioError,setAudioError]=useState('');
+  useEffect(()=>{window.speechSynthesis?.cancel();setIsSpeaking(false);setAudioError('');return()=>window.speechSynthesis?.cancel();},[locale,aiResult]);
+  const handleSpeakHindi=()=>{
+    setAudioError('');
+    if(!aiResult)return;
+    if(!window.speechSynthesis){setAudioError('Audio is unavailable in this browser.');return;}
+    if(isSpeaking){window.speechSynthesis.cancel();setIsSpeaking(false);return;}
+    const voices=window.speechSynthesis.getVoices();
+    const voice=voices.find(v=>v.lang.toLowerCase().startsWith(locale));
+    if(!voice&&locale!=='en'){setAudioError('No voice is installed for this language. Please use the written estimate.');return;}
+    const words=locale==='en'?
+      t(aiResult.parent_name)+'. Weight: '+weightKg+' kilograms. Estimated value: '+aiResult.estimated_value+' rupees.':locale==='hi'?
+      t(aiResult.parent_name)+'। वजन: '+weightKg+' किलोग्राम। अनुमानित मूल्य: '+aiResult.estimated_value+' रुपये।':
+      t(aiResult.parent_name)+'. वजन: '+weightKg+' किलोग्रॅम. अंदाजित मूल्य: '+aiResult.estimated_value+' रुपये.';
+    const utterance=new SpeechSynthesisUtterance(words);utterance.lang=locale+'-IN';if(voice)utterance.voice=voice;
+    utterance.onend=()=>setIsSpeaking(false);utterance.onerror=()=>{setIsSpeaking(false);setAudioError('Audio could not play. Please try again.');};
+    window.speechSynthesis.cancel();setIsSpeaking(true);window.speechSynthesis.speak(utterance);
   };
 
   // 1. Awaiting Inspection State
   if (!aiResult && !isAnalyzing) {
     return (
       <div className={styles.emptyCardState}>
-        <span className={styles.estimatePlaceholder} aria-hidden="true">₹ —</span>
-        <h4 className={styles.emptyTitle}>Your estimate will appear here</h4>
-        <p className={styles.emptyDescription}>
+        <span className={styles.estimatePlaceholder} aria-hidden="true"><T>₹ —</T></span>
+        <h4 className={styles.emptyTitle}><T>Your estimate will appear here</T></h4>
+        <p className={styles.emptyDescription}><T>
           Add your material details, then choose Inspect material.
-        </p>
+        </T></p>
       </div>
     );
   }
@@ -93,10 +92,10 @@ export default function AiInspectionCard({
     return (
       <div className={styles.analyzingCardState}>
         <div className={styles.analyzingSpinner} />
-        <h4 className={styles.analyzingTitle}>Inspecting your material…</h4>
-        <p className={styles.analyzingDescription}>
+        <h4 className={styles.analyzingTitle}><T>Inspecting your material…</T></h4>
+        <p className={styles.analyzingDescription}><T>
           Checking your material details and estimate.
-        </p>
+        </T></p>
       </div>
     );
   }
@@ -106,19 +105,19 @@ export default function AiInspectionCard({
   return (
     <div className={styles.resultContainer} aria-live="polite">
       <div className={styles.estimateLead}>
-        <span>Estimated value</span>
-        <strong>₹{aiResult.estimated_value.toLocaleString('en-IN')}</strong>
-        <span>{weightKg} kg × ₹{aiResult.suggested_rate_per_kg}/kg</span>
+        <span><T>Estimated value</T></span>
+        <strong><T>₹</T><T>{aiResult.estimated_value.toLocaleString('en-IN')}</T></strong>
+        <span><T>{weightKg}</T><T> kg × ₹</T><T>{aiResult.suggested_rate_per_kg}</T><T>/kg</T></span>
       </div>
       {/* Category Header with Hindi Audio Action */}
       <div className={styles.resultHeader}>
         <div>
           <div className={styles.categoryBadgeRow}>
-            <span className={styles.cpcbTag}>{aiResult.parent_code}</span>
-            <h4 className={styles.resultSubName}>{aiResult.sub_name}</h4>
+            <span className={styles.cpcbTag}><T>{aiResult.parent_name}</T></span>
+            <h4 className={styles.resultSubName}><T>{aiResult.sub_name}</T></h4>
           </div>
-          <span className={styles.categoryMeta}>
-            Category: {aiResult.parent_name} · Condition: <strong className={styles.conditionHighlight}>{aiResult.condition.toUpperCase()}</strong>
+          <span className={styles.categoryMeta}><T>
+            Category: </T><T>{aiResult.parent_name}</T><T> · Condition: </T><strong className={styles.conditionHighlight}><T>{aiResult.condition.toUpperCase()}</T></strong>
           </span>
         </div>
 
@@ -127,90 +126,91 @@ export default function AiInspectionCard({
             type="button"
             onClick={handleSpeakHindi}
             className={`${styles.audioBtn} ${isSpeaking ? styles.audioBtnSpeaking : ''}`}
-            title="Read valuation aloud in Hindi"
+            title={t('Read aloud')} aria-pressed={isSpeaking}
           >
             <Volume2 size={15} />
-            <span>{isSpeaking ? 'बोल रहा है...' : 'बोलें 🔊'}</span>
+            <span><T>{isSpeaking ? t('Stop audio') : t('Read aloud')}</T></span>
           </button>
           <div className={styles.confidenceScore}>
-            {Math.round(aiResult.category_confidence * 100)}%
-          </div>
-          <span className={styles.confidenceLabel}>AI Confidence</span>
+            <T>{Math.round(aiResult.category_confidence * 100)}</T><T>%
+          </T></div>
+          <span className={styles.confidenceLabel}><T>AI Confidence</T></span>
         </div>
       </div>
 
+      {audioError && <p role="status"><T>{audioError}</T></p>}
       {/* Hazard Warning Banner */}
-      {aiResult.is_hazardous && (
+      <T>{aiResult.is_hazardous && (
         <div className={styles.hazardBanner}>
           <AlertTriangle size={18} className={styles.hazardIcon} />
           <div>
-            <div className={styles.hazardTitle}>
-              Hazard Warning: {aiResult.hazard_flags.join(', ')}
+            <div className={styles.hazardTitle}><T>
+              Hazard Warning: </T><T>{aiResult.hazard_flags.map(flag=>t(flag.replaceAll('_',' '))).join(', ')}</T>
             </div>
             <p className={styles.hazardAdvisory}>
-              {aiResult.hazard_advisory || 'Hazardous e-waste detected. Route exclusively to DPCC-authorized recycler.'}
+              <T>{aiResult.hazard_advisory || 'Hazardous e-waste detected. Route exclusively to DPCC-authorized recycler.'}</T>
             </p>
           </div>
         </div>
-      )}
+      )}</T>
 
-      <details className={styles.inspectionDetails}><summary>Inspection details</summary>
+      <details className={styles.inspectionDetails}><summary><T>Inspection details</T></summary>
       {/* Visual Diagnostic Notes */}
       <div className={styles.notesBox}>
-        <strong className={styles.notesHeading}>Visual Diagnostic: </strong>
-        <span>{aiResult.ai_notes}</span>
+        <strong className={styles.notesHeading}><T>Visual Diagnostic: </T></strong>
+        <span><T>{aiResult.ai_notes}</T></span>
       </div>
 
       {/* Identified Components */}
-      {aiResult.identified_components && aiResult.identified_components.length > 0 && (
+      <T>{aiResult.identified_components && aiResult.identified_components.length > 0 && (
         <div className={styles.componentsSection}>
-          <span className={styles.sectionSmallHeading}>Identified Electronic Components</span>
+          <span className={styles.sectionSmallHeading}><T>Identified Electronic Components</T></span>
           <div className={styles.tagsRow}>
-            {aiResult.identified_components.map((comp, idx) => (
+            <T>{aiResult.identified_components.map((comp, idx) => (
               <span key={idx} className={styles.componentTag}>
-                {comp}
+                <T>{comp}</T>
               </span>
-            ))}
+            ))}</T>
           </div>
         </div>
-      )}
+      )}</T>
 
       {/* Regulatory & Model Footer */}
       <div className={styles.regulatoryMeta}>
-        <span>CPCB EPR: {aiResult.epr_schedule1_hint || 'Schedule I'}</span>
-        <span>Vision Engine: {aiResult.ai_model_used}</span>
+        <span><T>CPCB EPR: </T><T>{aiResult.epr_schedule1_hint || 'Schedule I'}</T></span>
+        <span><T>Vision Engine: </T><T>{aiResult.ai_model_used}</T></span>
       </div>
 
       </details>
       {/* Confirmation & Post Action */}
-      {!submittedLotCode ? (
+      <T>{!submittedLotCode ? (
         <button
           type="button"
           onClick={onSubmitLot}
           className={styles.submitLotBtn}
         >
           <CheckCircle2 size={18} />
-          <span>Confirm & find recycler</span>
+          <span><T>{actionLabel}</T></span>
         </button>
       ) : (
         <div className={styles.successBox}>
           <div className={styles.successHeading}>
             <CheckCircle2 size={20} className={styles.successIcon} />
-            <span>Lot Matched Successfully ({submittedLotCode})</span>
+            <span><T>Lot Matched Successfully (</T><T>{submittedLotCode}</T><T>)</T></span>
           </div>
-          <p className={styles.successSubtext}>
-            Paired with <strong>{CURRENT_RECYCLER.business_name}</strong> in Okhla. Ready for weighbridge handover!
-          </p>
+          <p className={styles.successSubtext}><T>
+            Paired with </T><strong><T>{CURRENT_RECYCLER.business_name}</T></strong><T> in Okhla. Ready for weighbridge handover!
+          </T></p>
           <button
             type="button"
             onClick={onNavigateToRecyclerQueue}
             className={styles.viewQueueBtn}
           >
-            <span>View in Recycler Incoming Lots Queue</span>
+            <span><T>View in Recycler Incoming Lots Queue</T></span>
             <ArrowRight size={15} />
           </button>
         </div>
-      )}
+      )}</T>
     </div>
   );
 }

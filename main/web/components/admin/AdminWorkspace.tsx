@@ -1,4 +1,5 @@
 "use client";
+import { T, useLocale } from '@/components/language/Language';
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
@@ -115,6 +116,8 @@ const AUDIT_MANIFESTS: AuditManifest[] = [
 ];
 
 export default function AdminWorkspace() {
+ const {t:translate}=useLocale();
+
   const [currentUser, setCurrentUser] = useState<{
     name: string;
     role: string;
@@ -203,9 +206,9 @@ export default function AdminWorkspace() {
             color: "var(--text-secondary, #52606D)",
             fontWeight: 600,
           }}
-        >
+        ><T>
           Verifying administrative credentials...
-        </span>
+        </T></span>
       </div>
     );
   }
@@ -258,9 +261,9 @@ export default function AdminWorkspace() {
               color: "var(--text-primary)",
               marginBottom: "0.75rem",
             }}
-          >
+          ><T>
             Access Restricted
-          </h1>
+          </T></h1>
 
           <p
             style={{
@@ -269,16 +272,16 @@ export default function AdminWorkspace() {
               lineHeight: 1.6,
               marginBottom: "2rem",
             }}
-          >
-            Your account is authenticated as{" "}
+          ><T>
+            Your account is authenticated as</T><T>{" "}</T>
             <strong>
-              {currentUser?.role === "collector"
+              <T>{currentUser?.role === "collector"
                 ? "Field Collector"
-                : "Recycler Partner"}
-            </strong>
+                : "Recycler Partner"}</T>
+            </strong><T>
             . The Administrative Oversight Console is restricted to DPCC/CPCB
             platform regulators.
-          </p>
+          </T></p>
 
           <Link
             href={
@@ -298,7 +301,7 @@ export default function AdminWorkspace() {
             }}
           >
             <ArrowLeft size={16} />
-            <span>Return to Your Workspace</span>
+            <span><T>Return to Your Workspace</T></span>
           </Link>
         </div>
       </div>
@@ -324,16 +327,16 @@ export default function AdminWorkspace() {
         <div className={styles.adminHeader}>
           <div className={styles.adminHeaderLeft}>
             <div className={styles.titleRow}>
-              <h1 className={styles.adminTitle}>Network Operations</h1>
+              <h1 className={styles.adminTitle}><T>Network Operations</T></h1>
               <span className={styles.regulatorBadge}>
                 <CheckCircle2 size={13} />
-                <span>DPCC / CPCB Console</span>
+                <span><T>DPCC / CPCB Console</T></span>
               </span>
             </div>
-            <p className={styles.adminSubtitle}>
+            <p className={styles.adminSubtitle}><T>
               Regulatory governance, authorized facility registry, and
               cryptographic chain of custody for Delhi NCR circular economy.
-            </p>
+            </T></p>
           </div>
 
           <div className={styles.headerActions}>
@@ -341,20 +344,43 @@ export default function AdminWorkspace() {
               type="button"
               className={styles.complianceReportBtn}
               onClick={() => {
-                setActionNotice(
-                  "EPR Compliance Audit Report exported successfully (PDF/CSV).",
+                const rows = [
+                  ["Lot Identifier", "Collector (Source)", "Facility (Dest)", "Material", "Net Weight", "Cryptographic Hash", "Timestamp", "Regulatory State", "Data Source"],
+                  ...AUDIT_MANIFESTS.map((manifest) => [
+                    manifest.lotId,
+                    manifest.collectorName,
+                    manifest.facilityName,
+                    manifest.material,
+                    manifest.weight,
+                    manifest.qrHash,
+                    manifest.timestamp,
+                    manifest.compliance,
+                    "Demo data",
+                  ]),
+                ];
+                const csv = rows
+                  .map((row) => row.map((value) => `"${value.replace(/"/g, '""')}"`).join(","))
+                  .join("\r\n");
+                const url = URL.createObjectURL(
+                  new Blob(["\uFEFF", csv, "\r\n"], { type: "text/csv;charset=utf-8;" }),
                 );
-                setTimeout(() => setActionNotice(null), 4000);
+                const download = document.createElement("a");
+                download.href = url;
+                download.download = `scrapsetu-epr-report-${new Date().toISOString().slice(0, 10)}.csv`;
+                document.body.appendChild(download);
+                download.click();
+                download.remove();
+                setTimeout(() => URL.revokeObjectURL(url), 1000);
               }}
             >
               <Download size={15} />
-              <span>Export EPR Report</span>
+              <span><T>Export EPR Report</T></span>
             </button>
           </div>
         </div>
 
         {/* Action Notice Alert */}
-        {actionNotice && (
+        <T>{actionNotice && (
           <div
             style={{
               padding: "0.85rem 1.25rem",
@@ -371,111 +397,111 @@ export default function AdminWorkspace() {
             }}
           >
             <CheckCircle2 size={18} />
-            <span>{actionNotice}</span>
+            <span><T>{actionNotice}</T></span>
           </div>
-        )}
+        )}</T>
 
         {/* 4 Key Metrics */}
         <div className={styles.statsGrid}>
           <div className={styles.statCard}>
             <div className={styles.statHeader}>
-              <span className={styles.statLabel}>Authorized Facilities</span>
+              <span className={styles.statLabel}><T>Authorized Facilities</T></span>
               <div className={styles.statIconWrap}>
                 <Building2 size={16} />
               </div>
             </div>
-            <div className={styles.statValue}>12</div>
-            <span className={styles.statSubtext}>
+            <div className={styles.statValue}><T>12</T></div>
+            <span className={styles.statSubtext}><T>
               ✓ 11 Verified · 1 In Review
-            </span>
+            </T></span>
           </div>
 
           <div className={styles.statCard}>
             <div className={styles.statHeader}>
-              <span className={styles.statLabel}>Active Collectors</span>
+              <span className={styles.statLabel}><T>Active Collectors</T></span>
               <div className={styles.statIconWrap}>
                 <Users size={16} />
               </div>
             </div>
-            <div className={styles.statValue}>48</div>
-            <span className={styles.statSubtext}>✓ Delhi NCR Registered</span>
+            <div className={styles.statValue}><T>48</T></div>
+            <span className={styles.statSubtext}><T>✓ Delhi NCR Registered</T></span>
           </div>
 
           <div className={styles.statCard}>
             <div className={styles.statHeader}>
-              <span className={styles.statLabel}>Lots In Pipeline</span>
+              <span className={styles.statLabel}><T>Lots In Pipeline</T></span>
               <div className={styles.statIconWrap}>
                 <PackageCheck size={16} />
               </div>
             </div>
-            <div className={styles.statValue}>14</div>
-            <span className={styles.statSubtext}>Active Handover Matches</span>
+            <div className={styles.statValue}><T>14</T></div>
+            <span className={styles.statSubtext}><T>Active Handover Matches</T></span>
           </div>
 
           <div className={styles.statCard}>
             <div className={styles.statHeader}>
-              <span className={styles.statLabel}>Material Diverted</span>
+              <span className={styles.statLabel}><T>Material Diverted</T></span>
               <div className={styles.statIconWrap}>
                 <Scale size={16} />
               </div>
             </div>
-            <div className={styles.statValue}>1,840 kg</div>
-            <span className={styles.statSubtext}>
+            <div className={styles.statValue}><T>1,840 kg</T></div>
+            <span className={styles.statSubtext}><T>
               100% Cryptographically Traced
-            </span>
+            </T></span>
           </div>
         </div>
 
         {/* Tab 1: Authorized Facilities Registry */}
-        {activeTab === "facilities" && (
+        <T>{activeTab === "facilities" && (
           <div className={styles.tableCard}>
             <div className={styles.tableHeaderBar}>
-              <h2 className={styles.tableCardTitle}>
+              <h2 className={styles.tableCardTitle}><T>
                 DPCC Registered Recycling Units
-              </h2>
+              </T></h2>
               <span className={styles.tableCardCount}>
-                {facilities.length} Facilities Listed
-              </span>
+                <T>{facilities.length}</T><T> Facilities Listed
+              </T></span>
             </div>
 
             <div className={styles.tableWrapper}>
               <table className={styles.dataTable}>
                 <thead>
                   <tr>
-                    <th>Facility Name</th>
-                    <th>Region</th>
-                    <th>DPCC Reg ID</th>
-                    <th>Authorized Category</th>
-                    <th>Status</th>
-                    <th>Last Audited</th>
-                    <th>Actions</th>
+                    <th><T>Facility Name</T></th>
+                    <th><T>Region</T></th>
+                    <th><T>DPCC Reg ID</T></th>
+                    <th><T>Authorized Category</T></th>
+                    <th><T>Status</T></th>
+                    <th><T>Last Audited</T></th>
+                    <th><T>Actions</T></th>
                   </tr>
                 </thead>
                 <tbody>
-                  {facilities.map((fac) => (
+                  <T>{facilities.map((fac) => (
                     <tr key={fac.id}>
-                      <td className={styles.primaryCell}>{fac.name}</td>
-                      <td>{fac.region}</td>
-                      <td>
-                        <span className={styles.monoCode}>{fac.dpccRegId}</span>
+                      <td className={styles.primaryCell} data-label={translate("Facility Name")}><T>{fac.name}</T></td>
+                      <td data-label={translate("Region")}><T>{fac.region}</T></td>
+                      <td data-label={translate("DPCC Reg ID")}>
+                        <span className={styles.monoCode}><T>{fac.dpccRegId}</T></span>
                       </td>
-                      <td>{fac.category}</td>
-                      <td>
-                        {fac.status === "verified" ? (
+                      <td data-label={translate("Authorized Category")}><T>{fac.category}</T></td>
+                      <td data-label={translate("Status")}>
+                        <T>{fac.status === "verified" ? (
                           <span className={styles.statusVerified}>
                             <CheckCircle2 size={12} />
-                            <span>Verified</span>
+                            <span><T>Verified</T></span>
                           </span>
                         ) : (
                           <span className={styles.statusPending}>
                             <Clock size={12} />
-                            <span>Audit Pending</span>
+                            <span><T>Audit Pending</T></span>
                           </span>
-                        )}
+                        )}</T>
                       </td>
-                      <td>{fac.lastInspection}</td>
-                      <td>
-                        {fac.status === "pending" ? (
+                      <td data-label={translate("Last Audited")}><T>{fac.lastInspection}</T></td>
+                      <td data-label={translate("Actions")}>
+                        <T>{fac.status === "pending" ? (
                           <button
                             type="button"
                             className={styles.approveBtn}
@@ -484,7 +510,7 @@ export default function AdminWorkspace() {
                             }
                           >
                             <Check size={13} />
-                            <span>Approve</span>
+                            <span><T>Approve</T></span>
                           </button>
                         ) : (
                           <button
@@ -498,125 +524,125 @@ export default function AdminWorkspace() {
                             }}
                           >
                             <Eye size={13} />
-                            <span>View KYC</span>
+                            <span><T>View KYC</T></span>
                           </button>
-                        )}
+                        )}</T>
                       </td>
                     </tr>
-                  ))}
+                  ))}</T>
                 </tbody>
               </table>
             </div>
           </div>
-        )}
+        )}</T>
 
         {/* Tab 2: Audit Manifests */}
-        {activeTab === "manifests" && (
+        <T>{activeTab === "manifests" && (
           <div className={styles.tableCard}>
             <div className={styles.tableHeaderBar}>
-              <h2 className={styles.tableCardTitle}>
+              <h2 className={styles.tableCardTitle}><T>
                 Immutable Chain of Custody Manifests
-              </h2>
-              <span className={styles.tableCardCount}>
+              </T></h2>
+              <span className={styles.tableCardCount}><T>
                 SHA-256 Telemetry Logged
-              </span>
+              </T></span>
             </div>
 
             <div className={styles.tableWrapper}>
               <table className={styles.dataTable}>
                 <thead>
                   <tr>
-                    <th>Lot Identifier</th>
-                    <th>Collector (Source)</th>
-                    <th>Facility (Dest)</th>
-                    <th>Material</th>
-                    <th>Net Weight</th>
-                    <th>Cryptographic Hash</th>
-                    <th>Timestamp</th>
-                    <th>Regulatory State</th>
+                    <th><T>Lot Identifier</T></th>
+                    <th><T>Collector (Source)</T></th>
+                    <th><T>Facility (Dest)</T></th>
+                    <th><T>Material</T></th>
+                    <th><T>Net Weight</T></th>
+                    <th><T>Cryptographic Hash</T></th>
+                    <th><T>Timestamp</T></th>
+                    <th><T>Regulatory State</T></th>
                   </tr>
                 </thead>
                 <tbody>
-                  {AUDIT_MANIFESTS.map((manifest) => (
+                  <T>{AUDIT_MANIFESTS.map((manifest) => (
                     <tr key={manifest.lotId}>
-                      <td className={styles.primaryCell}>{manifest.lotId}</td>
-                      <td>{manifest.collectorName}</td>
-                      <td>{manifest.facilityName}</td>
-                      <td>{manifest.material}</td>
-                      <td>
+                      <td className={styles.primaryCell} data-label={translate("Lot Identifier")}><T>{manifest.lotId}</T></td>
+                      <td data-label={translate("Collector (Source)")}><T>{manifest.collectorName}</T></td>
+                      <td data-label={translate("Facility (Dest)")}><T>{manifest.facilityName}</T></td>
+                      <td data-label={translate("Material")}><T>{manifest.material}</T></td>
+                      <td data-label={translate("Net Weight")}>
                         <span
                           style={{
                             fontWeight: 700,
                             color: "var(--text-primary)",
                           }}
                         >
-                          {manifest.weight}
+                          <T>{manifest.weight}</T>
                         </span>
                       </td>
-                      <td>
+                      <td data-label={translate("Cryptographic Hash")}>
                         <span className={styles.monoCode}>
-                          {manifest.qrHash}
+                          <T>{manifest.qrHash}</T>
                         </span>
                       </td>
-                      <td>{manifest.timestamp}</td>
-                      <td>
+                      <td data-label={translate("Timestamp")}><T>{manifest.timestamp}</T></td>
+                      <td data-label={translate("Regulatory State")}>
                         <span className={styles.statusVerified}>
                           <CheckCircle2 size={12} />
-                          <span>{manifest.compliance}</span>
+                          <span><T>{manifest.compliance}</T></span>
                         </span>
                       </td>
                     </tr>
-                  ))}
+                  ))}</T>
                 </tbody>
               </table>
             </div>
           </div>
-        )}
+        )}</T>
 
         {/* Tab 3: Verification Queue */}
-        {activeTab === "verification" && (
+        <T>{activeTab === "verification" && (
           <div className={styles.tableCard}>
             <div className={styles.tableHeaderBar}>
-              <h2 className={styles.tableCardTitle}>
+              <h2 className={styles.tableCardTitle}><T>
                 Pending Facility Verification Queue
-              </h2>
+              </T></h2>
               <span className={styles.tableCardCount}>
-                {pendingCount} Units Pending
-              </span>
+                <T>{pendingCount}</T><T> Units Pending
+              </T></span>
             </div>
 
             <div className={styles.tableWrapper}>
               <table className={styles.dataTable}>
                 <thead>
                   <tr>
-                    <th>Facility</th>
-                    <th>Jurisdiction</th>
-                    <th>DPCC Application ID</th>
-                    <th>Intake Categories</th>
-                    <th>Review Priority</th>
-                    <th>Operational Action</th>
+                    <th><T>Facility</T></th>
+                    <th><T>Jurisdiction</T></th>
+                    <th><T>DPCC Application ID</T></th>
+                    <th><T>Intake Categories</T></th>
+                    <th><T>Review Priority</T></th>
+                    <th><T>Operational Action</T></th>
                   </tr>
                 </thead>
                 <tbody>
-                  {facilities
+                  <T>{facilities
                     .filter((f) => f.status === "pending")
                     .map((fac) => (
                       <tr key={fac.id}>
-                        <td className={styles.primaryCell}>{fac.name}</td>
-                        <td>{fac.region}</td>
-                        <td>
+                        <td className={styles.primaryCell} data-label={translate("Facility")}><T>{fac.name}</T></td>
+                        <td data-label={translate("Jurisdiction")}><T>{fac.region}</T></td>
+                        <td data-label={translate("DPCC Application ID")}>
                           <span className={styles.monoCode}>
-                            {fac.dpccRegId}
+                            <T>{fac.dpccRegId}</T>
                           </span>
                         </td>
-                        <td>{fac.category}</td>
-                        <td>
+                        <td data-label={translate("Intake Categories")}><T>{fac.category}</T></td>
+                        <td data-label={translate("Review Priority")}>
                           <span className={styles.statusPending}>
                             <AlertCircle size={12} />
-                            <span>HIGH PRIORITY</span>
+                            <span><T>HIGH PRIORITY</T></span>
                           </span>
                         </td>
-                        <td>
+                        <td data-label={translate("Operational Action")}>
                           <button
                             type="button"
                             className={styles.approveBtn}
@@ -625,12 +651,12 @@ export default function AdminWorkspace() {
                             }
                           >
                             <Check size={13} />
-                            <span>Issue DPCC License</span>
+                            <span><T>Issue DPCC License</T></span>
                           </button>
                         </td>
                       </tr>
-                    ))}
-                  {facilities.filter((f) => f.status === "pending").length ===
+                    ))}</T>
+                  <T>{facilities.filter((f) => f.status === "pending").length ===
                     0 && (
                     <tr>
                       <td
@@ -640,24 +666,24 @@ export default function AdminWorkspace() {
                           padding: "3rem 1rem",
                           color: "var(--text-muted)",
                         }}
-                      >
+                       data-label={translate("Facility")}>
                         <CheckCircle2
                           size={28}
                           color="var(--brand-primary)"
                           style={{ margin: "0 auto 0.5rem", display: "block" }}
                         />
-                        <span style={{ fontWeight: 600 }}>
+                        <span style={{ fontWeight: 600 }}><T>
                           All facility verification queues are cleared and
                           compliant!
-                        </span>
+                        </T></span>
                       </td>
                     </tr>
-                  )}
+                  )}</T>
                 </tbody>
               </table>
             </div>
           </div>
-        )}
+        )}</T>
       </div>
     </AppShell>
   );

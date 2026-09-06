@@ -1,4 +1,5 @@
 'use client';
+import { T, useLocale } from '@/components/language/Language';
 
 import React, { useRef, useEffect, useState } from 'react';
 import { Upload, Image as ImageIcon, X, Clipboard, Cpu, BatteryCharging, Zap } from 'lucide-react';
@@ -61,6 +62,8 @@ export default function ImageUploader({
   onImageSelected,
   onClearImage,
 }: ImageUploaderProps) {
+ const {t:translate}=useLocale();
+
   const [isDragging, setIsDragging] = useState(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -137,12 +140,12 @@ export default function ImageUploader({
 
   return (
     <div className={styles.uploaderContainer}>
-      {toastMessage && (
+      <T>{toastMessage && (
         <div className={styles.toastAlert}>
           <Clipboard size={16} />
-          <span>{toastMessage}</span>
+          <span><T>{toastMessage}</T></span>
         </div>
-      )}
+      )}</T>
 
       {/* Interactive Dropzone */}
       <div
@@ -161,7 +164,7 @@ export default function ImageUploader({
         onDrop={handleDrop}
         role="button"
         tabIndex={0}
-        aria-label="Upload scrap photo"
+        aria-label={translate("Upload scrap photo")}
       >
         <input
           type="file"
@@ -171,11 +174,11 @@ export default function ImageUploader({
           style={{ display: 'none' }}
         />
 
-        {selectedImageBase64 ? (
+        <T>{selectedImageBase64 ? (
           <div className={styles.previewWrapper}>
             <img
               src={selectedImageBase64}
-              alt="Selected scrap lot"
+              alt={translate("Selected scrap lot")}
               className={styles.previewImage}
             />
             <button
@@ -186,30 +189,30 @@ export default function ImageUploader({
                 onClearImage();
                 if (fileInputRef.current) fileInputRef.current.value = '';
               }}
-              aria-label="Remove image"
+              aria-label={translate("Remove image")}
             >
               <X size={14} />
-              <span>Remove</span>
+              <span><T>Remove</T></span>
             </button>
-            <div className={styles.replaceHint}>
-              Press <strong className={styles.highlightText}>⌘+V / Ctrl+V</strong> or click to replace
-            </div>
+            <div className={styles.replaceHint}><T>
+              Press </T><strong className={styles.highlightText}><T>⌘+V / Ctrl+V</T></strong><T> or click to replace
+            </T></div>
           </div>
         ) : (
           <div className={styles.dropzonePrompt}>
             <div className={styles.uploadIconCircle}>
-              {isDragging ? <Upload size={24} /> : <ImageIcon size={24} />}
+              <T>{isDragging ? <Upload size={24} /> : <ImageIcon size={24} />}</T>
             </div>
             <div>
               <span className={styles.dropzonePrimaryText}>
-                {isDragging ? 'Drop your photo here' : 'Add a scrap photo'}
+                <T>{isDragging ? 'Drop your photo here' : 'Add a scrap photo'}</T>
               </span>
-              <span className={styles.dropzoneSubText}>
+              <span className={styles.dropzoneSubText}><T>
                 Browse, drag a file, or paste · JPG, PNG, WebP
-              </span>
+              </T></span>
             </div>
           </div>
-        )}
+        )}</T>
       </div>
     </div>
   );

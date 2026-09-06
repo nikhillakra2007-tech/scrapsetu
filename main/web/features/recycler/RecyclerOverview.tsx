@@ -1,4 +1,5 @@
 "use client";
+import { T } from '@/components/language/Language';
 
 import React from "react";
 import {
@@ -41,52 +42,52 @@ export default function RecyclerOverview({
       <div className={`${styles.kpiGrid} drop-segment-2`}>
         <div className={styles.kpiCard}>
           <div className={styles.kpiHeader}>
-            <span>Incoming lots</span>
+            <span><T>Incoming lots</T></span>
             <Package size={18} className={styles.kpiIconBrand} />
           </div>
-          <div className={styles.kpiValue}>{matchedLots.length}</div>
+          <div className={styles.kpiValue}><T>{matchedLots.length}</T></div>
           <div className={styles.kpiSub}>
             <ArrowUpRight size={14} className={styles.kpiSuccessIcon} />
-            <span>Ready for your review</span>
+            <span><T>Ready for your review</T></span>
           </div>
         </div>
 
         <div className={styles.kpiCard}>
           <div className={styles.kpiHeader}>
-            <span>Available material</span>
+            <span><T>Available material</T></span>
             <Sparkles size={18} className={styles.kpiIconBrand} />
           </div>
           <div className={styles.kpiValue}>
-            {totalOfferedWeight.toFixed(1)} kg
-          </div>
+            <T>{totalOfferedWeight.toFixed(1)}</T><T> kg
+          </T></div>
           <div className={styles.kpiSub}>
-            <span>Across PCB, Batteries & Cables</span>
+            <span><T>Across PCB, Batteries & Cables</T></span>
           </div>
         </div>
 
         <div className={styles.kpiCard}>
           <div className={styles.kpiHeader}>
-            <span>Estimated value</span>
+            <span><T>Estimated value</T></span>
             <IndianRupee size={18} className={styles.kpiIconBrand} />
           </div>
-          <div className={styles.kpiValue}>
-            ₹{totalOfferedValue.toLocaleString()}
+          <div className={styles.kpiValue}><T>
+            ₹</T><T>{totalOfferedValue.toLocaleString()}</T>
           </div>
           <div className={styles.kpiSub}>
-            <span>Based on 7-day rolling benchmark</span>
+            <span><T>Based on 7-day rolling benchmark</T></span>
           </div>
         </div>
 
         <div className={styles.kpiCard}>
           <div className={styles.kpiHeader}>
-            <span>Digital records</span>
+            <span><T>Digital records</T></span>
             <ShieldCheck size={18} className={styles.kpiIconBrand} />
           </div>
-          <div className={styles.kpiValue}>QR</div>
+          <div className={styles.kpiValue}><T>QR</T></div>
           <div className={styles.kpiSub}>
-            <span className={styles.kpiSuccessText}>
+            <span className={styles.kpiSuccessText}><T>
               Keep a record of each exchange
-            </span>
+            </T></span>
           </div>
         </div>
       </div>
@@ -95,45 +96,45 @@ export default function RecyclerOverview({
       <div className={`${styles.bannerCard} drop-segment-3`}>
         <div className={styles.bannerContent}>
           <div className={styles.bannerBadgeRow}>
-            <span className={styles.bannerBadge}>A LITTLE MOMENTUM</span>
-            <span className={styles.bannerZone}>Mandoli & Okhla Zones</span>
+            <span className={styles.bannerBadge}><T>A LITTLE MOMENTUM</T></span>
+            <span className={styles.bannerZone}><T>Mandoli & Okhla Zones</T></span>
           </div>
-          <h3 className={styles.bannerTitle}>
+          <h3 className={styles.bannerTitle}><T>
             Your next good exchange is waiting.
-          </h3>
-          <p className={styles.bannerDesc}>
+          </T></h3>
+          <p className={styles.bannerDesc}><T>
             Explore materials matched to your facility. Review the details and
             choose what works for you.
-          </p>
+          </T></p>
         </div>
         <div className={styles.bannerActions}>
           <button
             type="button"
             className={styles.primaryActionBtn}
             onClick={onNavigateToLots}
-          >
+          ><T>
             Explore incoming lots
-          </button>
+          </T></button>
           <button
             type="button"
             className={styles.secondaryActionBtn}
             onClick={onNavigateToRateCards}
-          >
+          ><T>
             Manage rates
-          </button>
+          </T></button>
         </div>
       </div>
 
       {/* Recent Candidate Lots Table */}
       <div className={`${styles.tableCard} drop-segment-4`}>
         <div className={styles.cardHeaderBar}>
-          <h3 className={styles.cardTitle}>Materials worth a closer look</h3>
+          <h3 className={styles.cardTitle}><T>Materials worth a closer look</T></h3>
           <button
             type="button"
             className={styles.viewAllBtn}
             onClick={onNavigateToLots}
           >
-            <span>View All ({matchedLots.length})</span>
+            <span><T>View All (</T><T>{matchedLots.length}</T><T>)</T></span>
             <ArrowRight size={14} />
           </button>
         </div>
@@ -142,62 +143,62 @@ export default function RecyclerOverview({
           <table className={styles.customTable}>
             <thead>
               <tr>
-                <th>Category</th>
-                <th>Collector</th>
-                <th>Weight</th>
-                <th>Indicative rate</th>
-                <th>Estimated Total</th>
-                <th>Match</th>
-                <th>Action</th>
+                <th><T>Category</T></th>
+                <th><T>Collector</T></th>
+                <th><T>Weight</T></th>
+                <th><T>Indicative rate</T></th>
+                <th><T>Estimated Total</T></th>
+                <th><T>Match</T></th>
+                <th><T>Action</T></th>
               </tr>
             </thead>
             <tbody>
-              {matchedLots.slice(0, 4).map((match) => (
+              <T>{matchedLots.slice(0, 4).map((match) => (
                 <tr key={match.id}>
                   <td>
                     <div className={styles.tablePrimaryText}>
-                      {match.lot?.sub_code.replace(/_/g, " ").toUpperCase()}
+                      <T>{match.lot?.sub_code.replace(/_/g, " ").toUpperCase()}</T>
                     </div>
                     <div className={styles.tableSecondaryText}>
-                      {match.lot?.parent_code}
+                      <T>{match.lot?.parent_code}</T>
                     </div>
                   </td>
                   <td>
                     <div className={styles.collectorNameRow}>
                       <MapPin size={13} className={styles.locationPin} />
-                      <span>{match.lot?.collector_name}</span>
+                      <span><T>{match.lot?.collector_name}</T></span>
                     </div>
                     <div className={styles.tableSecondaryText}>
-                      {match.lot?.ward_name}
+                      <T>{match.lot?.ward_name}</T>
                     </div>
                   </td>
                   <td>
                     <span className={styles.weightCell}>
-                      {match.lot?.weight_kg} kg
-                    </span>
+                      <T>{match.lot?.weight_kg}</T><T> kg
+                    </T></span>
                   </td>
-                  <td>₹{match.lot?.ai_suggested_rate_per_kg}/kg</td>
+                  <td><T>₹</T><T>{match.lot?.ai_suggested_rate_per_kg}</T><T>/kg</T></td>
                   <td>
-                    <span className={styles.valuationCell}>
-                      ₹{match.lot?.estimated_value.toLocaleString()}
+                    <span className={styles.valuationCell}><T>
+                      ₹</T><T>{match.lot?.estimated_value.toLocaleString()}</T>
                     </span>
                   </td>
                   <td>
                     <span className={styles.matchScoreBadge}>
-                      {match.score}% match
-                    </span>
+                      <T>{match.score}</T><T>% match
+                    </T></span>
                   </td>
                   <td>
                     <button
                       type="button"
                       className={styles.inspectBtn}
                       onClick={onNavigateToLots}
-                    >
+                    ><T>
                       Inspect
-                    </button>
+                    </T></button>
                   </td>
                 </tr>
-              ))}
+              ))}</T>
             </tbody>
           </table>
         </div>

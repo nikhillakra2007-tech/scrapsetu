@@ -1,4 +1,5 @@
 "use client";
+import { T } from '@/components/language/Language';
 
 import React, { useState, useEffect } from "react";
 import AppShell from "@/components/shell/AppShell";
@@ -120,9 +121,9 @@ export default function RecyclerWorkspace() {
             color: "var(--text-secondary, #52606D)",
             fontWeight: 600,
           }}
-        >
+        ><T>
           Verifying Recycler credentials...
-        </span>
+        </T></span>
       </div>
     );
   }
@@ -142,33 +143,33 @@ export default function RecyclerWorkspace() {
         <div className={styles.facilityHeader}>
           <div className={styles.facilityHeaderLeft}>
             <div className={styles.titleRow}>
-              <h1 className={styles.facilityTitle}>
+              <h1 className={styles.facilityTitle}><T>
                 Your facility, at a glance.
-              </h1>
+              </T></h1>
               <span className={styles.verifiedBadge}>
                 <CheckCircle2 size={13} />
-                <span>DPCC Authorized</span>
+                <span><T>DPCC Authorized</T></span>
               </span>
             </div>
-            <p className={styles.facilitySubtitle}>
+            <p className={styles.facilitySubtitle}><T>
               Review incoming materials, manage your rates, and keep every
               handover in one place.
-            </p>
+            </T></p>
 
             <div className={styles.facilityMetaRow}>
               <span className={styles.facilityMetaItem}>
                 <MapPin size={14} />
-                <span>Okhla Industrial Area, Phase III</span>
+                <span><T>Okhla Industrial Area, Phase III</T></span>
               </span>
               <span className={styles.facilityMetaItem}>
-                <span>REG ID:</span>
-                <span className={styles.facilityMetaMono}>
+                <span><T>REG ID:</T></span>
+                <span className={styles.facilityMetaMono}><T>
                   DPCC/EW/2024/0981
-                </span>
+                </T></span>
               </span>
               <span className={styles.facilityMetaItem}>
                 <ShieldCheck size={14} color="var(--brand-primary)" />
-                <span>EPR Traceability: Active</span>
+                <span><T>EPR Traceability: Active</T></span>
               </span>
             </div>
           </div>
@@ -176,37 +177,37 @@ export default function RecyclerWorkspace() {
 
         {/* Clean Active Feature Subview Surface */}
         <div className={styles.activeViewSurface} key={activeTab}>
-          {activeTab === "recycler-overview" && (
+          <T>{activeTab === "recycler-overview" && (
             <RecyclerOverview
               matchedLots={matchedLots}
               onNavigateToLots={() => setActiveTab("matched-lots")}
               onNavigateToHandover={() => setActiveTab("handover")}
               onNavigateToRateCards={() => setActiveTab("rate-cards")}
             />
-          )}
+          )}</T>
 
-          {activeTab === "matched-lots" && (
+          <T>{activeTab === "matched-lots" && (
             <MatchedLotsQueue
               lots={matchedLots}
               onAcceptLot={handleAcceptLot}
               onInitiateHandover={handleInitiateHandover}
             />
-          )}
+          )}</T>
 
-          {activeTab === "handover" && <HandoverTraceabilityView />}
+          <T>{activeTab === "handover" && <HandoverTraceabilityView />}</T>
 
-          {activeTab === "rate-cards" && <RateCardManager />}
+          <T>{activeTab === "rate-cards" && <RateCardManager />}</T>
         </div>
       </div>
 
       {/* Handover Verification Modal */}
-      {isHandoverModalOpen && (
+      <T>{isHandoverModalOpen && (
         <HandoverVerificationModal
           match={selectedHandoverMatch}
           onClose={() => setIsHandoverModalOpen(false)}
           onSuccess={handleHandoverSuccess}
         />
-      )}
+      )}</T>
     </AppShell>
   );
 }

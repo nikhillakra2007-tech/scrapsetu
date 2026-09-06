@@ -1,4 +1,5 @@
 'use client';
+import { T, useLocale } from '@/components/language/Language';
 
 import React, { useState } from 'react';
 import {
@@ -22,6 +23,8 @@ export default function HandoverVerificationModal({
   onClose,
   onSuccess,
 }: HandoverVerificationProps) {
+ const {t:translate}=useLocale();
+
   const lot = match?.lot;
   const [scaleWeight, setScaleWeight] = useState<string>(
     lot ? String(lot.weight_kg) : '14.20'
@@ -53,63 +56,63 @@ export default function HandoverVerificationModal({
             </div>
             <div>
               <h3 className={styles.modalTitle}>
-                {isCompleted ? 'Handover Confirmed' : 'Verify Handover & Traceability'}
+                <T>{isCompleted ? 'Handover Confirmed' : 'Verify Handover & Traceability'}</T>
               </h3>
-              <p className={styles.modalSubtitle}>
+              <p className={styles.modalSubtitle}><T>
                 DPCC Rule 2022 Traceability Record · NCT of Delhi
-              </p>
+              </T></p>
             </div>
           </div>
           <button
             type="button"
             className={styles.closeBtn}
             onClick={onClose}
-            aria-label="Close modal"
+            aria-label={translate("Close modal")}
           >
             <X size={20} />
           </button>
         </div>
 
-        {isCompleted ? (
+        <T>{isCompleted ? (
           /* Confirmation Receipt View */
           <div className={styles.receiptView}>
             <div className={styles.receiptBanner}>
               <CheckCircle2 size={44} className={styles.receiptCheckIcon} />
-              <h4 className={styles.receiptTitle}>Handover Confirmed & Locked</h4>
-              <p className={styles.receiptDesc}>
+              <h4 className={styles.receiptTitle}><T>Handover Confirmed & Locked</T></h4>
+              <p className={styles.receiptDesc}><T>
                 A permanent audit record has been anchored with timestamp & coordinates.
-              </p>
+              </T></p>
 
               {/* Unique Reference QR Token */}
               <div className={styles.qrTokenBox}>
                 <QrCode size={36} className={styles.qrIcon} />
                 <div className={styles.qrTextGroup}>
-                  <div className={styles.qrLabel}>UNIQUE HANDOVER ID</div>
-                  <div className={styles.qrCodeValue}>{generatedCode}</div>
+                  <div className={styles.qrLabel}><T>UNIQUE HANDOVER ID</T></div>
+                  <div className={styles.qrCodeValue}><T>{generatedCode}</T></div>
                 </div>
               </div>
             </div>
 
             <div className={styles.receiptDetails}>
               <div className={styles.detailRow}>
-                <span className={styles.detailLabel}>Material:</span>
+                <span className={styles.detailLabel}><T>Material:</T></span>
                 <span className={styles.detailValue}>
-                  {lot?.sub_code.replace(/_/g, ' ').toUpperCase() || 'ELECTRONIC SCRAP'}
+                  <T>{lot?.sub_code.replace(/_/g, ' ').toUpperCase() || 'ELECTRONIC SCRAP'}</T>
                 </span>
               </div>
               <div className={styles.detailRow}>
-                <span className={styles.detailLabel}>Verified Scale Weight:</span>
-                <span className={styles.detailValue}>{scaleWeight} kg</span>
+                <span className={styles.detailLabel}><T>Verified Scale Weight:</T></span>
+                <span className={styles.detailValue}><T>{scaleWeight}</T><T> kg</T></span>
               </div>
               <div className={styles.detailRow}>
-                <span className={styles.detailLabel}>Final Payout:</span>
-                <span className={styles.detailValueHighlight}>
-                  ₹{finalPayout.toLocaleString()} ({paymentMode.toUpperCase()})
-                </span>
+                <span className={styles.detailLabel}><T>Final Payout:</T></span>
+                <span className={styles.detailValueHighlight}><T>
+                  ₹</T><T>{finalPayout.toLocaleString()}</T><T> (</T><T>{paymentMode.toUpperCase()}</T><T>)
+                </T></span>
               </div>
               <div className={styles.detailRow}>
-                <span className={styles.detailLabel}>Facility Location:</span>
-                <span className={styles.detailValue}>Mandoli Industrial Area (DPCC-033)</span>
+                <span className={styles.detailLabel}><T>Facility Location:</T></span>
+                <span className={styles.detailValue}><T>Mandoli Industrial Area (DPCC-033)</T></span>
               </div>
             </div>
 
@@ -117,9 +120,9 @@ export default function HandoverVerificationModal({
               type="button"
               className={styles.finishBtn}
               onClick={onClose}
-            >
+            ><T>
               Done & Return to Dashboard
-            </button>
+            </T></button>
           </div>
         ) : (
           /* Handover Entry Form */
@@ -127,7 +130,7 @@ export default function HandoverVerificationModal({
             <div className={styles.formGroup}>
               <label htmlFor="facility-scale-weight" className={styles.formLabel}>
                 <Scale size={15} />
-                <span>Facility Weighbridge Scale Reading (kg)</span>
+                <span><T>Facility Weighbridge Scale Reading (kg)</T></span>
               </label>
               <input
                 id="facility-scale-weight"
@@ -136,55 +139,55 @@ export default function HandoverVerificationModal({
                 className={styles.scaleInput}
                 value={scaleWeight}
                 onChange={(e) => setScaleWeight(e.target.value)}
-                placeholder="Enter physical scale weight"
+                placeholder={translate("Enter physical scale weight")}
                 required
               />
-              <span className={styles.reportedWeightHint}>
-                Collector reported weight: {lot?.weight_kg || '14.2'} kg
-              </span>
+              <span className={styles.reportedWeightHint}><T>
+                Collector reported weight: </T><T>{lot?.weight_kg || '14.2'}</T><T> kg
+              </T></span>
             </div>
 
             <div className={styles.formGroup}>
-              <label className={styles.formLabel}>Confirmation Method</label>
+              <label className={styles.formLabel}><T>Confirmation Method</T></label>
               <div className={styles.toggleGrid3}>
-                {(['app_tap', 'otp', 'qr_scan'] as const).map((method) => (
+                <T>{(['app_tap', 'otp', 'qr_scan'] as const).map((method) => (
                   <button
                     key={method}
                     type="button"
                     className={`${styles.toggleBtn} ${confirmationMethod === method ? styles.toggleBtnActive : ''}`}
                     onClick={() => setConfirmationMethod(method)}
                   >
-                    {method.replace('_', ' ').toUpperCase()}
+                    <T>{method.replace('_', ' ').toUpperCase()}</T>
                   </button>
-                ))}
+                ))}</T>
               </div>
             </div>
 
             <div className={styles.formGroup}>
-              <label className={styles.formLabel}>Settlement Mode</label>
+              <label className={styles.formLabel}><T>Settlement Mode</T></label>
               <div className={styles.toggleGrid2}>
-                {(['cash', 'upi'] as const).map((mode) => (
+                <T>{(['cash', 'upi'] as const).map((mode) => (
                   <button
                     key={mode}
                     type="button"
                     className={`${styles.toggleBtn} ${paymentMode === mode ? styles.toggleBtnActive : ''}`}
                     onClick={() => setPaymentMode(mode)}
                   >
-                    {mode === 'cash' ? 'Cash First (Default)' : 'UPI Deep-Link'}
+                    <T>{mode === 'cash' ? 'Cash First (Default)' : 'UPI Deep-Link'}</T>
                   </button>
-                ))}
+                ))}</T>
               </div>
             </div>
 
             {/* Payout Calculation Box */}
             <div className={styles.payoutCalcBox}>
               <div className={styles.payoutRow}>
-                <span className={styles.payoutLabel}>Calculated Payout:</span>
-                <span className={styles.payoutAmount}>₹{finalPayout.toLocaleString()}</span>
+                <span className={styles.payoutLabel}><T>Calculated Payout:</T></span>
+                <span className={styles.payoutAmount}><T>₹</T><T>{finalPayout.toLocaleString()}</T></span>
               </div>
-              <div className={styles.payoutFormula}>
-                Agreed Rate: ₹{rate}/kg × {scaleWeight} kg scale reading
-              </div>
+              <div className={styles.payoutFormula}><T>
+                Agreed Rate: ₹</T><T>{rate}</T><T>/kg × </T><T>{scaleWeight}</T><T> kg scale reading
+              </T></div>
             </div>
 
             <div className={styles.modalActionRow}>
@@ -192,19 +195,19 @@ export default function HandoverVerificationModal({
                 type="button"
                 className={styles.cancelBtn}
                 onClick={onClose}
-              >
+              ><T>
                 Cancel
-              </button>
+              </T></button>
               <button
                 type="button"
                 className={styles.confirmHandoverBtn}
                 onClick={handleConfirm}
-              >
+              ><T>
                 Sign & Confirm Handover
-              </button>
+              </T></button>
             </div>
           </div>
-        )}
+        )}</T>
       </div>
     </div>
   );

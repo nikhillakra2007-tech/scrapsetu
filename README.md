@@ -1,6 +1,8 @@
 # ScrapSetu (Kabadiwala Connect)
 ### Bridging Informal E-Waste Collectors into the Formal, Traceable Value Chain
 
+**Live site:** [https://scrapsetu.vercel.app](https://scrapsetu.vercel.app)
+
 > **Smart India Hackathon** — JNARDDC / Ministry of Mines (Problem Statement ID: **26229**)  
 > **Pilot Geography**: National Capital Territory (NCT) of Delhi (*Mandoli/Shahdara, Okhla, Patparganj, Peeragarhi, Mohan Cooperative*)  
 > **Regulatory Alignment**: E-Waste (Management) Rules, 2022 & CPCB/DPCC EPR Guidelines  

@@ -1,4 +1,5 @@
 'use client';
+import { T, useLocale } from '@/components/language/Language';
 
 import React, { useState } from 'react';
 import {
@@ -12,6 +13,8 @@ import { MOCK_PRICE_BOARD } from '@/lib/mock-data';
 import styles from './PriceBoard.module.css';
 
 export default function LivePriceBoard() {
+ const {t:translate}=useLocale();
+
   const [speakingItem, setSpeakingItem] = useState<string | null>(null);
 
   // Audio Speech Synthesis for accessibility / low-literacy users (PRD FR10)
@@ -38,19 +41,19 @@ export default function LivePriceBoard() {
       {/* Page Header */}
       <div className={styles.pageHeader}>
         <div>
-          <h2 className={styles.pageTitle}>Delhi E-Waste Price Board</h2>
-          <p className={styles.pageSubtitle}>
+          <h2 className={styles.pageTitle}><T>Delhi E-Waste Price Board</T></h2>
+          <p className={styles.pageSubtitle}><T>
             7-day rolling benchmark aggregated from verified formal recyclers across Delhi industrial clusters.
-          </p>
+          </T></p>
         </div>
         <div className={styles.updateBadge}>
-          <span>UPDATED HOURLY · DPCC RECYCLER POOL</span>
+          <span><T>UPDATED HOURLY · DPCC RECYCLER POOL</T></span>
         </div>
       </div>
 
       {/* Benchmark Cards Grid */}
       <div className={styles.cardsGrid}>
-        {MOCK_PRICE_BOARD.map((item) => {
+        <T>{MOCK_PRICE_BOARD.map((item) => {
           const isSpeaking = speakingItem === item.sub_code;
 
           return (
@@ -58,71 +61,71 @@ export default function LivePriceBoard() {
               <div>
                 {/* Header Tag and Audio Action */}
                 <div className={styles.cardHeader}>
-                  <span className={styles.cpcbTag}>{item.parent_code}</span>
+                  <span className={styles.cpcbTag}><T>{item.parent_code}</T></span>
 
                   <div className={styles.headerRightGroup}>
-                    {item.is_hazardous && (
+                    <T>{item.is_hazardous && (
                       <span className={styles.hazardTag}>
                         <AlertTriangle size={11} />
-                        <span>HAZARDOUS</span>
+                        <span><T>HAZARDOUS</T></span>
                       </span>
-                    )}
+                    )}</T>
 
                     {/* Hindi Audio Read-Aloud */}
                     <button
                       type="button"
                       onClick={() => speakPrice(item)}
                       className={`${styles.speechBtn} ${isSpeaking ? styles.speechBtnSpeaking : ''}`}
-                      title="Read aloud in Hindi"
+                      title={translate("Read aloud in Hindi")}
                     >
                       <Volume2 size={13} />
-                      <span>{isSpeaking ? 'बोल रहा है...' : 'बोलें 🔊'}</span>
+                      <span><T>{isSpeaking ? 'बोल रहा है...' : 'बोलें 🔊'}</T></span>
                     </button>
                   </div>
                 </div>
 
-                <h3 className={styles.itemTitle}>{item.sub_name}</h3>
+                <h3 className={styles.itemTitle}><T>{item.sub_name}</T></h3>
 
                 {/* Main Benchmark Price */}
                 <div className={styles.priceRow}>
-                  <div className={styles.priceValue}>₹{item.avg_price_per_kg}</div>
-                  <div className={styles.priceUnit}>/ kg</div>
+                  <div className={styles.priceValue}><T>₹</T><T>{item.avg_price_per_kg}</T></div>
+                  <div className={styles.priceUnit}><T>/ kg</T></div>
 
-                  {item.trend_percentage && (
+                  <T>{item.trend_percentage && (
                     <div
                       className={`${styles.trendBadge} ${
                         item.trend_percentage >= 0 ? styles.trendPositive : styles.trendNegative
                       }`}
                     >
-                      {item.trend_percentage >= 0 ? (
+                      <T>{item.trend_percentage >= 0 ? (
                         <ArrowUpRight size={14} />
                       ) : (
                         <ArrowDownRight size={14} />
-                      )}
-                      <span>{Math.abs(item.trend_percentage)}% 7d</span>
+                      )}</T>
+                      <span><T>{Math.abs(item.trend_percentage)}</T><T>% 7d</T></span>
                     </div>
-                  )}
+                  )}</T>
                 </div>
 
                 {/* Min / Max Spread Box */}
                 <div className={styles.spreadBox}>
                   <div className={styles.spreadItem}>
-                    <span className={styles.spreadLabel}>Min: </span>
-                    <strong className={styles.spreadVal}>₹{item.min_price_per_kg}/kg</strong>
+                    <span className={styles.spreadLabel}><T>Min: </T></span>
+                    <strong className={styles.spreadVal}><T>₹</T><T>{item.min_price_per_kg}</T><T>/kg</T></strong>
                   </div>
                   <div className={styles.spreadItem}>
-                    <span className={styles.spreadLabel}>Max: </span>
-                    <strong className={styles.spreadVal}>₹{item.max_price_per_kg}/kg</strong>
+                    <span className={styles.spreadLabel}><T>Max: </T></span>
+                    <strong className={styles.spreadVal}><T>₹</T><T>{item.max_price_per_kg}</T><T>/kg</T></strong>
                   </div>
                   <div className={styles.spreadItem}>
-                    <span className={styles.spreadLabel}>Trades: </span>
-                    <span>{item.data_points_count}</span>
+                    <span className={styles.spreadLabel}><T>Trades: </T></span>
+                    <span><T>{item.data_points_count}</T></span>
                   </div>
                 </div>
               </div>
             </div>
           );
-        })}
+        })}</T>
       </div>
     </div>
   );

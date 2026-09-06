@@ -3,6 +3,15 @@
   color: #a0b890;
   font-family: var(--font-sans);
 }
+
+@media(min-width:1700px){
+ .diagram:not(.compact) .cycle { max-width:none; }
+ .diagram:not(.compact) .center > span { font-size:clamp(38px,6.5cqw,62px); }
+ .diagram:not(.compact) .node { font-size:clamp(14px,2.3cqw,22px); padding:1em .5em; }
+ .diagram:not(.compact) .description strong { font-size:clamp(16px,2.5cqw,24px); }
+ .diagram:not(.compact) .description p { font-size:clamp(14px,2.1cqw,20px); max-width:30em; }
+ .diagram:not(.compact) .center > small { font-size:clamp(9px,1.4cqw,13px); }
+}
 .topline {
   display: flex;
   justify-content: space-between;

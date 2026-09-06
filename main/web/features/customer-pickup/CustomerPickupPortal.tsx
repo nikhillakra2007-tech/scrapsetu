@@ -1,4 +1,5 @@
 'use client';
+import { T, useLocale } from '@/components/language/Language';
 
 import React, { useState } from 'react';
 import {
@@ -16,6 +17,8 @@ import { MOCK_PICKUP_REQUESTS } from '@/lib/mock-data';
 import styles from './CustomerPickup.module.css';
 
 export default function CustomerPickupPortal() {
+ const {t:translate}=useLocale();
+
   const [activeSubTab, setActiveSubTab] = useState<'book' | 'estimator' | 'track'>('book');
   const [requests, setRequests] = useState<CustomerPickupRequest[]>(MOCK_PICKUP_REQUESTS);
   const [isBulk, setIsBulk] = useState(false);
@@ -73,10 +76,10 @@ export default function CustomerPickupPortal() {
       {/* Page Header */}
       <div className={styles.pageHeader}>
         <div>
-          <h2 className={styles.pageTitle}>Household & Bulk E-Waste Pickups</h2>
-          <p className={styles.pageSubtitle}>
+          <h2 className={styles.pageTitle}><T>Household & Bulk E-Waste Pickups</T></h2>
+          <p className={styles.pageSubtitle}><T>
             Connect directly with verified local kabadiwalas or authorized recyclers for door-to-door e-waste pickup.
-          </p>
+          </T></p>
         </div>
 
         {/* Sub-Navigation Tabs */}
@@ -87,7 +90,7 @@ export default function CustomerPickupPortal() {
             onClick={() => setActiveSubTab('book')}
           >
             <Truck size={14} />
-            <span>Book a Pickup</span>
+            <span><T>Book a Pickup</T></span>
           </button>
           <button
             type="button"
@@ -95,29 +98,29 @@ export default function CustomerPickupPortal() {
             onClick={() => setActiveSubTab('estimator')}
           >
             <Calculator size={14} />
-            <span>Price Estimator</span>
+            <span><T>Price Estimator</T></span>
           </button>
           <button
             type="button"
             className={`${styles.tabNavBtn} ${activeSubTab === 'track' ? styles.tabNavBtnActive : ''}`}
             onClick={() => setActiveSubTab('track')}
           >
-            <span>Track Requests ({requests.length})</span>
+            <span><T>Track Requests (</T><T>{requests.length}</T><T>)</T></span>
           </button>
         </div>
       </div>
 
       {/* 1. BOOKING FORM */}
-      {activeSubTab === 'book' && (
+      <T>{activeSubTab === 'book' && (
         <div className={styles.formCenterWrapper}>
           <div className={styles.contentCard}>
-            {submittedSuccess ? (
+            <T>{submittedSuccess ? (
               <div className={styles.successState}>
                 <CheckCircle2 size={44} className={styles.successCheckIcon} />
-                <h3 className={styles.successTitle}>Pickup Request Broadcasted!</h3>
-                <p className={styles.successDesc}>
+                <h3 className={styles.successTitle}><T>Pickup Request Broadcasted!</T></h3>
+                <p className={styles.successDesc}><T>
                   Your request has been routed to verified informal collectors in your Delhi ward.
-                </p>
+                </T></p>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className={styles.bookingForm}>
@@ -129,7 +132,7 @@ export default function CustomerPickupPortal() {
                     onClick={() => setIsBulk(false)}
                   >
                     <Home size={18} />
-                    <span>Household Generator</span>
+                    <span><T>Household Generator</T></span>
                   </button>
                   <button
                     type="button"
@@ -137,19 +140,19 @@ export default function CustomerPickupPortal() {
                     onClick={() => setIsBulk(true)}
                   >
                     <Building2 size={18} />
-                    <span>Bulk / Institutional Generator</span>
+                    <span><T>Bulk / Institutional Generator</T></span>
                   </button>
                 </div>
 
                 <div className={styles.formGroup}>
-                  <label htmlFor="customer-phone" className={styles.formLabel}>
+                  <label htmlFor="customer-phone" className={styles.formLabel}><T>
                     Phone Number (For Collector Arrival SMS)
-                  </label>
+                  </T></label>
                   <input
                     id="customer-phone"
                     type="tel"
                     className={styles.formInput}
-                    placeholder="+91 98112 34567"
+                    placeholder={translate("+91 98112 34567")}
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     required
@@ -157,14 +160,14 @@ export default function CustomerPickupPortal() {
                 </div>
 
                 <div className={styles.formGroup}>
-                  <label htmlFor="customer-address" className={styles.formLabel}>
+                  <label htmlFor="customer-address" className={styles.formLabel}><T>
                     Pickup Address & Ward (Delhi)
-                  </label>
+                  </T></label>
                   <input
                     id="customer-address"
                     type="text"
                     className={styles.formInput}
-                    placeholder="e.g. Flat 302, Mayur Vihar Ph-1, East Delhi"
+                    placeholder={translate("e.g. Flat 302, Mayur Vihar Ph-1, East Delhi")}
                     value={address}
                     onChange={(e) => setAddress(e.target.value)}
                     required
@@ -172,14 +175,14 @@ export default function CustomerPickupPortal() {
                 </div>
 
                 <div className={styles.formGroup}>
-                  <label htmlFor="customer-desc" className={styles.formLabel}>
+                  <label htmlFor="customer-desc" className={styles.formLabel}><T>
                     Material Description
-                  </label>
+                  </T></label>
                   <textarea
                     id="customer-desc"
                     rows={3}
                     className={styles.formTextarea}
-                    placeholder="Describe scrap electronics: e.g. 2 old laptops, 4 chargers, 1 desktop CPU..."
+                    placeholder={translate("Describe scrap electronics: e.g. 2 old laptops, 4 chargers, 1 desktop CPU...")}
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                     required
@@ -188,9 +191,9 @@ export default function CustomerPickupPortal() {
 
                 <div className={styles.twoColRow}>
                   <div className={styles.formGroup}>
-                    <label htmlFor="customer-weight" className={styles.formLabel}>
+                    <label htmlFor="customer-weight" className={styles.formLabel}><T>
                       Estimated Weight (kg)
-                    </label>
+                    </T></label>
                     <input
                       id="customer-weight"
                       type="number"
@@ -202,9 +205,9 @@ export default function CustomerPickupPortal() {
                     />
                   </div>
                   <div className={styles.formGroup}>
-                    <label htmlFor="customer-date" className={styles.formLabel}>
+                    <label htmlFor="customer-date" className={styles.formLabel}><T>
                       Preferred Date
-                    </label>
+                    </T></label>
                     <input
                       id="customer-date"
                       type="date"
@@ -217,67 +220,67 @@ export default function CustomerPickupPortal() {
                 </div>
 
                 <div className={styles.formGroup}>
-                  <label htmlFor="customer-window" className={styles.formLabel}>
+                  <label htmlFor="customer-window" className={styles.formLabel}><T>
                     Preferred Time Window
-                  </label>
+                  </T></label>
                   <select
                     id="customer-window"
                     className={styles.formSelect}
                     value={preferredWindow}
                     onChange={(e) => setPreferredWindow(e.target.value)}
                   >
-                    <option>09:00 AM - 12:00 PM</option>
-                    <option>12:00 PM - 03:00 PM</option>
-                    <option>03:00 PM - 06:00 PM</option>
+                    <option><T>09:00 AM - 12:00 PM</T></option>
+                    <option><T>12:00 PM - 03:00 PM</T></option>
+                    <option><T>03:00 PM - 06:00 PM</T></option>
                   </select>
                 </div>
 
-                <button type="submit" className={styles.submitBtn}>
+                <button type="submit" className={styles.submitBtn}><T>
                   Confirm & Request Collector Pickup
-                </button>
+                </T></button>
               </form>
-            )}
+            )}</T>
           </div>
         </div>
-      )}
+      )}</T>
 
       {/* 2. PRICE ESTIMATOR (FR15) */}
-      {activeSubTab === 'estimator' && (
+      <T>{activeSubTab === 'estimator' && (
         <div className={styles.estimatorCenterWrapper}>
           <div className={styles.contentCard}>
             <div className={styles.cardHeaderBar}>
               <h3 className={styles.estimatorTitle}>
                 <Sparkles size={18} className={styles.sparkleIcon} />
-                <span>Indicative Fair Market Price Calculator</span>
+                <span><T>Indicative Fair Market Price Calculator</T></span>
               </h3>
             </div>
-            <p className={styles.estimatorSubtitle}>
+            <p className={styles.estimatorSubtitle}><T>
               Check prevailing benchmark rates before handing over material to prevent lowball offers.
-            </p>
+            </T></p>
 
             <div className={styles.formGroup}>
-              <label htmlFor="est-category" className={styles.formLabel}>
+              <label htmlFor="est-category" className={styles.formLabel}><T>
                 Select E-Waste Category
-              </label>
+              </T></label>
               <select
                 id="est-category"
                 className={styles.formSelect}
                 value={estCategory}
                 onChange={(e) => setEstCategory(e.target.value)}
               >
-                <option value="PCB">Printed Circuit Boards (Mobile/PC Motherboards)</option>
-                <option value="BATTERY">Batteries (Lithium-Ion / Lead Acid)</option>
-                <option value="CABLE_WIRE">Cables & Wires (Copper)</option>
-                <option value="LCD_LED_PANEL">Flat Displays & Panels</option>
-                <option value="METAL_SCRAP">Heavy Scrap Metal / Copper</option>
-                <option value="WHOLE_DEVICE">Whole Intact Devices (Laptops/Phones)</option>
+                <option value="PCB"><T>Printed Circuit Boards (Mobile/PC Motherboards)</T></option>
+                <option value="BATTERY"><T>Batteries (Lithium-Ion / Lead Acid)</T></option>
+                <option value="CABLE_WIRE"><T>Cables & Wires (Copper)</T></option>
+                <option value="LCD_LED_PANEL"><T>Flat Displays & Panels</T></option>
+                <option value="METAL_SCRAP"><T>Heavy Scrap Metal / Copper</T></option>
+                <option value="WHOLE_DEVICE"><T>Whole Intact Devices (Laptops/Phones)</T></option>
               </select>
             </div>
 
             <div className={styles.formGroup}>
-              <label htmlFor="est-weight" className={styles.formLabel}>
+              <label htmlFor="est-weight" className={styles.formLabel}><T>
                 Approximate Weight (kg)
-              </label>
+              </T></label>
               <input
                 id="est-weight"
                 type="number"
@@ -290,68 +293,68 @@ export default function CustomerPickupPortal() {
 
             {/* Calculated Fair Valuation Box */}
             <div className={styles.estimateResultBox}>
-              <div className={styles.estimateLabel}>
+              <div className={styles.estimateLabel}><T>
                 Estimated Fair Handover Value
+              </T></div>
+              <div className={styles.estimateValue}><T>
+                ₹</T><T>{calculatedEstimate.toLocaleString()}</T>
               </div>
-              <div className={styles.estimateValue}>
-                ₹{calculatedEstimate.toLocaleString()}
-              </div>
-              <div className={styles.estimateSub}>
-                Indicative rate: ₹{getEstRate(estCategory)}/kg (7-Day Rolling Delhi Average)
-              </div>
+              <div className={styles.estimateSub}><T>
+                Indicative rate: ₹</T><T>{getEstRate(estCategory)}</T><T>/kg (7-Day Rolling Delhi Average)
+              </T></div>
             </div>
           </div>
         </div>
-      )}
+      )}</T>
 
       {/* 3. TRACKING LIST */}
-      {activeSubTab === 'track' && (
+      <T>{activeSubTab === 'track' && (
         <div className={styles.tableCard}>
           <div className={styles.tableResponsive}>
             <table className={styles.customTable}>
               <thead>
                 <tr>
-                  <th>Request ID</th>
-                  <th>Customer Phone</th>
-                  <th>Pickup Address</th>
-                  <th>Materials</th>
-                  <th>Weight</th>
-                  <th>Type</th>
-                  <th>Status</th>
+                  <th><T>Request ID</T></th>
+                  <th><T>Customer Phone</T></th>
+                  <th><T>Pickup Address</T></th>
+                  <th><T>Materials</T></th>
+                  <th><T>Weight</T></th>
+                  <th><T>Type</T></th>
+                  <th><T>Status</T></th>
                 </tr>
               </thead>
               <tbody>
-                {requests.map((r) => (
+                <T>{requests.map((r) => (
                   <tr key={r.id}>
                     <td>
-                      <span className={styles.requestIdText}>{r.id}</span>
+                      <span className={styles.requestIdText}><T>{r.id}</T></span>
                     </td>
-                    <td>{r.customer_phone}</td>
+                    <td><T>{r.customer_phone}</T></td>
                     <td>
                       <div className={styles.addressRow}>
                         <MapPin size={13} className={styles.locationPin} />
-                        <span>{r.pickup_address}</span>
+                        <span><T>{r.pickup_address}</T></span>
                       </div>
                     </td>
-                    <td>{r.material_description}</td>
-                    <td>{r.approx_weight_kg} kg</td>
+                    <td><T>{r.material_description}</T></td>
+                    <td><T>{r.approx_weight_kg}</T><T> kg</T></td>
                     <td>
                       <span className={`${styles.typeBadge} ${r.is_bulk ? styles.bulkBadge : styles.householdBadge}`}>
-                        {r.is_bulk ? 'BULK' : 'HOUSEHOLD'}
+                        <T>{r.is_bulk ? 'BULK' : 'HOUSEHOLD'}</T>
                       </span>
                     </td>
                     <td>
                       <span className={styles.statusBadge}>
-                        {r.status.toUpperCase()}
+                        <T>{r.status.toUpperCase()}</T>
                       </span>
                     </td>
                   </tr>
-                ))}
+                ))}</T>
               </tbody>
             </table>
           </div>
         </div>
-      )}
+      )}</T>
     </div>
   );
 }

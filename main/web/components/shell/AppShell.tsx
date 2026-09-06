@@ -1,4 +1,5 @@
 'use client';
+import { T } from '@/components/language/Language';
 
 import React from 'react';
 import Header from './Header';
@@ -7,13 +8,13 @@ import SmoothScroll from '@/components/SmoothScroll';
 import styles from './AppShell.module.css';
 
 export interface AppShellProps {
-  role: 'collector' | 'recycler' | 'admin';
+  role: 'collector' | 'recycler' | 'admin' | 'citizen';
   activeTab: string;
   onSelectTab: (tab: string) => void;
   currentUser?: {
     name: string;
     email?: string;
-    role?: 'collector' | 'recycler' | 'admin';
+    role?: 'collector' | 'recycler' | 'admin' | 'citizen';
   } | null;
   onSignOut?: () => void;
   matchedCount?: number;
@@ -48,7 +49,7 @@ export default function AppShell({
         {/* Centered Golden-Ratio Spacious Workspace Content */}
         <main className={styles.mainContent}>
           <div className={styles.contentContainer}>
-            {children}
+            <T>{children}</T>
           </div>
         </main>
 

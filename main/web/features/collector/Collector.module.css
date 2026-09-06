@@ -1098,3 +1098,12 @@
 .confidenceScore, .confidenceLabel { display: none; }
 .inspectBtn:disabled { opacity: .55; cursor: not-allowed; transform: none; }
 .materialSelect:focus-visible, .scannerOptions > summary:focus-visible, .inspectionDetails > summary:focus-visible, .dropzone:focus-visible { outline: 2px solid #527747; outline-offset: 4px; }
+
+
+.resultHeader { display:flex; flex-wrap:wrap; align-items:flex-start; gap:1rem; }
+.resultHeader > div:first-child { flex:1 1 15rem; min-width:0; }
+.categoryBadgeRow { display:flex; flex-direction:column; align-items:flex-start; gap:.65rem; }
+.cpcbTag { white-space:nowrap; font-weight:500; }
+.resultSubName { overflow-wrap:anywhere; line-height:1.4; }
+.audioBtn { white-space:nowrap; flex-shrink:0; gap:.5rem; border-radius:8px; padding:.65rem .8rem; }
+.audioBtn svg { flex-shrink:0; }

@@ -7,6 +7,13 @@
   font-family: var(--font-sans);
   overflow: hidden;
 }
+
+@media(max-width:700px){
+ .nav .navCta { display:none; }
+ .nav { gap:12px; }
+ .nav .brand { font-size:22px; }
+ .nav .menuToggle { flex-shrink:0; }
+}
 .site a {
   text-decoration: none;
 }
@@ -1032,4 +1039,23 @@
 @media(min-width:701px) {
  .heroCopy { max-width: 520px; justify-self: end; }
  .heroFlow { justify-self: start; max-width: min(460px, 50svh); }
+}
+
+
+/* Grow the composition together on desktop monitors; retain laptop proportions. */
+@media (min-width: 1700px) {
+ .hero { padding-inline: 9%; column-gap: 6vw; grid-template-columns: 1.15fr 1fr; padding-top: 3vh; }
+ .nav .brand { font-size:clamp(25px,1.3vw,36px); }
+ .nav .links a, .nav .navCta { font-size:clamp(16px,.9vw,23px); }
+ .heroCopy { max-width: none; justify-self: stretch; }
+ .hero h1 { font-size: clamp(82px, 5.1vw, 150px); letter-spacing: -.055em; }
+ .heroCopy > p { font-size: clamp(17px, 1.05vw, 28px); max-width: 31em; }
+ .heroFlow { max-width: min(34vw, 57svh); width: 100%; justify-self: center; }
+ .hero .limeButton { font-size: clamp(16px, .95vw, 25px); padding: 1em 1.5em; }
+ .hero .demoLink { font-size: clamp(15px, .9vw, 23px); }
+ .heroBottom { left: 9%; right: 9%; font-size: clamp(12px, .7vw, 19px); }
+ .trustStrip { padding-inline: 9%; font-size: clamp(13px, .8vw, 21px); }
+ .purposeCopy h2, .materialIntro h2, .sectionHead h2 { font-size: clamp(60px, 3.6vw, 100px); }
+ .purposeCopy p, .materialIntro p { font-size: clamp(17px, 1vw, 26px); max-width: 32em; }
+ .purpose, .materialSection, .process { padding-inline: 9%; }
 }

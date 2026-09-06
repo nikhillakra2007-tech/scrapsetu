@@ -1,4 +1,5 @@
 'use client';
+import { T, useLocale } from '@/components/language/Language';
 
 import React, { useState } from 'react';
 import {
@@ -24,7 +25,7 @@ interface SafetyGuide {
 }
 
 export default function SafetyGuidanceView() {
-  const [selectedLang, setSelectedLang] = useState<Language>('en');
+  const {locale:selectedLang,setLocale:setSelectedLang}=useLocale();
 
   const UI_TEXT = {
     title: {
@@ -188,9 +189,9 @@ export default function SafetyGuidanceView() {
       {/* Page Header */}
       <div className={styles.pageHeader}>
         <div>
-          <h2 className={styles.pageTitle}>{UI_TEXT.title[selectedLang]}</h2>
+          <h2 className={styles.pageTitle}><T>{UI_TEXT.title[selectedLang]}</T></h2>
           <p className={styles.pageSubtitle}>
-            {UI_TEXT.subtitle[selectedLang]}
+            <T>{UI_TEXT.subtitle[selectedLang]}</T>
           </p>
         </div>
 
@@ -200,23 +201,23 @@ export default function SafetyGuidanceView() {
             type="button"
             className={`${styles.langBtn} ${selectedLang === 'en' ? styles.langBtnActive : ''}`}
             onClick={() => setSelectedLang('en')}
-          >
+          ><T>
             English
-          </button>
+          </T></button>
           <button
             type="button"
             className={`${styles.langBtn} ${selectedLang === 'hi' ? styles.langBtnActive : ''}`}
             onClick={() => setSelectedLang('hi')}
-          >
+          ><T>
             हिंदी (Hindi)
-          </button>
+          </T></button>
           <button
             type="button"
             className={`${styles.langBtn} ${selectedLang === 'mr' ? styles.langBtnActive : ''}`}
             onClick={() => setSelectedLang('mr')}
-          >
+          ><T>
             मराठी (Marathi)
-          </button>
+          </T></button>
         </div>
       </div>
 
@@ -228,17 +229,17 @@ export default function SafetyGuidanceView() {
         <div className={styles.emergencyTextContent}>
           <h4 className={styles.emergencyTitle}>
             <PhoneCall size={14} style={{ display: 'inline', marginRight: 6 }} />
-            {UI_TEXT.emergencyTitle[selectedLang]}
+            <T>{UI_TEXT.emergencyTitle[selectedLang]}</T>
           </h4>
           <p className={styles.emergencyDesc}>
-            {UI_TEXT.emergencyText[selectedLang]}
+            <T>{UI_TEXT.emergencyText[selectedLang]}</T>
           </p>
         </div>
       </div>
 
       {/* Safety Cards Grid */}
       <div className={styles.cardsGrid}>
-        {guides.map((item) => (
+        <T>{guides.map((item) => (
           <div
             key={item.id}
             className={`${styles.safetyCard} ${styles[`border-${item.colorVar}`]}`}
@@ -247,12 +248,12 @@ export default function SafetyGuidanceView() {
               <div className={styles.hazardHeader}>
                 <Flame size={18} className={styles[`icon-${item.colorVar}`]} />
                 <span className={`${styles.hazardText} ${styles[`text-${item.colorVar}`]}`}>
-                  {item.hazard[selectedLang]}
+                  <T>{item.hazard[selectedLang]}</T>
                 </span>
               </div>
 
               <h3 className={styles.categoryTitle}>
-                {item.category[selectedLang]}
+                <T>{item.category[selectedLang]}</T>
               </h3>
 
               {/* Prohibited Action Box */}
@@ -260,9 +261,9 @@ export default function SafetyGuidanceView() {
                 <XCircle size={16} className={styles.doNotIcon} />
                 <div>
                   <strong className={styles.doNotTitle}>
-                    {UI_TEXT.doNotLabel[selectedLang]}
-                  </strong>{' '}
-                  <span className={styles.doNotText}>{item.doNot[selectedLang]}</span>
+                    <T>{UI_TEXT.doNotLabel[selectedLang]}</T>
+                  </strong><T>{' '}</T>
+                  <span className={styles.doNotText}><T>{item.doNot[selectedLang]}</T></span>
                 </div>
               </div>
 
@@ -271,20 +272,20 @@ export default function SafetyGuidanceView() {
                 <CheckCircle2 size={16} className={styles.doThisIcon} />
                 <div>
                   <strong className={styles.doThisTitle}>
-                    {UI_TEXT.doThisLabel[selectedLang]}
-                  </strong>{' '}
-                  <span className={styles.doThisText}>{item.doThis[selectedLang]}</span>
+                    <T>{UI_TEXT.doThisLabel[selectedLang]}</T>
+                  </strong><T>{' '}</T>
+                  <span className={styles.doThisText}><T>{item.doThis[selectedLang]}</T></span>
                 </div>
               </div>
 
               {/* PPE Gear Box */}
               <div className={styles.ppeBox}>
-                <span className={styles.ppeLabel}>{UI_TEXT.ppeLabel[selectedLang]}</span>
-                <span className={styles.ppeValue}>{item.ppe[selectedLang]}</span>
+                <span className={styles.ppeLabel}><T>{UI_TEXT.ppeLabel[selectedLang]}</T></span>
+                <span className={styles.ppeValue}><T>{item.ppe[selectedLang]}</T></span>
               </div>
             </div>
           </div>
-        ))}
+        ))}</T>
       </div>
     </div>
   );

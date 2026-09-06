@@ -1,6 +1,8 @@
 "use client";
+import { T, useLocale } from '@/components/language/Language';
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { LanguageSwitcher } from "@/components/language/Language";
 import MaterialFlow from "@/components/material-flow/MaterialFlow";
 import {
   ArrowUpRight,
@@ -63,6 +65,8 @@ const faqs = [
   ],
 ];
 export default function LandingPage() {
+ const {t:translate}=useLocale();
+
   const [menu, setMenu] = useState(false),
     [openFaq, setOpenFaq] = useState<number | null>(0),
     [material, setMaterial] = useState(0),
@@ -87,30 +91,30 @@ export default function LandingPage() {
   return (
     <SmoothScroll>
       <div className={styles.site} ref={root}>
-        <a href="#main" className={styles.skip}>
+        <a href="#main" className={styles.skip}><T>
           Skip to content
-        </a>
+        </T></a>
         <header className={styles.nav}>
           <Link href="/" className={styles.brand}>
-            <Recycle size={27} strokeWidth={1.7} />
-            ScrapSetu<span>®</span>
+            <Recycle size={27} strokeWidth={1.7} /><T>
+            ScrapSetu</T><span><T>®</T></span>
           </Link>
           <nav
             className={`${styles.links} ${menu ? styles.menuOpen : ""}`}
-            aria-label="Main navigation"
+            aria-label={translate("Main navigation")}
           >
-            <a href="#how-it-works" onClick={() => setMenu(false)}>
+            <a href="#how-it-works" onClick={() => setMenu(false)}><T>
               The process
-            </a>
-            <a href="#materials" onClick={() => setMenu(false)}>
+            </T></a>
+            <a href="#materials" onClick={() => setMenu(false)}><T>
               Materials & rates
-            </a>
-            <a href="#our-purpose" onClick={() => setMenu(false)}>
+            </T></a>
+            <a href="#our-purpose" onClick={() => setMenu(false)}><T>
               Our purpose
-            </a>
+            </T></a>
           </nav>
-          <Link href="/auth" className={styles.navCta}>
-            Get started <ArrowUpRight size={17} />
+          <LanguageSwitcher/><Link href="/auth" className={styles.navCta}><T>
+            Get started </T><ArrowUpRight size={17} />
           </Link>
           <button
             className={styles.menuToggle}
@@ -118,29 +122,29 @@ export default function LandingPage() {
             aria-expanded={menu}
             onClick={() => setMenu(!menu)}
           >
-            {menu ? <X /> : <Menu />}
+            <T>{menu ? <X /> : <Menu />}</T>
           </button>
         </header>
         <main id="main">
           <section className={styles.hero}>
 
             <div className={styles.heroCopy}>
-              <h1>
+              <h1><T>
                 Nothing wasted.
-                <br />
+                </T><br /><T>
                 Everything
-                <br />
-                <em>worth more.</em>
+                </T><br />
+                <em><T>worth more.</T></em>
               </h1>
-              <p>
+              <p><T>
                 A new chapter for your scrap. Connecting local collectors with
                 responsible recyclers, one fair exchange at a time.
-              </p>
-              <Link href="/auth" className={styles.limeButton}>
-                Give your scrap a new life <ArrowUpRight size={20} />
+              </T></p>
+              <Link href="/auth" className={styles.limeButton}><T>
+                Give your scrap a new life </T><ArrowUpRight size={20} />
               </Link>
-              <Link href="/auth" className={styles.demoLink}>
-                Explore the demo <ArrowRight size={16} />
+              <Link href="/auth" className={styles.demoLink}><T>
+                Explore the demo </T><ArrowRight size={16} />
               </Link>
             </div>
             <div className={styles.heroFlow}>
@@ -148,85 +152,85 @@ export default function LandingPage() {
             </div>
 <div className={styles.heroBottom}>
               <span>
-                <MapPin size={14} /> Rooted in Delhi NCR
-              </span>
-              <a href="#how-it-works">
-                A little scroll. A bigger change. <ArrowDown size={15} />
+                <MapPin size={14} /><T> Rooted in Delhi NCR
+              </T></span>
+              <a href="#how-it-works"><T>
+                A little scroll. A bigger change. </T><ArrowDown size={15} />
               </a>
-              <span>THE CIRCULAR ECONOMY, CONNECTED</span>
+              <span><T>THE CIRCULAR ECONOMY, CONNECTED</T></span>
             </div>
           </section>
           <div className={styles.trustStrip}>
-            <span>
+            <span><T>
               Good for your business.
-              <br />
-              <strong>Better for what comes next.</strong>
+              </T><br />
+              <strong><T>Better for what comes next.</T></strong>
             </span>
             <span>
-              <Scale /> Transparent pricing
-            </span>
+              <Scale /><T> Transparent pricing
+            </T></span>
             <span>
-              <ShieldCheck /> Responsible recycling
-            </span>
+              <ShieldCheck /><T> Responsible recycling
+            </T></span>
             <span>
-              <Recycle /> Traceable handovers
-            </span>
+              <Recycle /><T> Traceable handovers
+            </T></span>
           </div>
           <section id="how-it-works" className={styles.process}>
             <div className={styles.sectionHead} data-reveal>
               <div>
-                <span className={styles.label}>01 / A SIMPLER CYCLE</span>
-                <h2>
+                <span className={styles.label}><T>01 / A SIMPLER CYCLE</T></span>
+                <h2><T>
                   Less friction.
-                  <br />
-                  <span>More possibility.</span>
+                  </T><br />
+                  <span><T>More possibility.</T></span>
                 </h2>
               </div>
-              <p>
+              <p><T>
                 Recycling should feel like a natural next step.
-                <br />
+                </T><br /><T>
                 We make the connections. You keep moving.
-              </p>
+              </T></p>
             </div>
             <div className={styles.steps}>
-              {steps.map((s, i) => (
+              <T>{steps.map((s, i) => (
                 <article key={s.title} data-reveal>
                   <div className={styles.stepTop}>
                     <s.icon size={29} strokeWidth={1.3} />
-                    <span>0{i + 1}</span>
+                    <span><T>0</T><T>{i + 1}</T></span>
                   </div>
-                  <h3>{s.title}</h3>
-                  <p>{s.text}</p>
+                  <h3><T>{s.title}</T></h3>
+                  <p><T>{s.text}</T></p>
                   <div className={styles.stepLine} />
                 </article>
-              ))}
+              ))}</T>
             </div>
           </section>
           <section id="materials" className={styles.materialSection}>
             <div className={styles.materialIntro} data-reveal>
-              <h2>
+              <h2><T>
                 Old materials.
-                <br />
-                <em>Fresh potential.</em>
+                </T><br />
+                <em><T>Fresh potential.</T></em>
               </h2>
-              <p>
+              <p><T>
                 No guesswork. Start with an indicative price for your materials
                 and see what your next collection could be worth.
-              </p>
-              <Link href="/auth" className={styles.textLink}>
-                Explore the price board <ArrowUpRight size={18} />
+              </T></p>
+              <Link href="/auth" className={styles.textLink}><T>
+                Explore the price board </T><ArrowUpRight size={18} />
               </Link>
-              <span className={styles.sampleNote}>
+              <span className={styles.sampleNote}><T>
                 DELHI NCR PILOT · SAMPLE RATES
-              </span>
+              </T></span>
             </div>
             <div className={styles.priceCard} data-reveal>
               <div className={styles.priceHead}>
-                <span>Know your scrap’s worth</span>
+                <span><T>Know your scrap’s worth</T></span>
                 <Scale size={22} />
               </div>
               <div className={styles.materialChoices}>
-                {materials.map((m, i) => (
+                <T>{materials.map((m, i) => (
                   <button
                     key={m.name}
                     aria-pressed={material === i}
@@ -234,18 +238,18 @@ export default function LandingPage() {
                     onClick={() => setMaterial(i)}
                   >
                     <m.icon size={22} />
-                    <span>{m.name}</span>
-                    <strong>
-                      ₹{m.rate}
-                      <small> / kg</small>
+                    <span><T>{m.name}</T></span>
+                    <strong><T>
+                      ₹</T><T>{m.rate}</T>
+                      <small><T> / kg</T></small>
                     </strong>
                   </button>
-                ))}
+                ))}</T>
               </div>
               <div className={styles.estimate}>
-                <label htmlFor="scrap-weight">
+                <label htmlFor="scrap-weight"><T>
                   Your estimated weight
-                  <div className={styles.weightInput}>
+                  </T><div className={styles.weightInput}>
                     <input
                       id="scrap-weight"
                       type="number"
@@ -254,29 +258,29 @@ export default function LandingPage() {
                       value={weight}
                       onChange={(e) => setWeight(e.target.value)}
                     />
-                    <span>kg</span>
+                    <span><T>kg</T></span>
                   </div>
                 </label>
                 <div>
-                  <span>Estimated value</span>
-                  <output>
+                  <span><T>Estimated value</T></span>
+                  <output><T>
                     ₹
-                    {(
+                    </T><T>{(
                       Math.max(0, Number(weight) || 0) *
                       materials[material].rate
-                    ).toLocaleString("en-IN")}
+                    ).toLocaleString("en-IN")}</T>
                   </output>
                 </div>
               </div>
-              <p className={styles.disclaimer}>
+              <p className={styles.disclaimer}><T>
                 An estimate, not a quote. Final value depends on grade and
                 verified weight.
-              </p>
+              </T></p>
             </div>
           </section>
           <section id="our-purpose" className={styles.purpose}>
-            <figure className={styles.recoveryVisual} data-reveal aria-label="Discarded circuit boards become recovered copper, then useful materials again">
-              <svg viewBox="0 0 480 480" role="img" aria-label="Circuit board to copper to a new material">
+            <figure className={styles.recoveryVisual} data-reveal aria-label={translate("Discarded circuit boards become recovered copper, then useful materials again")}>
+              <svg viewBox="0 0 480 480" role="img" aria-label={translate("Circuit board to copper to a new material")}>
                 <defs><pattern id="board-grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M0 12H24M12 0V24" fill="none" stroke="#b3c59d" strokeWidth="0.5" /></pattern></defs>
                 <circle cx="240" cy="240" r="176" fill="none" stroke="#adbc98" strokeDasharray="3 9" />
                 <g transform="translate(88 70) rotate(-12 100 80)">
@@ -288,83 +292,83 @@ export default function LandingPage() {
                 </g>
                 <path d="M319 145Q392 180 350 263" fill="none" stroke="#50784f" strokeWidth="2" />
                 <path d="M338 250L348 270L367 257" fill="none" stroke="#50784f" strokeWidth="2" />
-                <g transform="translate(265 282) rotate(-16)">{[0, 1, 2, 3, 4].map(i => <rect key={i} x={i * 17} width="12" height="96" rx="6" fill={i % 2 ? '#b78355' : '#ce9e6f'} />)}</g>
+                <g transform="translate(265 282) rotate(-16)"><T>{[0, 1, 2, 3, 4].map(i => <rect key={i} x={i * 17} width="12" height="96" rx="6" fill={i % 2 ? '#b78355' : '#ce9e6f'} />)}</T></g>
                 <path d="M248 370Q126 385 112 259" fill="none" stroke="#50784f" strokeWidth="2" />
                 <path d="M100 275L111 254L127 270" fill="none" stroke="#50784f" strokeWidth="2" />
                 <circle cx="134" cy="305" r="31" fill="#d2dfb9" />
                 <path d="M124 318Q119 292 147 289Q150 314 124 318ZM125 317L142 296" fill="none" stroke="#4c7247" strokeWidth="2" />
               </svg>
-              <figcaption>Recovered. Ready for what’s next.</figcaption>
+              <figcaption><T>Recovered. Ready for what’s next.</T></figcaption>
             </figure>
             <div className={styles.purposeCopy} data-reveal>
-              <h2>
+              <h2><T>
                 A small bridge.
-                <br />A lasting <em>difference.</em>
+                </T><br /><T>A lasting </T><em><T>difference.</T></em>
               </h2>
-              <p>
+              <p><T>
                 Behind every recovered material is someone who saw its value.
                 We’re here to give that work a better connection.
-              </p>
-              <p>
+              </T></p>
+              <p><T>
                 ScrapSetu brings local collectors and recycling facilities
                 together with clearer prices, safer handling, and a shared
                 record of the journey.
-              </p>
-              <Link href="/auth" className={styles.darkButton}>
-                Find your place in the loop <ArrowUpRight size={18} />
+              </T></p>
+              <Link href="/auth" className={styles.darkButton}><T>
+                Find your place in the loop </T><ArrowUpRight size={18} />
               </Link>
             </div>
           </section>
           <section className={styles.faq}>
             <div data-reveal>
-              <span className={styles.label}>A FEW THINGS, ANSWERED</span>
-              <h2>
+              <span className={styles.label}><T>A FEW THINGS, ANSWERED</T></span>
+              <h2><T>
                 Good questions.
-                <br />
+                </T><br /><T>
                 Clear answers.
-              </h2>
+              </T></h2>
             </div>
             <div>
-              {faqs.map(([q, a], i) => (
+              <T>{faqs.map(([q, a], i) => (
                 <div className={styles.faqItem} key={q}>
                   <button
                     aria-expanded={openFaq === i}
                     aria-controls={`faq-${i}`}
                     onClick={() => setOpenFaq(openFaq === i ? null : i)}
                   >
-                    {q}
-                    {openFaq === i ? <Minus size={18} /> : <Plus size={18} />}
+                    <T>{q}</T>
+                    <T>{openFaq === i ? <Minus size={18} /> : <Plus size={18} />}</T>
                   </button>
                   <div id={`faq-${i}`} hidden={openFaq !== i}>
-                    <p>{a}</p>
+                    <p><T>{a}</T></p>
                   </div>
                 </div>
-              ))}
+              ))}</T>
             </div>
           </section>
           <section className={styles.closing}>
-            <span className={styles.label}>
+            <span className={styles.label}><T>
               THE NEXT CHAPTER STARTS WITH YOU
-            </span>
-            <h2>
+            </T></span>
+            <h2><T>
               Let’s make
-              <br />
-              <em>good things go round.</em>
+              </T><br />
+              <em><T>good things go round.</T></em>
             </h2>
-            <Link href="/auth" className={styles.limeButton}>
-              Join the loop <ArrowUpRight size={20} />
+            <Link href="/auth" className={styles.limeButton}><T>
+              Join the loop </T><ArrowUpRight size={20} />
             </Link>
             <Recycle className={styles.closingIcon} strokeWidth={0.6} />
           </section>
         </main>
         <footer className={styles.footer}>
           <Link href="/" className={styles.brand}>
-            <Recycle size={25} />
-            ScrapSetu<span>®</span>
+            <Recycle size={25} /><T>
+            ScrapSetu</T><span><T>®</T></span>
           </Link>
-          <span>Made for a world that wastes less.</span>
-          <span>Delhi NCR pilot · 2026</span>
-          <a href="#main">Back to the top ↑</a>
+          <span><T>Made for a world that wastes less.</T></span>
+          <span><T>Delhi NCR pilot · 2026</T></span>
+          <a href="#main"><T>Back to the top ↑</T></a>
         </footer>
       </div>
     </SmoothScroll>

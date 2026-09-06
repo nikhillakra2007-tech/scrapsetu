@@ -1,4 +1,5 @@
 'use client';
+import { T, useLocale } from '@/components/language/Language';
 
 import React, { useState, useRef, useEffect } from 'react';
 import { MessageSquare, X, Send, Sparkles } from 'lucide-react';
@@ -12,6 +13,8 @@ interface Message {
 }
 
 export default function SetuAssistant() {
+ const {t:translate}=useLocale();
+
   const [isOpen, setIsOpen] = useState(false);
   const [inputText, setInputText] = useState('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -87,7 +90,7 @@ export default function SetuAssistant() {
 
   return (
     <div className={styles.floatingContainer}>
-      {isOpen ? (
+      <T>{isOpen ? (
         <div
           className={styles.chatCard}
           data-lenis-prevent="true"
@@ -98,15 +101,15 @@ export default function SetuAssistant() {
             <div className={styles.headerTitleGroup}>
               <span className={styles.pulseDot} />
               <div>
-                <h4 className={styles.assistantName}>Setu Delhi Assistant</h4>
-                <span className={styles.statusText}>Online · E-Waste Support</span>
+                <h4 className={styles.assistantName}><T>Setu Delhi Assistant</T></h4>
+                <span className={styles.statusText}><T>Online · E-Waste Support</T></span>
               </div>
             </div>
             <button
               type="button"
               className={styles.closeBtn}
               onClick={() => setIsOpen(false)}
-              aria-label="Close Assistant"
+              aria-label={translate("Close Assistant")}
             >
               <X size={18} />
             </button>
@@ -120,23 +123,23 @@ export default function SetuAssistant() {
             onWheel={(e) => e.stopPropagation()}
             onTouchMove={(e) => e.stopPropagation()}
           >
-            {messages.map((m) => (
+            <T>{messages.map((m) => (
               <div
                 key={m.id}
                 className={`${styles.messageBubble} ${
                   m.sender === 'user' ? styles.userBubble : styles.assistantBubble
                 }`}
               >
-                <div className={styles.bubbleText}>{m.text}</div>
-                <span className={styles.bubbleTime}>{m.time}</span>
+                <div className={styles.bubbleText}><T>{m.text}</T></div>
+                <span className={styles.bubbleTime}><T>{m.time}</T></span>
               </div>
-            ))}
+            ))}</T>
             <div ref={messagesEndRef} />
           </div>
 
           {/* Quick Prompts */}
           <div className={styles.quickPromptsRow} data-lenis-prevent="true">
-            {quickPrompts.map((q, idx) => (
+            <T>{quickPrompts.map((q, idx) => (
               <button
                 key={idx}
                 type="button"
@@ -144,9 +147,9 @@ export default function SetuAssistant() {
                 onClick={() => handleSend(q)}
               >
                 <Sparkles size={11} />
-                <span>{q}</span>
+                <span><T>{q}</T></span>
               </button>
-            ))}
+            ))}</T>
           </div>
 
           {/* Input Box */}
@@ -159,7 +162,7 @@ export default function SetuAssistant() {
           >
             <input
               type="text"
-              placeholder="Ask Setu about rates, pickups..."
+              placeholder={translate("Ask Setu about rates, pickups...")}
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
               className={styles.chatInput}
@@ -168,7 +171,7 @@ export default function SetuAssistant() {
               type="submit"
               className={styles.sendBtn}
               disabled={!inputText.trim()}
-              aria-label="Send message"
+              aria-label={translate("Send message")}
             >
               <Send size={15} />
             </button>
@@ -179,11 +182,11 @@ export default function SetuAssistant() {
           type="button"
           className={styles.launcherBtn}
           onClick={() => setIsOpen(true)}
-          aria-label="Open Setu Assistant"
+          aria-label={translate("Open Setu Assistant")}
         >
           <MessageSquare size={22} className={styles.launcherIcon} />
         </button>
-      )}
+      )}</T>
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import { LanguageProvider } from '@/components/language/Language';
 
 export const metadata: Metadata = {
   title: 'Kabadiwala Connect (ScrapSetu) — Delhi Pilot',
@@ -16,7 +17,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <div className="ambient-glow" />
-        {children}
+        <LanguageProvider>{children}</LanguageProvider>
       </body>
     </html>
   );

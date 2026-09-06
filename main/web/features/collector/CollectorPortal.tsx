@@ -1,4 +1,5 @@
 'use client';
+import { T, useLocale } from '@/components/language/Language';
 
 import React, { useState, useRef, useEffect } from 'react';
 import {
@@ -24,6 +25,7 @@ import AiInspectionCard, { AIClassificationResult } from './AiInspectionCard';
 import styles from './Collector.module.css';
 
 interface CollectorPortalProps {
+  citizen?: boolean;
   onLotCreated: (newMatch: LotMatch) => void;
   onNavigateToRecyclerQueue: () => void;
 }
@@ -158,9 +160,12 @@ const CATEGORY_PROFILES: Record<string, {
 };
 
 export default function CollectorPortal({
+  citizen = false,
   onLotCreated,
   onNavigateToRecyclerQueue,
 }: CollectorPortalProps) {
+ const {t:translate,locale}=useLocale();
+
   const [selectedImageBase64, setSelectedImageBase64] = useState<string | null>(null);
   const [selectedImageFile, setSelectedImageFile] = useState<File | null>(null);
   const [activePreset, setActivePreset] = useState<string>('pcb');
@@ -315,7 +320,7 @@ export default function CollectorPortal({
 
     try {
       const recognition = new SpeechRecognition();
-      recognition.lang = 'hi-IN'; // Hindi recognition (also transcribes mixed Hinglish / English)
+      recognition.lang = locale + '-IN'; // Hindi recognition (also transcribes mixed Hinglish / English)
       recognition.continuous = false;
       recognition.interimResults = true;
 
@@ -424,7 +429,7 @@ export default function CollectorPortal({
 
         const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${geminiApiKey.trim()}`;
 
-        const prompt = `You are ScrapSetu Delhi E-Waste Classification Engine. Classify this scrap into CPCB 11-category taxonomy (PCB, BATTERY, CABLE_WIRE, CRT, LCD_LED_PANEL, MOTOR_MAGNET, METAL_SCRAP, WHOLE_DEVICE). Return ONLY valid JSON with keys:
+        const prompt = `You are ScrapSetu Delhi E-Waste Classification Engine. Classify this scrap into CPCB 11-category taxonomy (PCB, BATTERY, CABLE_WIRE, CRT, LCD_LED_PANEL, MOTOR_MAGNET, METAL_SCRAP, WHOLE_DEVICE). Write human-readable descriptions in ${locale === "hi" ? "Hindi" : locale === "mr" ? "Marathi" : "English"}, retaining taxonomy codes in English. Return ONLY valid JSON with keys:
         parent_code, parent_name, sub_code, sub_name, condition, category_confidence (0-1), hazard_flags (array), is_hazardous (boolean), hazard_advisory, suggested_rate_per_kg (number), epr_schedule1_hint, identified_components (array), ai_notes.`;
 
         const geminiRes = await fetch(geminiUrl, {
@@ -475,7 +480,9 @@ export default function CollectorPortal({
     setTimeout(() => {
       const profile = CATEGORY_PROFILES[detectedCategoryKey] || CATEGORY_PROFILES.pcb;
 
-      // Realistic variation based on weight and category
+      // Catalogue estimates are not photo recognition.
+      if (!geminiApiKey) setApiNotice("Catalogue estimate. Your photo has not been analysed; connect AI in scanner options for photo recognition.");
+      // Variation is used only for legacy demo data
       const confidenceVariance = 0.91 + (Math.sin(weightKg * 1.5) * 0.05 + 0.03);
       const confidence = Math.min(0.98, Math.max(0.88, parseFloat(confidenceVariance.toFixed(2))));
 
@@ -497,7 +504,7 @@ export default function CollectorPortal({
         epr_schedule1_hint: profile.eprHint,
         identified_components: profile.components,
         ai_notes: profile.notes,
-        ai_model_used: 'Gemini 2.5 Flash Vision Pipeline (Delhi Grounded)',
+        ai_model_used: 'Catalogue estimate — selected material',
       };
 
       setAiResult(result);
@@ -556,23 +563,23 @@ export default function CollectorPortal({
       {/* Page Header Bar */}
       <div className={`${styles.pageHeader} drop-segment-1`}>
         <div>
-          <h2 className={styles.pageTitle}>Scan your scrap</h2>
-          <p className={styles.pageSubtitle}>
+          <h2 className={styles.pageTitle}><T>Scan your scrap</T></h2>
+          <p className={styles.pageSubtitle}><T>
             Add a photo. Check the value. Find a recycler.
-          </p>
+          </T></p>
         </div>
 
         {/* Action Controls & Voice Assistant Trigger */}
-        <details className={styles.scannerOptions}><summary>Scanner options</summary><div className={styles.headerControls}>
+        <details className={styles.scannerOptions}><summary><T>Scanner options</T></summary><div className={styles.headerControls}>
           {/* Interactive Voice Assistant Button */}
           <button
             type="button"
             onClick={handleToggleVoiceAssistant}
             className={`${styles.voiceAssistantBtn} ${isListening ? styles.voiceListening : ''}`}
-            title="Speak your scrap details in Hindi or English"
+            title={translate("Speak your scrap details in Hindi or English")}
           >
-            {isListening ? <MicOff size={16} /> : <Mic size={16} />}
-            <span>{isListening ? 'Listening...' : 'बोलकर बताएं'}</span>
+            <T>{isListening ? <MicOff size={16} /> : <Mic size={16} />}</T>
+            <span><T>{isListening ? 'Listening...' : 'बोलकर बताएं'}</T></span>
           </button>
 
           {/* Optional Gemini Live API Key button */}
@@ -580,9 +587,9 @@ export default function CollectorPortal({
             type="button"
             onClick={() => setShowApiKeyModal(!showApiKeyModal)}
             className={styles.apiKeyToggleBtn}
-            title="Configure optional Google Gemini API Key"
+            title={translate("Configure optional Google Gemini API Key")}
           >
-            <span>{geminiApiKey ? 'AI connected' : 'AI settings'}</span>
+            <span><T>{geminiApiKey ? 'AI connected' : 'AI settings'}</T></span>
           </button>
 
           {/* Offline Outbox Simulation Button */}
@@ -591,37 +598,37 @@ export default function CollectorPortal({
             onClick={() => setIsOffline(!isOffline)}
             className={`${styles.offlineBtn} ${isOffline ? styles.offlineActive : ''}`}
           >
-            {isOffline ? <WifiOff size={14} /> : <Wifi size={14} />}
-            <span>{isOffline ? 'Offline' : 'Online'}</span>
+            <T>{isOffline ? <WifiOff size={14} /> : <Wifi size={14} />}</T>
+            <span><T>{isOffline ? 'Offline' : 'Online'}</T></span>
           </button>
 
-          {offlineOutboxCount > 0 && (
+          <T>{offlineOutboxCount > 0 && (
             <span className={styles.outboxBadge}>
-              {offlineOutboxCount} Queued
-            </span>
-          )}
+              <T>{offlineOutboxCount}</T><T> Queued
+            </T></span>
+          )}</T>
         </div></details>
       </div>
 
       {/* Voice Assistant Live Transcript Banner */}
-      {voiceTranscript && (
+      <T>{voiceTranscript && (
         <div className={styles.voiceTranscriptBanner}>
           <div className={styles.voicePulseIndicator} />
           <div className={styles.transcriptContent}>
-            <span className={styles.transcriptLabel}>Voice Input Detected:</span>
-            <span className={styles.transcriptText}>&ldquo;{voiceTranscript}&rdquo;</span>
+            <span className={styles.transcriptLabel}><T>Voice Input Detected:</T></span>
+            <span className={styles.transcriptText}><T>&ldquo;</T><T>{voiceTranscript}</T><T>&rdquo;</T></span>
           </div>
         </div>
-      )}
+      )}</T>
 
       {/* Optional Gemini API Key Drawer */}
-      {showApiKeyModal && (
+      <T>{showApiKeyModal && (
         <div className={styles.apiKeyDrawer}>
           <div className={styles.apiKeyRow}>
             <Key size={16} className={styles.apiKeyIcon} />
             <input
               type="password"
-              placeholder="Paste Google Gemini 2.5 Flash API Key (Optional)..."
+              placeholder={translate("Paste Google Gemini 2.5 Flash API Key (Optional)...")}
               value={geminiApiKey}
               onChange={(e) => setGeminiApiKey(e.target.value)}
               className={styles.apiKeyInput}
@@ -630,29 +637,29 @@ export default function CollectorPortal({
               type="button"
               className={styles.saveKeyBtn}
               onClick={() => setShowApiKeyModal(false)}
-            >
+            ><T>
               Save Key
-            </button>
+            </T></button>
           </div>
-          <span className={styles.apiKeyHint}>
+          <span className={styles.apiKeyHint}><T>
             Connect a key for photo analysis. Without a key, estimates use the selected material and pilot rates.
-          </span>
+          </T></span>
         </div>
-      )}
+      )}</T>
 
       {/* 2-Column Work Grid */}
       <div className={styles.workGrid}>
         {/* Left Column: Photograph Capture & Inputs */}
         <div className={`${styles.card} drop-segment-3`}>
           <div className={styles.cardHeader}>
-            <h3 className={styles.cardTitle}>01 — Your material</h3>
-            <p className={styles.cardSubtitle}>
+            <h3 className={styles.cardTitle}><T>01 — Your material</T></h3>
+            <p className={styles.cardSubtitle}><T>
               Upload a photo or add your material details.
-            </p>
+            </T></p>
           </div>
 
       <div className={`${styles.categoryPillsSection} drop-segment-2`}>
-        <label className={styles.pillsHeading} htmlFor="material-category">Material</label>
+        <label className={styles.pillsHeading} htmlFor="material-category"><T>Material</T></label>
         <select id="material-category" className={styles.materialSelect} value={detectedCategoryKey} disabled={isAnalyzing}
           onChange={(event) => {
             const key = event.target.value;
@@ -661,9 +668,9 @@ export default function CollectorPortal({
             setAiResult(null);
             setSubmittedLotCode(null);
           }}>
-          {Object.entries(CATEGORY_PROFILES).map(([key, prof]) => (
-            <option key={key} value={key}>{prof.parent_name} · ₹{prof.defaultRate}/kg</option>
-          ))}
+          <T>{Object.entries(CATEGORY_PROFILES).map(([key, prof]) => (
+            <option key={key} value={key}><T>{prof.parent_name}</T><T> · ₹</T><T>{prof.defaultRate}</T><T>/kg</T></option>
+          ))}</T>
         </select>
       </div>
 
@@ -695,32 +702,32 @@ export default function CollectorPortal({
             disabled={isAnalyzing || !Number.isFinite(weightKg) || weightKg <= 0}
             className={styles.inspectBtn}
           >
-            {isAnalyzing ? (
+            <T>{isAnalyzing ? (
               <>
                 <RefreshCw size={18} className="spin-animation" />
-                <span>Inspecting material…</span>
+                <span><T>Inspecting material…</T></span>
               </>
             ) : (
               <>
-                <span>Inspect material</span>
+                <span><T>Inspect material</T></span>
               </>
-            )}
+            )}</T>
           </button>
 
-          {apiNotice && (
+          <T>{apiNotice && (
             <div className={styles.apiNotice} role="status">
-              {apiNotice}
+              <T>{apiNotice}</T>
             </div>
-          )}
+          )}</T>
         </div>
 
         {/* Right Column: AI Diagnostic & Valuation Result */}
         <div className={`${styles.card} drop-segment-4`}>
           <div className={styles.cardHeader}>
-            <h3 className={styles.cardTitle}>02 — Your estimate</h3>
-            <p className={styles.cardSubtitle}>
+            <h3 className={styles.cardTitle}><T>02 — Your estimate</T></h3>
+            <p className={styles.cardSubtitle}><T>
               Material value and safe handling, together.
-            </p>
+            </T></p>
           </div>
 
           <AiInspectionCard
@@ -728,7 +735,8 @@ export default function CollectorPortal({
             isAnalyzing={isAnalyzing}
             weightKg={weightKg}
             submittedLotCode={submittedLotCode}
-            onSubmitLot={handleSubmitLot}
+            onSubmitLot={citizen ? onNavigateToRecyclerQueue : handleSubmitLot}
+            actionLabel={citizen ? "Book pickup" : "Confirm & find recycler"}
             onNavigateToRecyclerQueue={onNavigateToRecyclerQueue}
           />
         </div>

@@ -30,7 +30,7 @@ interface DemoAccount {
   id: string;
   name: string;
   email: string;
-  role: "recycler" | "collector" | "admin";
+  role: "recycler" | "collector" | "admin" | "citizen";
   roleLabel: string;
   roleDescription: string;
   initial: string;
@@ -39,6 +39,7 @@ interface DemoAccount {
 
 // Helper to resolve route by user role
 const getRoleDestination = (role?: string) => {
+  if (role === "citizen") return "/citizen";
   if (role === "collector") return "/collector";
   if (role === "admin") return "/admin";
   return "/recycler";
@@ -50,7 +51,7 @@ export default function AuthPage() {
   const [password, setPassword] = useState<string>("");
   const [showPassword, setShowPassword] = useState(false);
   const [selectedRole, setSelectedRole] = useState<
-    "collector" | "recycler" | "admin"
+    "collector" | "recycler" | "admin" | "citizen"
   >("recycler");
   const [isLoading, setIsLoading] = useState(false);
   const [isGoogleLoading, setIsGoogleLoading] = useState(false);
@@ -61,6 +62,7 @@ export default function AuthPage() {
 
   // Pre-configured Pilot Demo Accounts (All 3 Canonical Roles)
   const DEMO_ACCOUNTS: DemoAccount[] = [
+    { id: "demo-citizen", name: "Aarav", email: "citizen@scrapsetu.in", role: "citizen", roleLabel: "Citizen", roleDescription: "Estimate materials and book a pickup", initial: "A", icon: Recycle },
     {
       id: "demo-ramesh",
       name: "Ramesh Kumar",
@@ -448,7 +450,7 @@ export default function AuthPage() {
                     ? "Collector"
                     : a.role === "recycler"
                       ? "Recycler"
-                      : "Admin"}
+                      : a.role === "citizen" ? "Citizen" : "Admin"}
                 </span>
                 <ArrowUpRight size={13} />
               </button>
@@ -502,7 +504,7 @@ export default function AuthPage() {
               value={selectedRole}
               onChange={(e) =>
                 setSelectedRole(
-                  e.target.value as "collector" | "recycler" | "admin",
+                  e.target.value as "collector" | "recycler" | "admin" | "citizen",
                 )
               }
             >

@@ -1,4 +1,5 @@
 'use client';
+import { T, useLocale } from '@/components/language/Language';
 
 import React, { useState } from 'react';
 import {
@@ -9,6 +10,8 @@ import {
 import styles from './Handover.module.css';
 
 export default function HandoverTraceabilityView() {
+ const {t:translate}=useLocale();
+
   const [searchQuery, setSearchQuery] = useState('');
 
   const records = [
@@ -59,10 +62,10 @@ export default function HandoverTraceabilityView() {
       {/* Page Header */}
       <div className={styles.pageHeader}>
         <div>
-          <h2 className={styles.pageTitle}>Traceability Ledger & Handover Audit</h2>
-          <p className={styles.pageSubtitle}>
+          <h2 className={styles.pageTitle}><T>Traceability Ledger & Handover Audit</T></h2>
+          <p className={styles.pageSubtitle}><T>
             Immutable digital handover records linking informal waste-pickers with CPCB/DPCC authorized recyclers.
-          </p>
+          </T></p>
         </div>
 
         {/* Search Input */}
@@ -71,7 +74,7 @@ export default function HandoverTraceabilityView() {
           <input
             type="text"
             className={styles.searchInput}
-            placeholder="Search by KC-DL code, material, collector..."
+            placeholder={translate("Search by KC-DL code, material, collector...")}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
@@ -84,63 +87,63 @@ export default function HandoverTraceabilityView() {
           <table className={styles.customTable}>
             <thead>
               <tr>
-                <th>Reference ID</th>
-                <th>Material</th>
-                <th>Collector</th>
-                <th>Authorized Recycler</th>
-                <th>Scale Weight</th>
-                <th>Payout</th>
-                <th>Status</th>
+                <th><T>Reference ID</T></th>
+                <th><T>Material</T></th>
+                <th><T>Collector</T></th>
+                <th><T>Authorized Recycler</T></th>
+                <th><T>Scale Weight</T></th>
+                <th><T>Payout</T></th>
+                <th><T>Status</T></th>
               </tr>
             </thead>
             <tbody>
-              {filtered.map((rec) => (
+              <T>{filtered.map((rec) => (
                 <tr key={rec.refCode}>
                   <td>
                     <div className={styles.refCodeGroup}>
                       <QrCode size={16} className={styles.qrCodeIcon} />
                       <span className={styles.refCodeText}>
-                        {rec.refCode}
+                        <T>{rec.refCode}</T>
                       </span>
                     </div>
                     <div className={styles.timestampText}>
-                      {rec.timestamp}
+                      <T>{rec.timestamp}</T>
                     </div>
                   </td>
                   <td>
                     <div className={styles.materialNameText}>
-                      {rec.material}
+                      <T>{rec.material}</T>
                     </div>
                   </td>
                   <td>
                     <span className={styles.collectorNameText}>
-                      {rec.collector}
+                      <T>{rec.collector}</T>
                     </span>
                   </td>
                   <td>
                     <div className={styles.recyclerNameText}>
-                      {rec.recycler}
+                      <T>{rec.recycler}</T>
                     </div>
                     <div className={styles.methodTag}>
-                      {rec.method}
+                      <T>{rec.method}</T>
                     </div>
                   </td>
                   <td>
-                    <span className={styles.scaleWeightText}>{rec.scaleWeight}</span>
+                    <span className={styles.scaleWeightText}><T>{rec.scaleWeight}</T></span>
                   </td>
                   <td>
                     <span className={styles.payoutText}>
-                      {rec.payout}
+                      <T>{rec.payout}</T>
                     </span>
                   </td>
                   <td>
                     <span className={styles.verifiedBadge}>
                       <CheckCircle2 size={13} />
-                      <span>{rec.status}</span>
+                      <span><T>{rec.status}</T></span>
                     </span>
                   </td>
                 </tr>
-              ))}
+              ))}</T>
             </tbody>
           </table>
         </div>

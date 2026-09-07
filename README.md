@@ -1,4 +1,4 @@
-# ScrapSetu (Kabadiwala Connect)
+# SmartScrapNet (Kabadiwala Connect)
 ### Bridging Informal E-Waste Collectors into the Formal, Traceable Value Chain
 
 **Live site:** [https://scrapsetu.vercel.app](https://scrapsetu.vercel.app)

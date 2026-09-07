@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import CollectorWorkspace from '@/components/collector/CollectorWorkspace';
 
 export const metadata: Metadata = {
-  title: 'Collector Portal — ScrapSetu',
+  title: 'Collector Portal — SmartScrapNet',
   description: 'AI Scrap Scanner, Live Price Board, and Safety Guidance for Grassroots Collectors.',
 };
 

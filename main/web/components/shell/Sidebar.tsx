@@ -52,7 +52,7 @@ export default function Sidebar({
             <Layers size={22} className={styles.brandIcon} />
           </div>
           <div className={styles.brandInfo}>
-            <h1 className={styles.brandTitle}>SmartScrapNet</h1>
+            <h1 className={styles.brandTitle}>SmartScrapSetu</h1>
             <span className={styles.brandSubtitle}>Kabadiwala Connect</span>
           </div>
           {onCloseMobile && (

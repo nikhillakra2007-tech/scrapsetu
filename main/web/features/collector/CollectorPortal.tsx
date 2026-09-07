@@ -429,7 +429,7 @@ export default function CollectorPortal({
 
         const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${geminiApiKey.trim()}`;
 
-        const prompt = `You are SmartScrapNet Delhi E-Waste Classification Engine. Classify this scrap into CPCB 11-category taxonomy (PCB, BATTERY, CABLE_WIRE, CRT, LCD_LED_PANEL, MOTOR_MAGNET, METAL_SCRAP, WHOLE_DEVICE). Write human-readable descriptions in ${locale === "hi" ? "Hindi" : locale === "mr" ? "Marathi" : "English"}, retaining taxonomy codes in English. Return ONLY valid JSON with keys:
+        const prompt = `You are SmartScrapSetu Delhi E-Waste Classification Engine. Classify this scrap into CPCB 11-category taxonomy (PCB, BATTERY, CABLE_WIRE, CRT, LCD_LED_PANEL, MOTOR_MAGNET, METAL_SCRAP, WHOLE_DEVICE). Write human-readable descriptions in ${locale === "hi" ? "Hindi" : locale === "mr" ? "Marathi" : "English"}, retaining taxonomy codes in English. Return ONLY valid JSON with keys:
         parent_code, parent_name, sub_code, sub_name, condition, category_confidence (0-1), hazard_flags (array), is_hazardous (boolean), hazard_advisory, suggested_rate_per_kg (number), epr_schedule1_hint, identified_components (array), ai_notes.`;
 
         const geminiRes = await fetch(geminiUrl, {

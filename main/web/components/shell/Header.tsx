@@ -178,7 +178,7 @@ export default function Header({
               <Recycle size={27} strokeWidth={1.7} />
             </div>
             <span className={styles.brandName}><T>
-              SmartScrapNet</T><span className={styles.brandDot}><T>®</T></span>
+              SmartScrapSetu</T><span className={styles.brandDot}><T>®</T></span>
             </span>
           </Link>
 

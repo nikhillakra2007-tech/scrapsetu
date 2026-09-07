@@ -24,7 +24,7 @@ export default function SetuAssistant() {
     {
       id: '1',
       sender: 'assistant',
-      text: 'Namaste! I am your SmartScrapNet Delhi Assistant. You can ask me about live e-waste rates, booking a doorstep kabadiwala pickup, or CPCB safety guidelines.',
+      text: 'Namaste! I am your SmartScrapSetu Delhi Assistant. You can ask me about live e-waste rates, booking a doorstep kabadiwala pickup, or CPCB safety guidelines.',
       time: 'Just now',
     },
     {

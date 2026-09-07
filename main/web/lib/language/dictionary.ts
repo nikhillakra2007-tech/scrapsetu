@@ -231,9 +231,9 @@ export const dictionary:Record<string,[string,string]> = {
     "कुछ सवालों के जवाब",
     "काही प्रश्नांची उत्तरे"
   ],
-  "Who is SmartScrapNet for?": [
-    "SmartScrapNet किसके लिए है?",
-    "SmartScrapNet कोणासाठी आहे?"
+  "Who is SmartScrapSetu for?": [
+    "SmartScrapSetu किसके लिए है?",
+    "SmartScrapSetu कोणासाठी आहे?"
   ],
   "What materials can I recycle?": [
     "मैं कौन सी सामग्री रीसाइकल कर सकता हूँ?",
@@ -255,9 +255,9 @@ export const dictionary:Record<string,[string,string]> = {
     "हाँ। डेमो चुनकर कोई भी कार्यक्षेत्र खोलें। डेमो में नमूना डेटा है और वास्तविक पिकअप नहीं होता।",
     "होय. डेमो निवडून कार्यक्षेत्र उघडा. डेमोमध्ये नमुना माहिती आहे; प्रत्यक्ष संकलन होत नाही."
   ],
-  "SmartScrapNet connects local scrap collectors with authorized recycling facilities. Collectors can classify materials and compare rates; recyclers can review incoming lots and manage handovers.": [
-    "SmartScrapNet स्थानीय कबाड़ संग्राहकों को अधिकृत रीसाइक्लिंग केंद्रों से जोड़ता है। संग्राहक सामग्री पहचानकर दरें देख सकते हैं; केंद्र आने वाले लॉट और हस्तांतरण सँभाल सकते हैं।",
-    "SmartScrapNet स्थानिक भंगार संकलकांना अधिकृत पुनर्चक्रण केंद्रांशी जोडते. संकलक साहित्य ओळखून दर पाहू शकतात; केंद्रे येणाऱ्या मालाचे आणि हस्तांतरणाचे व्यवस्थापन करू शकतात."
+  "SmartScrapSetu connects local scrap collectors with authorized recycling facilities. Collectors can classify materials and compare rates; recyclers can review incoming lots and manage handovers.": [
+    "SmartScrapSetu स्थानीय कबाड़ संग्राहकों को अधिकृत रीसाइक्लिंग केंद्रों से जोड़ता है। संग्राहक सामग्री पहचानकर दरें देख सकते हैं; केंद्र आने वाले लॉट और हस्तांतरण सँभाल सकते हैं।",
+    "SmartScrapSetu स्थानिक भंगार संकलकांना अधिकृत पुनर्चक्रण केंद्रांशी जोडते. संकलक साहित्य ओळखून दर पाहू शकतात; केंद्रे येणाऱ्या मालाचे आणि हस्तांतरणाचे व्यवस्थापन करू शकतात."
   ],
   "The pilot supports electronic waste including circuit boards, cables, batteries, screens, motors, and whole devices. The collector workspace includes material-specific handling guidance.": [
     "पायलट में सर्किट बोर्ड, तार, बैटरियाँ, स्क्रीन, मोटर और पूरे उपकरण शामिल हैं। संग्राहक कार्यक्षेत्र में सुरक्षित रखरखाव का मार्गदर्शन है।",
@@ -939,9 +939,9 @@ export const dictionary:Record<string,[string,string]> = {
     "रीसाइक्लिंग अगला आसान कदम होना चाहिए।",
     "पुनर्चक्रण हे पुढचे सहज पाऊल असावे."
   ],
-  "SmartScrapNet brings local collectors and recycling facilities together with clearer prices, safer handling, and a shared record of the journey.": [
-    "SmartScrapNet स्पष्ट कीमतों, सुरक्षित रखरखाव और साझा रिकॉर्ड के साथ स्थानीय संग्राहकों और रीसाइक्लिंग केंद्रों को जोड़ता है।",
-    "SmartScrapNet स्पष्ट दर, सुरक्षित हाताळणी आणि सामायिक नोंदींसह स्थानिक संकलकांना पुनर्चक्रण केंद्रांशी जोडते."
+  "SmartScrapSetu brings local collectors and recycling facilities together with clearer prices, safer handling, and a shared record of the journey.": [
+    "SmartScrapSetu स्पष्ट कीमतों, सुरक्षित रखरखाव और साझा रिकॉर्ड के साथ स्थानीय संग्राहकों और रीसाइक्लिंग केंद्रों को जोड़ता है।",
+    "SmartScrapSetu स्पष्ट दर, सुरक्षित हाताळणी आणि सामायिक नोंदींसह स्थानिक संकलकांना पुनर्चक्रण केंद्रांशी जोडते."
   ],
   "We make the connections. You keep moving.": [
     "हम संपर्क बनाते हैं। आप आगे बढ़ते रहें।",
@@ -1419,9 +1419,9 @@ export const dictionary:Record<string,[string,string]> = {
     "पुराने लैपटॉप मदरबोर्ड की दर क्या है?",
     "जुन्या लॅपटॉप मदरबोर्डचा दर काय आहे?"
   ],
-  "Namaste! I am your SmartScrapNet Delhi Assistant. You can ask me about live e-waste rates, booking a doorstep kabadiwala pickup, or CPCB safety guidelines.": [
-    "नमस्ते! मैं SmartScrapNet सहायक हूँ। ई-कचरे की दरों, घर से पिकअप और सुरक्षा निर्देशों के बारे में पूछें।",
-    "नमस्कार! मी SmartScrapNet सहाय्यक आहे. ई-कचऱ्याचे दर, घरातून संकलन आणि सुरक्षा सूचनांबद्दल विचारा."
+  "Namaste! I am your SmartScrapSetu Delhi Assistant. You can ask me about live e-waste rates, booking a doorstep kabadiwala pickup, or CPCB safety guidelines.": [
+    "नमस्ते! मैं SmartScrapSetu सहायक हूँ। ई-कचरे की दरों, घर से पिकअप और सुरक्षा निर्देशों के बारे में पूछें।",
+    "नमस्कार! मी SmartScrapSetu सहाय्यक आहे. ई-कचऱ्याचे दर, घरातून संकलन आणि सुरक्षा सूचनांबद्दल विचारा."
   ],
   "Quick tip: You can book a household pickup or check today’s prevailing Delhi market benchmark in one tap below.": [
     "नीचे चुनकर घर से पिकअप या दिल्ली की संदर्भ दरें जानें।",

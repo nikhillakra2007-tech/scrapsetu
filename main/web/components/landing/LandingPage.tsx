@@ -48,8 +48,8 @@ const steps = [
 ];
 const faqs = [
   [
-    "Who is SmartScrapNet for?",
-    "SmartScrapNet connects local scrap collectors with authorized recycling facilities. Collectors can classify materials and compare rates; recyclers can review incoming lots and manage handovers.",
+    "Who is SmartScrapSetu for?",
+    "SmartScrapSetu connects local scrap collectors with authorized recycling facilities. Collectors can classify materials and compare rates; recyclers can review incoming lots and manage handovers.",
   ],
   [
     "What materials can I recycle?",
@@ -97,7 +97,7 @@ export default function LandingPage() {
         <header className={styles.nav}>
           <Link href="/" className={styles.brand}>
             <Recycle size={27} strokeWidth={1.7} /><T>
-            SmartScrapNet</T><span><T>®</T></span>
+            SmartScrapSetu</T><span><T>®</T></span>
           </Link>
           <nav
             className={`${styles.links} ${menu ? styles.menuOpen : ""}`}
@@ -313,7 +313,7 @@ export default function LandingPage() {
                 We’re here to give that work a better connection.
               </T></p>
               <p><T>
-                SmartScrapNet brings local collectors and recycling facilities
+                SmartScrapSetu brings local collectors and recycling facilities
                 together with clearer prices, safer handling, and a shared
                 record of the journey.
               </T></p>
@@ -367,7 +367,7 @@ export default function LandingPage() {
         <footer className={styles.footer}>
           <Link href="/" className={styles.brand}>
             <Recycle size={25} /><T>
-            SmartScrapNet</T><span><T>®</T></span>
+            SmartScrapSetu</T><span><T>®</T></span>
           </Link>
           <span><T>Made for a world that wastes less.</T></span>
           <span><T>Delhi NCR pilot · 2026</T></span>

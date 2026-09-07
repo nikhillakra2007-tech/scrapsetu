@@ -340,7 +340,7 @@ export default function AuthPage() {
       <aside className={styles.cover}>
         <Link href="/" className={styles.brand}>
           <Recycle size={28} />
-          SmartScrapNet<span>®</span>
+          SmartScrapSetu<span>®</span>
         </Link>
         <div className={styles.coverCopy}>
           <span className={styles.eyebrow}>WELCOME TO THE CIRCULAR SIDE.</span>

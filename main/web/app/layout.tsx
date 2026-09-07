@@ -3,7 +3,7 @@ import './globals.css';
 import { LanguageProvider } from '@/components/language/Language';
 
 export const metadata: Metadata = {
-  title: 'SmartScrapNet — Delhi Pilot',
+  title: 'SmartScrapSetu — Delhi Pilot',
   description:
     'Bridging informal e-waste collectors with DPCC/CPCB authorized recyclers through transparent price discovery and traceable digital handovers.',
 };
